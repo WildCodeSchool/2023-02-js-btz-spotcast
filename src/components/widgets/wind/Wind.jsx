@@ -3,7 +3,9 @@ import "./Wind.css";
 import "../cards.css";
 import ToggleButton from "../../utilities/ToggleButton";
 
-const Wind = () => {
+const Wind = ({ time, winddirection_10m, windspeed_10m }) => {
+  console.log(time, winddirection_10m, windspeed_10m);
+  
   return (
     <div className="small-square">
       <div className="card-header">
