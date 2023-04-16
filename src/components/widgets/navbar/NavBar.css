@@ -1,0 +1,75 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.logo {
+  width: 14em;
+  height: 14em;
+  padding-top: 3em;
+}
+
+/* ------------------Block search input -------------------------- */
+
+.searchbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 33%;
+}
+
+.search-input {
+  width: 22em;
+  height: 2.5em;
+  background-color: #f0f4f1;
+  padding: 1.2em 1.5em;
+  border-radius: 25px;
+  border: none;
+}
+
+.current-location {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color-light);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.selected-spot {
+  padding-left: 0.5em;
+}
+
+.webcam-link {
+  padding-left: 0.5em;
+}
+
+/* ------------------Block login -------------------------- */
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: flex-start;
+  width: 33%;
+}
+
+.login-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.user-name {
+  color: var(--primary-color-light);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.user-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50% 50%;
+  background-color: var(--primary-color-light);
+}

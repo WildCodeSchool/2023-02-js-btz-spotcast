@@ -1,34 +1,36 @@
 @font-face {
-    font-family: 'n27';
-    src: url('./assets/fonts/N27-Regular.otf') format("opentype");
-    font-weight: 300;
+  font-family: 'n27';
+  src: url('./assets/fonts/N27-Regular.otf') format('opentype');
+  font-weight: 300;
 }
 
 :root {
-    /*Color variables*/
-    --text-color : #233030;
-    --primary-color : #446963;
-    --primary-color-medium : #68918A;
-    --primary-color-regular : #AFCFC4;
-    --primary-color-light : #EFF4F1;
-    --secondary-color : #EFBC80;
+  /*Color variables*/
+  --text-color: #233030;
+  --primary-color: #446963;
+  --primary-color-medium: #68918a;
+  --primary-color-regular: #afcfc4;
+  --primary-color-light: #eff4f1;
+  --secondary-color: #efbc80;
 
-    /*Typography variables*/
-    --text-font-main : 'n27', sans-serif, Arial, Helvetica;
+  /*Typography variables*/
+  --text-font-main: 'n27', sans-serif, Arial, Helvetica;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--text-font-main);
-    font-size: 16px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--text-font-main);
+  font-size: 16px;
 }
 
-.App{
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 2em;
-    background-color: var(--primary-color-regular);
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  background-color: var(--primary-color-regular);
 }
