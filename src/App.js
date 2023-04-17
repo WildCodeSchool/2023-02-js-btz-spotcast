@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Wind from './components/widgets/wind/Wind';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
   return (
     <div className="App">
-      <Wind />
+      <Dashboard />
     </div>
   );
 }
