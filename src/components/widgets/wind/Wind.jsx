@@ -38,14 +38,14 @@ const Wind = ({winddirection_10m, windspeed_10m, timeStampIndex}) => {
       <div className="card-content">
         <div className="wind-chart">
           <div className="cardinal-points">
-            <span className={windDirection == "north" ? "checked" : ""} style={{"--n":1}}></span>
-            <span className={windDirection == "north-east" ? "checked" : ""} style={{"--n":2}}></span>
-            <span className={windDirection == "east" ? "checked" : ""} style={{"--n":3}}></span>
-            <span className={windDirection == "south-east" ? "checked" : ""} style={{"--n":4}}></span>
-            <span className={windDirection == "south" ? "checked" : ""} style={{"--n":5}}></span>
-            <span className={windDirection == "south-west" ? "checked" : ""} style={{"--n":6}}></span>
-            <span className={windDirection == "west" ? "checked" : ""} style={{"--n":7}}></span>
-            <span className={windDirection == "north-west" ? "checked" : ""} style={{"--n":8}}></span>
+            <span className={windDirection === "north" ? "checked" : ""} style={{"--n":1}}></span>
+            <span className={windDirection === "north-east" ? "checked" : ""} style={{"--n":2}}></span>
+            <span className={windDirection === "east" ? "checked" : ""} style={{"--n":3}}></span>
+            <span className={windDirection === "south-east" ? "checked" : ""} style={{"--n":4}}></span>
+            <span className={windDirection === "south" ? "checked" : ""} style={{"--n":5}}></span>
+            <span className={windDirection === "south-west" ? "checked" : ""} style={{"--n":6}}></span>
+            <span className={windDirection === "west" ? "checked" : ""} style={{"--n":7}}></span>
+            <span className={windDirection ==="north-west" ? "checked" : ""} style={{"--n":8}}></span>
           </div>
           <div className="wind-stats">
             <p className="wind-strenght">
@@ -61,7 +61,3 @@ const Wind = ({winddirection_10m, windspeed_10m, timeStampIndex}) => {
 };
 
 export default Wind;
-
-
-//   case ((winddirection_10m && winddirection_10m[timeStampIndex] > 292) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 337)) :
-//     return setWindDirection('west');
