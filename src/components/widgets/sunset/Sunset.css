@@ -1,0 +1,43 @@
+.big-rectangle-width-sunset{
+    display: flex;
+    border-radius: 1.6em;
+    box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
+    width: 26.25em;
+    height: 12.5em;
+    overflow: hidden;
+}
+
+.sunset-left, .sunset-right{
+    padding: 1.2em 1.5em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sunset-left{
+    background-color: var(--primary-color);
+    align-items: flex-start;
+}
+
+.sunset-right{
+    background-color: var(--primary-color-regular);
+    align-items: flex-end;
+}
+
+.card-title-sunset{
+    color: #fff;
+}
+
+.sunrise-forecast, .sunset-forecast{
+   display: flex;
+   width: 100%;
+}
+/* padding: 1.2em 1.5em; */
+
+.card-header-sunset {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    color: #fff;
+    padding: 1.2em 1.5em 0 ;
+  }

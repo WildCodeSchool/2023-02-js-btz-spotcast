@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Wind from "../components/widgets/wind/Wind";
 import "./Dashboard.css";
+import Sunset from "../components/widgets/sunset/Sunset";
 
 const Dashboard = () => {
   //Setting up a realtime clock
@@ -14,13 +15,16 @@ const Dashboard = () => {
     };
   });
 
+  const timeStamp = 
+  `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
+
   //fetching the wind infos
   const [wind, setWind] = useState([]);
   
   useEffect(() => {
     axios
       .get(
-        "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=windspeed_10m,winddirection_10m"
+        "https://api.open-meteo.com/v1/forecast?latitude=42.47&longitude=-1.56&hourly=windspeed_10m,winddirection_10m"
       )
       .then((res) => res.data)
       .then((data) => {
@@ -30,10 +34,6 @@ const Dashboard = () => {
 
   //getting the index of current time in 'wind' array
   const [timeStampIndex, setTimeStampIndex] = useState('');
-
-  const timeStamp = 
-  `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
-
 
   useEffect(() => {
     wind.time && //checking if 'wind.time' is already loaded
@@ -46,6 +46,7 @@ const Dashboard = () => {
         {...wind} 
         timeStampIndex={timeStampIndex}
         />
+      <Sunset />
     </div>
   );
 };
