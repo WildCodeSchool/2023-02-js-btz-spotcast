@@ -1,0 +1,40 @@
+.meteo-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meteo-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.day-one-infos {
+    display: flex;
+    flex-direction: row;
+}
+
+.day-one {
+    font-size: 0.5em;
+}
+
+.day-two-infos {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.day-two {
+    font-size: 0.5em;
+}
+
+.day-three-infos {
+    display: flex;
+    flex-direction: row;
+}
+
+.day-three {
+    font-size: 0.5em;
+}

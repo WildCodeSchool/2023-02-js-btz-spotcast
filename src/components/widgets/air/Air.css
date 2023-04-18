@@ -1,0 +1,18 @@
+.air-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.air-infos {
+    color: var(--text-color);
+    position: absolute;
+    text-align: center;
+}
+
+.air-temperature {
+    font-size: 3.2em;
+    margin-bottom: -.30em;
+    
+}

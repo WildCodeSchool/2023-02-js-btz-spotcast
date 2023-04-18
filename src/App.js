@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Wind from './components/widgets/wind/Wind';
+import MeteoDay from './components/widgets/meteo-day/MeteoDay';
 
 
 function App() {
   return (
     <div className="App">
-      <Wind />
+      <MeteoDay />
     </div>
   );
 }
