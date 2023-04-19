@@ -11,7 +11,7 @@ const MeteoThreeDay = () => {
                 <p className="card-title">Meteo 3d</p>
                 <ToggleButton />
             </div>
-            <div className="meteo-card">
+            <div className="card-content">
                 <div className="meteo-infos">
                     <div className="day-one-infos">
                         <p className="day-one">Vendredi 14 avril</p>

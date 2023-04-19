@@ -11,30 +11,17 @@
     align-items: center;
 }
 
-.day-one-infos {
-    display: flex;
-    flex-direction: row;
-}
-
-.day-one {
-    font-size: 0.5em;
-}
-
-.day-two-infos {
-    display: flex;
-    flex-direction: row;
-}
-
-
-.day-two {
-    font-size: 0.5em;
-}
-
+.day-one-infos,
+.day-two-infos,
 .day-three-infos {
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
+.day-one,
+.day-two,
 .day-three {
     font-size: 0.5em;
+    color: var(--text-color);
 }
