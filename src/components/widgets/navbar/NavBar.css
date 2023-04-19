@@ -1,32 +1,84 @@
 .navbar {
+  width: 100%;
+  max-width: 1160px;
+  height: 16em;
   display: flex;
-  flex-direction: row;
-  margin-bottom: 1em;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #b5cec5, #71908a);
+  padding: 1.2em 1.5em;
+  border-radius: 25px;
+  box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
 }
 
 .logo {
-  width: 14em;
-  height: 14em;
-  padding-top: 3em;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  width: 12em;
+  max-width: 100%;
 }
 
 /* ------------------Block search input -------------------------- */
-
+.searchbar,
+.logo,
+.login {
+  flex: 1;
+}
 .searchbar {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 33%;
+  position: relative;
 }
 
 .search-input {
-  width: 22em;
+  width: 100%;
   height: 2.5em;
   background-color: #f0f4f1;
-  padding: 1.2em 1.5em;
+  padding: 1.2em 1em;
   border-radius: 25px;
   border: none;
+  outline: none;
 }
+
+.dropdown-search{
+  background-color: var(--primary-color-light);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 6.6em;
+  border-radius: 1em;
+  overflow: hidden;
+  padding: 1em 0;
+  width: 100%;
+  /* border: 1px solid grey; */
+  /* border-radius: 0px, 10px, 10px, 0px; */
+}
+
+.dropdown-search li{
+  list-style-type: none;
+  padding: .5em 0;
+}
+
+.dropdown-search li:hover{
+  background-color: #e4ece7;
+}
+
+.dropdown-search li p{
+  padding: 0 1em;
+}
+
+
+.dropdown-search:empty{
+  display: none;
+}
+
+
 
 .current-location {
   display: flex;
@@ -53,12 +105,12 @@
   flex-direction: column;
   align-items: end;
   justify-content: flex-start;
-  width: 33%;
 }
 
 .login-align {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
 }
 .user-name {
@@ -68,8 +120,8 @@
 }
 
 .user-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50% 50%;
+  width: 3.75em;
+  height: 3.75em;
+  border-radius: 50%;
   background-color: var(--primary-color-light);
 }
