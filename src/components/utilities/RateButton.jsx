@@ -42,12 +42,12 @@ const RateButton = ({ count, rating, color, onRating }) => {
 
 RateButton.propTypes = {
   count: PropTypes.number,
-  rating: PropTypes.number,
+  rating: PropTypes.bool, // fixed here
   onChange: PropTypes.func,
-  color: {
+  color: PropTypes.shape({
     filled: PropTypes.string,
     unfilled: PropTypes.string,
-  },
+  }),
 };
 
 RateButton.defaultProps = {

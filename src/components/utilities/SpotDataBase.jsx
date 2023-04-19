@@ -50,7 +50,7 @@ const SpotDataBase = [
   },
   {
     id: 7,
-    name: 'Bidart/Guethary - Parlementia',
+    name: 'Bidart - Parlementia',
     latitude: 43.4219,
     longitude: -1.5943,
     webcam: 'https://gosurf.fr/webcam/fr/13/Bidart-Guethary-Parlementia'
