@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Wind from "../components/widgets/wind/Wind";
+import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
 import "./Dashboard.css";
+
 
 
 
 const Dashboard = () => {
 
+
+
+
+
   //setting up Selected Spot 
-  const [selectedSpots, setSelectedSpots] = useState([{
+  const [currentSpots, setCurrentSpots] = useState(
+    [{
+    id : 0,
     name : "Biarritz - La Côte des Basques",
     latitude : "43.48",
     longitude : "-1.56",
-  }])
+    webcam : "https://gosurf.fr/webcam/fr/84/Biarritz-La-Grande-Plage"
+  }],
+)
 
 
   //Setting up a realtime clock
@@ -31,7 +41,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
+        `https://api.open-meteo.com/v1/forecast?latitude=${currentSpots[0].latitude}&longitude=${currentSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -54,10 +64,17 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      
       <Wind 
         {...wind} 
         timeStampIndex={timeStampIndex}
         />
+        {currentSpots.map(currentSpot => (
+          <ForecastCardBackground
+          key={currentSpot.id}
+          currentSpot={currentSpot}
+          />
+        ))}
     </div>
   );
 };
