@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Wind from "../components/widgets/wind/Wind";
+import NavBar from "../components/widgets/navbar/NavBar"
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -42,6 +43,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <NavBar/>
       <Wind 
         {...wind} 
         timeStampIndex={timeStampIndex}

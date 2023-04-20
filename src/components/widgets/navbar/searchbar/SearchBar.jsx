@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState} from 'reac
 import SpotDataBase from '../../../utilities/SpotDataBase';
 import RateButton from '../../../utilities/RateButton';
-import './NavBar.css';
+import '../NavBar.css';
 
 const SearchBar = () => {
 
