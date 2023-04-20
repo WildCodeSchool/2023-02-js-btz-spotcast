@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const RateButton = ({ count, rating, color, onRating }) => {
+
+  //------------------------------------------Create a state for the favicon star hovering
   const [hoverRating, setHoverRating] = useState(0);
 
+  //------------------------------------------Create a function that change the color on hovering for the favicon star
   const getColor = (index) => {
     if (hoverRating >= index) {
       return color.filled;
@@ -15,11 +18,13 @@ const RateButton = ({ count, rating, color, onRating }) => {
     return color.unfilled;
   };
 
+  //------------------------------------------Create a clickable favicon star
   const handleClick = (index) => {
     const newRating = rating === index ? 0 : index; // toggle rating if already selected
     onRating(newRating);
   };
 
+  //------------------------------------------Create a function that will allows to change the favicon color on the click
   const starRating = useMemo(() => {
     return Array(count)
       .fill(0)
