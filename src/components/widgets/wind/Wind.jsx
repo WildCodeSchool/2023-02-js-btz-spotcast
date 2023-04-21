@@ -27,7 +27,6 @@ const Wind = ({winddirection_10m, windspeed_10m, timeStampIndex}) => {
     }
   },[winddirection_10m && winddirection_10m[timeStampIndex]])
 
-  console.log(windDirection)
   
   return (
     <div className="small-square">
