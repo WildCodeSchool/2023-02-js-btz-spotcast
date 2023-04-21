@@ -3,6 +3,9 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import ToggleButton from '../utilities/ToggleButton'
 import './ForecastCardBackground.css'
+
+import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
+import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
 
@@ -11,6 +14,7 @@ const ForecastCardBackground = ({currentSpot}) => {
     const [tide, setTide] = useState([])
     const [surfDataWind,  setSurfDataWind] = useState([])
     const [surfDataHoule, setSurfDataHoule] =useState([])
+    const [onLoad, setOnLoad] = useState(true)
 
     
     useEffect(() => {
@@ -32,6 +36,8 @@ const ForecastCardBackground = ({currentSpot}) => {
 
     },[])
 
+    console.log(tide)
+
       
       
 
@@ -41,6 +47,7 @@ const ForecastCardBackground = ({currentSpot}) => {
         .then((req) => req.data)
         .then((data) => {
           setSurfDataWind(data);
+          setOnLoad(false)
         });
       
         // API HOULE (Hourly : Wave height et wave period / Daily : Wave height Max et Wave direction dominant)
@@ -53,13 +60,17 @@ const ForecastCardBackground = ({currentSpot}) => {
 
     },[])
 
-    console.log(tide);
-    console.log(surfDataWind);
-    console.log(surfDataHoule);
+    const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
+    const options = { weekday: 'long', day: '2-digit' }; // affiche le jours en long et la date en chiffres
+    const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
+    const dayForecast = [] // array qui receveras les dates
 
+    // boucle qui génère automatiquement les 7 prochains jours
+    for(let i = 0; i < 7; i++){
+        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('fr-FR', options))
+    }
    
 
-    
     
   return (
     <div className='background-forcast'>
@@ -80,8 +91,19 @@ const ForecastCardBackground = ({currentSpot}) => {
                 <ToggleButton />
             </div>
         </div>
-        <div className='body'>
-
+        <div className='bodyForecastCard'>
+            {
+              dayForecast.map((el,index) => (
+                <div >
+                <p>{el}</p>
+                <ForecastCardMinified 
+                  surfDataWind ={surfDataWind}
+                  number = {index}
+                  onLoad ={onLoad}/>
+                <ForecastCardExtended />
+                </div>
+              ))
+            }
         </div>
     </div>
   )
