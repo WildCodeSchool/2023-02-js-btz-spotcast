@@ -38,9 +38,6 @@ const Dashboard = () => {
   //getting the index of current time in 'wind' array
   const [timeStampIndex, setTimeStampIndex] = useState('');
 
-  const timeStamp =
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}T${String(date.getHours()).padStart(2, "0")}:00`;
-
   useEffect(() => {
     wind.time && //checking if 'wind.time' is already loaded
       setTimeStampIndex(wind.time.indexOf(timeStamp));
