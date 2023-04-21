@@ -8,11 +8,16 @@ import Sunset from "../components/widgets/sunset/Sunset";
 
 
 const Dashboard = () => {
+
+
+  //usdeState to check when the Open-Meteo API is loaded
+  const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
+
   //Setting up a realtime clock
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 1000);
+    const timer = setInterval(() => setDate(new Date()), 60000);
     return function () {
       clearInterval(timer);
     };
@@ -32,6 +37,7 @@ const Dashboard = () => {
       .then((res) => res.data)
       .then((data) => {
         setWind(data.hourly);
+        setOnLoadOpenMeteo(false);
       });
   }, []);
 
@@ -45,15 +51,18 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <Wind
-        {...wind}
-        timeStampIndex={timeStampIndex}
-      />
-      <Tide
-        date={date}
-      />
       <NavBar/>
-      <Sunset />
+      <div className="widgets-container">
+        <Wind
+          {...wind}
+          timeStampIndex={timeStampIndex}
+          onLoadOpenMeteo = {onLoadOpenMeteo}
+        />
+        <Tide
+          date={date}
+        />
+        <Sunset />
+      </div>
     </div>
   );
 };

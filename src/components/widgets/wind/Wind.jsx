@@ -3,29 +3,33 @@ import "./Wind.css";
 import "../cards.css";
 import ToggleButton from "../../utilities/ToggleButton";
 
-const Wind = ({ winddirection_10m, windspeed_10m, timeStampIndex }) => {
+const Wind = ({ winddirection_10m, windspeed_10m, timeStampIndex, onLoadOpenMeteo }) => {
 
   const [windDirection, setWindDirection] = useState('')
 
+
   useEffect(() => {
-    if ((winddirection_10m && winddirection_10m[timeStampIndex] > 337) || (winddirection_10m && winddirection_10m[timeStampIndex] <= 22)) {
+    if(onLoadOpenMeteo){
+    }
+    else if ((winddirection_10m[timeStampIndex] > 337) || (winddirection_10m[timeStampIndex] <= 22)) {
       setWindDirection('north')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 22) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 67)) {
+    } else if ((winddirection_10m[timeStampIndex] > 22) && (winddirection_10m[timeStampIndex] <= 67)) {
       setWindDirection('north-east')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 67) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 112)) {
+    } else if ((winddirection_10m[timeStampIndex] > 67) && (winddirection_10m[timeStampIndex] <= 112)) {
       setWindDirection('east')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 112) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 157)) {
+    } else if ((winddirection_10m[timeStampIndex] > 112) && (winddirection_10m[timeStampIndex] <= 157)) {
       setWindDirection('south-east')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 157) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 202)) {
+    } else if ((winddirection_10m[timeStampIndex] > 157) && (winddirection_10m[timeStampIndex] <= 202)) {
       setWindDirection('south')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 202) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 247)) {
+    } else if ((winddirection_10m[timeStampIndex] > 202) && (winddirection_10m[timeStampIndex] <= 247)) {
       setWindDirection('south-west')
-    } else if ((winddirection_10m && winddirection_10m[timeStampIndex] > 247) && (winddirection_10m && winddirection_10m[timeStampIndex] <= 292)) {
+    } else if ((winddirection_10m[timeStampIndex] > 247) && (winddirection_10m[timeStampIndex] <= 292)) {
       setWindDirection('west')
     } else {
       setWindDirection('north-west')
     }
-  }, [winddirection_10m && winddirection_10m[timeStampIndex]])
+  
+  }, [onLoadOpenMeteo])
 
 
   return (
