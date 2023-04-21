@@ -11,17 +11,15 @@ import neige from '../../../assets/images/neige.svg';
 import "../cards.css";
 import "./MeteoDay.css";
 
-const MeteoDay = ({ hourly, timeStampIndex }) => {
+const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo }) => {
 
     let [dayIcon, setDayIcon] = useState('')
-    let [weatherCode, setweatherCode] = useState(hourly && hourly.weathercode[timeStampIndex])
+    let [weatherCode, setweatherCode] = useState(onLoadMeteo ? "" : weathercode[timeStampIndex])
     let [weatherText, setweatherText] = useState("")
 
-
-
     useEffect(() => {
-
-        if (weatherCode == 0) {
+        if (onLoadMeteo) {
+        } else if (weatherCode === 0) {
             setDayIcon(soleil)
             setweatherText("Soleil")
         } else if (weatherCode >= 1 || weatherCode <= 3) {
@@ -46,15 +44,11 @@ const MeteoDay = ({ hourly, timeStampIndex }) => {
             setDayIcon(pluie)
             setweatherText("Orages")
         }
-    }, [weatherCode])
-
-    console.log('dayicon', dayIcon)
-    console.log('weathertext', weatherText)
-
+    }, [onLoadMeteo])
 
     return (
         <div>
-            {weatherText && dayIcon &&
+            {onLoadMeteo ? "" :
                 <div className="small-square">
                     <div className="card-header">
                         <p className="card-title">Meteo</p>
@@ -64,11 +58,10 @@ const MeteoDay = ({ hourly, timeStampIndex }) => {
                         <div className="day-icon">
                             <img src={dayIcon} alt="soleil" />
                         </div>
+
                         <div className="meteo-infos">
-                            <p className="meteo-temperature">{hourly &&
-                                hourly.temperature_2m[timeStampIndex]}</p>
-                            <p className="meteo-text">{hourly &&
-                                weatherText}</p>
+                            <p className="meteo-temperature">{temperature_2m[timeStampIndex]}°</p>
+                            <p className="meteo-text">{weatherText}</p>
                         </div>
                     </div>
 
@@ -77,4 +70,4 @@ const MeteoDay = ({ hourly, timeStampIndex }) => {
     )
 }
 
-export default MeteoDay;
+export default MeteoDay

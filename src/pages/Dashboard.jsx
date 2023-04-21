@@ -32,6 +32,7 @@ const Dashboard = () => {
 
   //fetching the meteo infos
   const [meteo, setMeteo] = useState([]);
+  const [onLoadMeteo, setOnLoadMeteo] = useState(true)
 
   useEffect(() => {
     axios
@@ -40,9 +41,28 @@ const Dashboard = () => {
       )
       .then((res) => res.data)
       .then((data) => {
-        setMeteo(data);
+        setMeteo(data.hourly);
+        setOnLoadMeteo(false)
       });
   }, []);
+
+  //fetching meteo infos at 3 day.
+  const [meteo3D, setMeteo3D] = useState([]);
+  const [onLoadMeteo3D, setOnLoadMeteo3D] = useState(true)
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.open-meteo.com/v1/forecast?latitude=43.48&longitude=-1.56&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin"
+      )
+      .then((res) => res.data)
+      .then((data) => {
+        setMeteo3D(data.daily);
+        setOnLoadMeteo3D(false)
+      });
+  }, []);
+
+
 
 
   //getting the index of current time in 'wind' array
@@ -57,6 +77,8 @@ const Dashboard = () => {
       setTimeStampIndex(wind.time.indexOf(timeStamp));
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
 
+
+
   return (
     <div className="dashboard">
       <Wind
@@ -65,9 +87,15 @@ const Dashboard = () => {
       />
       <MeteoDay
         {...meteo}
+        onLoadMeteo={onLoadMeteo}
         timeStampIndex={timeStampIndex}
       />
-      <MeteoThreeDay />
+      <MeteoThreeDay
+        meteo3D={meteo3D}
+        onLoadMeteo3D={onLoadMeteo3D}
+
+      />
+
     </div>
   );
 };
