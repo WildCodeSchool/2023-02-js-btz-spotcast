@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import SpotDataBase from '../../../utilities/SpotDataBase';
-import RateButton from '../../../utilities/RateButton';
+import starfilled from '../../../../assets/images/star-filled.svg';
+import staroutline from '../../../../assets/images/star-outline.svg';
 import '../NavBar.css';
 
 const SearchBar = () => {
 
     // -----------------------------------------Fav icon useState
-  const [rating, setRating] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
     //------------------------ -----------------Search input useState
   const [searchInput, setSearchInput] = useState("");
 
@@ -31,6 +32,10 @@ const SearchBar = () => {
   const onChange = (e) => {
     setSearchInput(e.target.value);
     setCurrentSpots('Your selected spot');
+  }
+
+  const handleFavorite=()=>{
+    setIsFavorite(!isFavorite)
   }
 
   // -------------------------------------------Filter the selected object to match it with the data base and rendered in a new tab as an object
@@ -66,11 +71,7 @@ const SearchBar = () => {
 
         <div className="current-location">
           {/* Implement a clickable favorite icon for your surf spot */}
-
-          <RateButton 
-            rating={rating} 
-            onRating={(rate) => setRating(rate)}
-          />
+          <img onClick={handleFavorite} src={isFavorite ? starfilled : staroutline} />
           <div className="selected-spot">
             {currentSpots}
           </div>
