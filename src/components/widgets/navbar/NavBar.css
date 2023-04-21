@@ -89,6 +89,10 @@
   padding-right: 0.5em;
 }
 
+.current-location img{
+  width: 1em;
+}
+
 .selected-spot {
   padding-left: 0.5em;
 }
