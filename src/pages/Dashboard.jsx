@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Wind from "../components/widgets/wind/Wind";
+
 import MeteoDay from "../components/widgets/meteo-day/MeteoDay"
 import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
+
+import NavBar from "../components/widgets/navbar/NavBar"
+
 import "./Dashboard.css";
+import Tide from "../components/widgets/tide/Tide";
+import Sunset from "../components/widgets/sunset/Sunset";
+
 
 const Dashboard = () => {
   //Setting up a realtime clock
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 60000);
-    return function cleanup() {
+    const timer = setInterval(() => setDate(new Date()), 1000);
+    return function () {
       clearInterval(timer);
     };
   });
+
+  const timeStamp = 
+  `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
 
   //fetching the wind infos
   const [wind, setWind] = useState([]);
@@ -22,7 +32,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=windspeed_10m,winddirection_10m"
+        "https://api.open-meteo.com/v1/forecast?latitude=42.47&longitude=-1.56&hourly=windspeed_10m,winddirection_10m"
       )
       .then((res) => res.data)
       .then((data) => {
@@ -68,9 +78,6 @@ const Dashboard = () => {
   //getting the index of current time in 'wind' array
   const [timeStampIndex, setTimeStampIndex] = useState('');
 
-  const timeStamp =
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}T${String(date.getHours()).padStart(2, "0")}:00`;
-
 
   useEffect(() => {
     wind.time && //checking if 'wind.time' is already loaded
@@ -85,6 +92,7 @@ const Dashboard = () => {
         {...wind}
         timeStampIndex={timeStampIndex}
       />
+
       <MeteoDay
         {...meteo}
         onLoadMeteo={onLoadMeteo}
@@ -95,6 +103,13 @@ const Dashboard = () => {
         onLoadMeteo3D={onLoadMeteo3D}
 
       />
+
+
+      <Tide
+        date={date}
+      />
+      <NavBar/>
+      <Sunset />
 
     </div>
   );
