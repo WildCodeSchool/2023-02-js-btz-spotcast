@@ -1,24 +1,23 @@
 import React from 'react'
-import axios from 'axios'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
-import './ForecastCardBackground.css'
-
 import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
 import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
+import './ForecastCardBackground.css'
 
 const ForecastCardBackground = ({currentSpot}) => {
+
     // Contient les donnés API
     const [tide, setTide] = useState([])
     const [surfDataWind,  setSurfDataWind] = useState([])
     const [surfDataHoule, setSurfDataHoule] =useState([])
     const [onLoad, setOnLoad] = useState(true)
 
-    
     useEffect(() => {
-       // API TIDE récupère la marée haute et basse sur 10jours mais attentions car que 10 fetch par jous donc delay de 3h appliqué
+      // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
       const delayTide = setTimeout(() => {
         axios
         .get(
@@ -37,9 +36,6 @@ const ForecastCardBackground = ({currentSpot}) => {
     },[])
 
     console.log(tide)
-
-      
-      
 
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
@@ -100,7 +96,11 @@ const ForecastCardBackground = ({currentSpot}) => {
                   surfDataWind ={surfDataWind}
                   number = {index}
                   onLoad ={onLoad}/>
-                <ForecastCardExtended />
+                <ForecastCardExtended 
+                  surfDataWind ={surfDataWind}
+                  number = {index}
+                  onLoad ={onLoad}
+                />
                 </div>
               ))
             }
