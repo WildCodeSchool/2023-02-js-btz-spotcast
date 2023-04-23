@@ -1,3 +1,9 @@
+.daily-extended-forecast{
+    display: flex;
+    /* position:absolute;
+    top: 0; */
+}
+
 .hourly-forecast{
     display: flex;
     flex-direction: column;
@@ -16,7 +22,7 @@
 .hourly-swell-container,
 .hourly-period{
     width: 100%;
-    padding: .5em 0;
+    padding: .5em;
 }
 
 .hourly-wind-container,

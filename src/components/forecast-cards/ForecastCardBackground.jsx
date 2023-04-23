@@ -35,11 +35,9 @@ const ForecastCardBackground = ({currentSpot}) => {
 
     },[])
 
-    console.log(tide)
-
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
-      axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${currentSpot.latitude}&longitude=${currentSpot.longitude}&hourly=windspeed_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
+      axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${currentSpot.latitude}&longitude=${currentSpot.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
         .then((req) => req.data)
         .then((data) => {
           setSurfDataWind(data);
@@ -90,17 +88,21 @@ const ForecastCardBackground = ({currentSpot}) => {
         <div className='bodyForecastCard'>
             {
               dayForecast.map((el,index) => (
-                <div >
-                <p>{el}</p>
-                <ForecastCardMinified 
-                  surfDataWind ={surfDataWind}
-                  number = {index}
-                  onLoad ={onLoad}/>
-                <ForecastCardExtended 
-                  surfDataWind ={surfDataWind}
-                  number = {index}
-                  onLoad ={onLoad}
-                />
+                <div className='daily-forecast'>
+                  <p className='dayDate'>{el}</p>
+                  <ForecastCardMinified 
+                    key={`minified ${index}`}
+                    surfDataWind ={surfDataWind}
+                    number = {index}
+                    onLoad ={onLoad}
+                  />
+                  <p className='dayDate'>{el}</p>
+                  <ForecastCardExtended 
+                    key={`extended ${index}`}
+                    surfDataWind ={surfDataWind}
+                    onLoad ={onLoad}
+                    index={index}
+                  />
                 </div>
               ))
             }

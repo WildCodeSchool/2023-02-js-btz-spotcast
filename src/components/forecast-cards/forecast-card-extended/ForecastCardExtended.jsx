@@ -1,49 +1,26 @@
 import React from 'react'
 import './ForecastCardExtended.css'
-import chartBar from '../../../assets/images/swell-bar.svg'
-import chartWaveBar from '../../../assets/images/swell-wave-bar.svg'
+import HourlyForecast from './forecast-extended-components/HourlyForecast'
 
-const ForecastCardExtended = () => {
+const ForecastCardExtended = ({surfDataWind, onLoad, index}) => {
+  
+  const range = (index+1)*24;
+  const {windspeed_10m, winddirection_10m} = onLoad ? "" : surfDataWind.hourly;
+  const windSpeedByDay = onLoad ? "" : windspeed_10m.slice(range-24, range);
+  const windDirectionByDay = onLoad ? "" : winddirection_10m.slice(range-24, range);
+  console.log(windSpeedByDay, windDirectionByDay);
+
   return (
-    <div>
-      <div className="hourly-forecast">
-
-        <div className="hourly-wind-container">
-          <p className="time">
-            5h
-          </p>
-          <div className="hourly-wind">
-            <div className='hourly-wind-direction'>
-            <p className='hourly-wind-data'>
-              18
-            </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="hourly-swell-container">
-          <div className="swell-chart">
-            <img className='swell-chart-bar' src={chartWaveBar} alt="" />
-            {Array(5).fill().map((_, index) =>(
-              <img className='swell-chart-bar' src={chartBar} alt='chart-bar' />
-            ))}
-          </div>
-          <p className="hourly-energy">
-            1200
-          </p>
-          <p className="hourly-swell">
-            4.4
-          </p>
-          <p className="hourly-swell-direction">
-            NE
-          </p>
-        </div>
-        <div className="hourly-period">
-          <p>
-            12s
-          </p>
-        </div>
-      </div>
+    <div className='daily-extended-forecast'>
+      {Array(7).fill().map((_, index)=>(
+        <HourlyForecast 
+        key={index}
+        windSpeedByDay ={windSpeedByDay}
+        windDirectionByDay ={windDirectionByDay}
+        index = {index}
+        onLoad ={onLoad}
+      />
+      ))} 
     </div>
   )
 }
