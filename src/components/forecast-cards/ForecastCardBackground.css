@@ -1,0 +1,56 @@
+.background-forcast{
+    height: 80vh;
+    width: 1160px;
+    display: flex;
+    background-color: white;
+    border-radius: 1.6em;
+    box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
+    padding: 2em;
+    max-width: 1160px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.flexSpotName{
+    display: flex;
+}
+.spotNameLocalisation{
+    height: 20px;
+    width: 20px;
+    margin-right: 0.5em;
+ 
+ }
+
+.spotName{
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+}
+
+.spotNameStars{
+   height: 20px;
+   width: 20px;
+   margin-left: 0.8em;
+
+}
+
+.spotNameWebcam{
+   text-decoration: none;
+   color: var(--primary-color-regular);
+   margin-left: 28px;
+ }
+
+.spotNameWebcam:hover{
+    text-decoration:underline;
+}
+
+.bodyForecastCard{
+    margin-top: 2em;
+    display: flex;
+}
