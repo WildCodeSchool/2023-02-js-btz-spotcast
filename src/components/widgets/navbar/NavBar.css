@@ -137,3 +137,15 @@
   width: 100%;
   border-radius: 50%;
 }
+
+
+/* ------------------Modal login --------------------------
+
+.modal-login{
+  display: flex;
+  z-index: 1000;
+  width: 65%;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(79deg, #446963 #afcfc4 48%, #efbc80);
+}*/
