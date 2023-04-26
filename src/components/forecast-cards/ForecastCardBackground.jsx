@@ -13,8 +13,11 @@ const ForecastCardBackground = ({currentSpot}) => {
     // Contient les donnés API
     const [tide, setTide] = useState([])
     const [surfDataWind,  setSurfDataWind] = useState([])
-    const [surfDataHoule, setSurfDataHoule] =useState([])
+    const [surfDataHoule, setSurfDataHoule] = useState([])
+    // UseState(s) qui vérifient que l'API est chargée
     const [onLoad, setOnLoad] = useState(true)
+    const [onLoadMarine, setOnLoadMarine] = useState(true)
+
 
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
@@ -41,17 +44,16 @@ const ForecastCardBackground = ({currentSpot}) => {
         .then((req) => req.data)
         .then((data) => {
           setSurfDataWind(data);
-          setOnLoad(false)
+          setOnLoad(false);
         });
       
         // API HOULE (Hourly : Wave height et wave period / Daily : Wave height Max et Wave direction dominant)
-      axios.get(`https://marine-api.open-meteo.com/v1/marine?latitude=${currentSpot.latitude}&longitude=${currentSpot.longitude}&hourly=wave_height,wave_period&daily=wave_height_max,wave_direction_dominant&timezone=Europe%2FBerlin`)
+      axios.get(`https://marine-api.open-meteo.com/v1/marine?latitude=${currentSpot.latitude}&longitude=${currentSpot.longitude}&hourly=wave_height,wave_period,wave_direction&daily=wave_height_max,wave_direction_dominant&timezone=Europe%2FBerlin`)
         .then((req) => req.data)
         .then((data) => {
           setSurfDataHoule(data);
+          setOnLoadMarine(false);
         });
-      
-
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
@@ -63,8 +65,6 @@ const ForecastCardBackground = ({currentSpot}) => {
     for(let i = 0; i < 7; i++){
         dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('fr-FR', options))
     }
-   
-
     
   return (
     <div className='background-forcast'>
@@ -100,6 +100,8 @@ const ForecastCardBackground = ({currentSpot}) => {
                   <ForecastCardExtended 
                     key={`extended ${index}`}
                     surfDataWind ={surfDataWind}
+                    surfDataHoule={surfDataHoule}
+                    onLoadMarine={onLoadMarine}
                     onLoad ={onLoad}
                     index={index}
                   />

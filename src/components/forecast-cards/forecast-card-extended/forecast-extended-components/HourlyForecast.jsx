@@ -2,7 +2,7 @@ import React from 'react'
 import chartBar from '../../../../assets/images/swell-bar.svg'
 import chartWaveBar from '../../../../assets/images/swell-wave-bar.svg'
 
-const HourlyForecast = ({ windSpeedByDay, windDirectionByDay, index, onLoad }) => {
+const HourlyForecast = ({ windSpeedByDay, windDirectionByDay, waveHeightByDay, wavePeriodByDay, waveDirectionByDay, index, onLoad, onLoadMarine }) => {
     
     const hoursShowed = [5, 8, 11, 14, 17, 20, 23]
 
@@ -33,15 +33,15 @@ const HourlyForecast = ({ windSpeedByDay, windDirectionByDay, index, onLoad }) =
             1200
             </p>
             <p className="hourly-swell">
-            4.4
+                {onLoadMarine ? "" : (waveHeightByDay[hoursShowed[index]]).toFixed(1)}
             </p>
             <p className="hourly-swell-direction">
-            NE
+                {onLoadMarine ? "" : waveDirectionByDay[hoursShowed[index]]}
             </p>
         </div>
         <div className="hourly-period">
             <p>
-            12s
+                {onLoadMarine ? "" : Math.floor(wavePeriodByDay[hoursShowed[index]])}s
             </p>
         </div>
         </div>
