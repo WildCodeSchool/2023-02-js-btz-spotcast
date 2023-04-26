@@ -20,7 +20,7 @@ const Dashboard = () => {
 
 
   //setting up Selected Spot 
-  const [currentSpots, setCurrentSpots] = useState(
+  const [selectedSpots, setSelectedSpots] = useState(
     [{
     id : 0,
     name : "Biarritz - La Côte des Basques",
@@ -52,7 +52,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${currentSpots[0].latitude}&longitude=${currentSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
+        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -132,7 +132,7 @@ const Dashboard = () => {
         <Sunset />
 
         <ForecastCardBackground
-          currentSpots={currentSpots}
+          selectedSpots={selectedSpots}
         />
       </div>
     </div>
