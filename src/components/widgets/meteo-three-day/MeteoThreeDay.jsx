@@ -5,8 +5,6 @@ import ToggleButton from "../../utilities/ToggleButton";
 import "../cards.css";
 import "./MeteoThreeDay.css";
 
-
-
 const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
 
     // Setup the date
@@ -72,7 +70,5 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
         </div>
     )
 }
-
-
 
 export default MeteoThreeDay

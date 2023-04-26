@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Wind from "../components/widgets/wind/Wind";
-import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
 import MeteoDay from "../components/widgets/meteo-day/MeteoDay"
 import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
 import NavBar from "../components/widgets/navbar/NavBar"
+import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
 import "./Dashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
-
-
-
-
 
 const Dashboard = () => {
 
@@ -52,7 +48,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
+        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -94,9 +90,15 @@ const Dashboard = () => {
   }, []);
 
 
-  
+  useEffect(() => {
+    const timer = setInterval(() => setDate(new Date()), 60000);
+    return function () {
+      clearInterval(timer);
+    };
+  });
 
-  //getting the index of current time in 'wind' array
+
+  //getting the index of current time in API array
   const [timeStampIndex, setTimeStampIndex] = useState('');
 
   useEffect(() => {
@@ -105,10 +107,8 @@ const Dashboard = () => {
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
 
 
-
   return (
     <div className="dashboard">
-
       <NavBar/>
       <div className="widgets-container">
         <Wind
@@ -119,24 +119,29 @@ const Dashboard = () => {
         <Tide
           date={date}
         />
+
          <MeteoDay
         {...meteo}
         onLoadMeteo={onLoadMeteo}
         timeStampIndex={timeStampIndex}
-      />
-      <MeteoThreeDay
+        />
+
+        <MeteoThreeDay
         meteo3D={meteo3D}
         onLoadMeteo3D={onLoadMeteo3D}
+        />
 
-      />
         <Sunset />
 
-        <ForecastCardBackground
+        {selectedSpots.map(selectedSpots => (
+          <ForecastCardBackground
+          key={selectedSpots.id}
           selectedSpots={selectedSpots}
-        />
-      </div>
+          />
+        ))}
     </div>
+  </div>
   );
 };
 
-export default Dashboard;
+export default Dashboard

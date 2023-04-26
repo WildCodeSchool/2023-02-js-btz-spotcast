@@ -1,0 +1,63 @@
+.daily-extended-forecast{
+    display: flex;
+    /* position:absolute;
+    top: 0; */
+}
+
+.hourly-forecast{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.time,
+.hourly-energy,
+.hourly-swell-direction{
+    font-size: .85em;
+}
+
+.hourly-wind-container,
+.hourly-swell-container,
+.hourly-period{
+    width: 100%;
+    padding: .5em;
+}
+
+.hourly-wind-container,
+.hourly-period{
+    background-color: var(--primary-color-very-light);
+}
+
+.hourly-wind-direction,
+.hourly-swell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 2.2em;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    position: relative;
+}
+
+.hourly-wind-direction{
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.swell-chart{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.swell-chart-bar{
+    width: 2.2em;
+    padding: .18em 0;
+}
+
+.hourly-swell{
+    border: 2px solid var(--primary-color-regular);
+}
