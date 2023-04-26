@@ -1,6 +1,7 @@
 import React from 'react'
 import chartBar from '../../../../assets/images/swell-bar.svg'
 import chartWaveBar from '../../../../assets/images/swell-wave-bar.svg'
+import { v4 as uuidv4 } from 'uuid';
 
 const HourlyForecast = ({ windSpeedByDay, windDirectionByDay, waveHeightByDay, wavePeriodByDay, waveDirectionByDay, index, onLoad, onLoadMarine }) => {
     
@@ -26,7 +27,7 @@ const HourlyForecast = ({ windSpeedByDay, windDirectionByDay, waveHeightByDay, w
             <div className="swell-chart">
             <img className='swell-chart-bar' src={chartWaveBar} alt="" />
             {Array(5).fill().map((_, index) =>(
-                <img className='swell-chart-bar' src={chartBar} alt='chart-bar' />
+                <img key={uuidv4()}className='swell-chart-bar' src={chartBar} alt='chart-bar' />
             ))}
             </div>
             <p className="hourly-energy">

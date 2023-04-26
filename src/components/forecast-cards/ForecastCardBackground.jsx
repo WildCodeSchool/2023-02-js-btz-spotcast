@@ -1,5 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+
+import { v4 as uuidv4 } from 'uuid';
+
 import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
 import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
@@ -17,7 +20,8 @@ const ForecastCardBackground = ({selectedSpots}) => {
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
 
-
+    
+  
     
     
     useEffect(() => {
@@ -89,17 +93,17 @@ const ForecastCardBackground = ({selectedSpots}) => {
         <div className='bodyForecastCard'>
             {
               dayForecast.map((el,index) => (
-                <div className='daily-forecast'>
+                <div key={uuidv4()}  className='daily-forecast'>
                   <p className='dayDate'>{el}</p>
                   <ForecastCardMinified 
-                    key={`minified ${index}`}
+                    
                     surfDataWind ={surfDataWind}
                     number = {index}
                     onLoad ={onLoad}
                   />
                   <p className='dayDate'>{el}</p>
                   <ForecastCardExtended 
-                    key={`extended ${index}`}
+                    
                     surfDataWind ={surfDataWind}
                     surfDataHoule={surfDataHoule}
                     onLoadMarine={onLoadMarine}
