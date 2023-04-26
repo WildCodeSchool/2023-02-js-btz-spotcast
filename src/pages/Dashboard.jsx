@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { createContext } from 'react';
 import Wind from "../components/widgets/wind/Wind";
 import MeteoDay from "../components/widgets/meteo-day/MeteoDay"
 import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
@@ -8,6 +9,10 @@ import ForecastCardBackground from "../components/forecast-cards/ForecastCardBac
 import "./Dashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
+
+// instancier un useContext
+export const selectedSpotsContext = createContext();
+
 
 const Dashboard = () => {
 
@@ -23,8 +28,10 @@ const Dashboard = () => {
     latitude : "43.48",
     longitude : "-1.56",
     webcam : "https://gosurf.fr/webcam/fr/84/Biarritz-La-Grande-Plage"
-  }],
-)
+    }
+  ]);
+
+  
 
   //usdeState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
@@ -64,7 +71,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.open-meteo.com/v1/forecast?latitude=43.48&longitude=-1.56&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin"
+        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -80,7 +87,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.open-meteo.com/v1/forecast?latitude=43.48&longitude=-1.56&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin"
+        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -106,40 +113,43 @@ const Dashboard = () => {
       setTimeStampIndex(wind.time.indexOf(timeStamp));
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
 
+  console.log(selectedSpots[0])
 
   return (
     <div className="dashboard">
-      <NavBar/>
-      <div className="widgets-container">
-        <Wind
-          {...wind}
-          timeStampIndex={timeStampIndex}
-          onLoadOpenMeteo = {onLoadOpenMeteo}
-        />
-        <Tide
-          date={date}
-        />
-
-         <MeteoDay
-        {...meteo}
-        onLoadMeteo={onLoadMeteo}
-        timeStampIndex={timeStampIndex}
-        />
-
-        <MeteoThreeDay
-        meteo3D={meteo3D}
-        onLoadMeteo3D={onLoadMeteo3D}
-        />
-
-        <Sunset />
-
-        {selectedSpots.map(selectedSpots => (
-          <ForecastCardBackground
-          key={selectedSpots.id}
-          selectedSpots={selectedSpots}
+      <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
+        <NavBar/>
+        <div className="widgets-container">
+          <Wind
+            {...wind}
+            timeStampIndex={timeStampIndex}
+            onLoadOpenMeteo = {onLoadOpenMeteo}
           />
-        ))}
-    </div>
+          <Tide
+            date={date}
+          />
+
+          <MeteoDay
+          {...meteo}
+          onLoadMeteo={onLoadMeteo}
+          timeStampIndex={timeStampIndex}
+          />
+
+          <MeteoThreeDay
+          meteo3D={meteo3D}
+          onLoadMeteo3D={onLoadMeteo3D}
+          />
+
+          <Sunset />
+
+          {selectedSpots.map(selectedSpots => (
+            <ForecastCardBackground
+            key={selectedSpots.id}
+            selectedSpots={selectedSpots}
+            />
+          ))}
+      </div>
+    </selectedSpotsContext.Provider>
   </div>
   );
 };
