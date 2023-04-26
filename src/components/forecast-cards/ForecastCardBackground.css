@@ -1,5 +1,4 @@
 .background-forcast{
-    height: 80vh;
     width: 1160px;
     display: flex;
     background-color: white;
@@ -21,6 +20,7 @@
 .flexSpotName{
     display: flex;
 }
+
 .spotNameLocalisation{
     height: 20px;
     width: 20px;
@@ -53,4 +53,14 @@
 .bodyForecastCard{
     margin-top: 2em;
     display: flex;
+    /* overflow: hidden; */
+    overflow-y: scroll;
+}
+
+.dayDate{
+    text-align: center;
+}
+
+.daily-forecast{
+    position: relative;
 }
