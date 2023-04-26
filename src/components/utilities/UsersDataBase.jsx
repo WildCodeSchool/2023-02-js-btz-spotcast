@@ -12,7 +12,7 @@ const UsersDataBase = [
     username: 'Oliv',
     fullname: 'oliver gomez',
     email: 'ashitaaaka@gmail.com',
-    password: 'olvier',
+    password: 'olivier',
     img: 'https://ca.slack-edge.com/T6SG2QGG2-U047SEWCT7Z-2de75da26654-512',
   },
   {

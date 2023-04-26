@@ -6,6 +6,8 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
+  const handleShow = () => props.setShow(!props.show);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = UsersDataBase.find(
@@ -22,15 +24,19 @@ const Login = (props) => {
       // Display an error message or perform some other action
     }
   };
+
   return (
-    <div className="auth-form-container">
+    <div
+      className={
+        props.show ? 'auth-form-container invisible' : 'auth-form-container'
+      }>
+      <button onClick={handleShow} className="closing-cross"></button>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-form" htmlfor="email">
           Email
         </label>
         <input
           className="input-form"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="youremail@example.com"
