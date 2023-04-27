@@ -1,5 +1,5 @@
 .background-forcast{
-    width: 1160px;
+    width: 100%;
     display: flex;
     background-color: white;
     border-radius: 1.6em;
@@ -64,3 +64,11 @@
 .daily-forecast{
     position: relative;
 }
+.daily-forecast-content{
+    position: relative
+}
+.extended-background{
+    /* position:absolute;
+        top: 0; */
+}
+ 

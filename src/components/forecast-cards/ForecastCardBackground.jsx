@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-
 import { v4 as uuidv4 } from 'uuid';
-
 import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
 import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
@@ -10,8 +8,11 @@ import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
 import './ForecastCardBackground.css'
+import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
+import TideDatas from '../utilities/TideDatas'
 
-const ForecastCardBackground = ({selectedSpots}) => {
+
+const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     // Contient les donnés API
     const [tide, setTide] = useState([])
     const [surfDataWind,  setSurfDataWind] = useState([])
@@ -19,19 +20,16 @@ const ForecastCardBackground = ({selectedSpots}) => {
     // UseState(s) qui vérifient que l'API est chargée
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
-
-    
   
-    
     
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
       const delayTide = setTimeout(() => {
         axios
         .get(
-          `https://api.stormglass.io/v2/tide/extremes/point?lat=${selectedSpots[0].latitude}&lng=${selectedSpots[0].longitude}&start=2023-04-19&end=2023-04-29`,{
+          `https://api.stormglass.io/v2/tide/extremes/point?lat=${selectedSpots.latitude}&lng=${selectedSpots.longitude}`,{
           headers: {
-              'Authorization': 'edy2bcc96-ddf7-11ed-92e6-0242ac130002-ed2bcd72-ddf7-11ed-92e6-0242ac130002'
+              'Authorization': '492f25ae-e4d0-11ed-8d52-0242ac130002-492f2662-e4d0-11ed-8d52-0242ac130002'
             }}
         )
         .then((res) => res.data)
@@ -42,6 +40,7 @@ const ForecastCardBackground = ({selectedSpots}) => {
       }, 3*60*60*1000); 
 
     },[])
+
 
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
@@ -96,24 +95,42 @@ const ForecastCardBackground = ({selectedSpots}) => {
             {
               dayForecast.map((el,index) => (
                 <div key={uuidv4()}  className='daily-forecast'>
+                
                   <p className='dayDate'>{el}</p>
+                  
+                  <div className='daily-forecast-content'>
+                  
                   <ForecastCardMinified 
-                    
                     surfDataHoule ={surfDataHoule}
                     surfDataWind ={surfDataWind}
                     number = {index}
                     onLoad ={onLoad} 
                     onLoadMarine ={onLoadMarine}
                   />
-                  <p className='dayDate'>{el}</p>
+                  
                   <ForecastCardExtended 
+                      surfDataWind ={surfDataWind}
+                      number = {index}
+                      onLoad ={onLoad}
+                    />
                     
-                    surfDataWind ={surfDataWind}
-                    surfDataHoule={surfDataHoule}
-                    onLoadMarine={onLoadMarine}
-                    onLoad ={onLoad}
-                    index={index}
-                  />
+                    <div className='extended-background'>
+                      <ForecastCardExtended
+                        surfDataWind ={surfDataWind}
+                        surfDataHoule={surfDataHoule}
+                        onLoadMarine={onLoadMarine}
+                        onLoad ={onLoad}
+                        index={index}
+                      />
+                      
+                      <DailyTide
+                        tide={TideDatas}
+                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                        timeStamp={timeStamp}
+                      />
+                      
+                    </div>
+                  </div>
                 </div>
               ))
             }

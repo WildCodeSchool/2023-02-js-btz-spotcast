@@ -16,10 +16,6 @@ export const selectedSpotsContext = createContext();
 
 const Dashboard = () => {
 
-
-
-
-
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -27,25 +23,25 @@ const Dashboard = () => {
     name : "Biarritz - La Côte des Basques",
     latitude : "43.48",
     longitude : "-1.56",
-    webcam : "https://gosurf.fr/webcam/fr/84/Biarritz-La-Grande-Plage"
+    webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
     }
   ]);
 
-  
-
-  //usdeState to check when the Open-Meteo API is loaded
+  //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
 
   //Setting up a realtime clock
   const [date, setDate] = useState(new Date());
 
+  //getting time and date every hour
   useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 60000);
+    const timer = setInterval(() => setDate(new Date()), 3600000);
     return function () {
       clearInterval(timer);
     };
   });
 
+  //creating a time stamp written as the one in the API
   const timeStamp = 
   `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
 
@@ -97,14 +93,6 @@ const Dashboard = () => {
   }, []);
 
 
-  useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 60000);
-    return function () {
-      clearInterval(timer);
-    };
-  });
-
-
   //getting the index of current time in API array
   const [timeStampIndex, setTimeStampIndex] = useState('');
 
@@ -112,7 +100,6 @@ const Dashboard = () => {
     wind.time && //checking if 'wind.time' is already loaded
       setTimeStampIndex(wind.time.indexOf(timeStamp));
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
-
   
 
   return (
@@ -146,6 +133,7 @@ const Dashboard = () => {
             <ForecastCardBackground
             key={selectedSpots.id}
             selectedSpots={selectedSpots}
+            timeStamp={timeStamp}
             />
           ))}
       </div>
