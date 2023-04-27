@@ -20,6 +20,8 @@ const TideMinified = ({ tide, dayDate }) => {
         <p>Tides</p>
         <div className="tides-minified">
             <div className='low-tide-minified'>
+                ↓
+                <br /> 
                 {dayHighTides[0] 
                 ? `${String(new Date(dayHighTides[0].time).getHours()).padStart(2, "0")}:${String(new Date(dayHighTides[0].time).getMinutes()).padStart(2, "0")} `
                 : ""}
@@ -29,6 +31,8 @@ const TideMinified = ({ tide, dayDate }) => {
                 : ""}
             </div>
             <div className='high-tide-minified'>
+             ↑
+             <br /> 
                 {dayLowTides[0] 
                 ? `${String(new Date(dayLowTides[0].time).getHours()).padStart(2, "0")}:${String(new Date(dayLowTides[0].time).getMinutes()).padStart(2, "0")} `
                 : ""}

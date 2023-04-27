@@ -4,7 +4,12 @@ import HourlyForecast from './forecast-extended-components/HourlyForecast'
 import { v4 as uuidv4 } from 'uuid';
 
 
-const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine, index}) => {
+const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine, index,functionChange, addActive,isActive}) => {
+
+  const sendBackIndex = () => {
+    addActive(!isActive)
+    functionChange(index)
+  }
   
   const range = (index+1)*24;
   const {windspeed_10m, winddirection_10m} = onLoad ? "" : surfDataWind.hourly;
@@ -18,7 +23,7 @@ const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine
   const waveDirectionByDay = onLoadMarine ? "" : wave_direction.slice(range-24, range);
 
   return (
-    <div className='daily-extended-forecast'>
+    <div className='daily-extended-forecast' onClick={sendBackIndex}>
       {Array(7).fill().map((_, index)=>(
         <HourlyForecast 
         key={uuidv4()}

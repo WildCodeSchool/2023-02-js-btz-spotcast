@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import WindMinified from './minified-components/Wind-Minified'
 import EnergieMinified from './minified-components/Energie-Minified'
 import PeriodeMinified from './minified-components/PeriodeMinified'
@@ -8,12 +8,17 @@ import './ForecastCardMinified.css'
 import TideMinified from './minified-components/TideMinified'
 
 
-const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate}) => {
+const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate, functionChange, addActive,isActive}) => {
 
-  console.log(tide, dayDate);
+
+  const sendBackIndex = () => {
+    addActive(!isActive)
+    functionChange(number)
+  }
+  
 
   return (
-    <div className='minified-background'>
+    <div className='minified-background' onClick={sendBackIndex}> 
     
         <div >
         <WindMinified 

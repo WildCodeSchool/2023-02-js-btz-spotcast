@@ -20,6 +20,22 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     // UseState(s) qui vérifient que l'API est chargée
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
+    // UseState qui active et désactive les cards
+    const [isActive, setIsActive] = useState(true)
+    const [indexCard, setIndexCard] = useState(0)
+
+    const addActive = (newValue) => {
+      setIsActive(newValue)
+    }
+
+    const changeIndex = (newValue) => {
+      setIndexCard(newValue)
+      //isActive & indexCard.some(el => el !== newValue) ? 
+      //setIndexCard(el => [...el,newValue])
+      //: setIndexCard(el => el.filter((el, i) => i !== newValue))
+    }
+
+    console.log(`isActive ${isActive}, indexCard ${indexCard} }`)
   
     
     useEffect(() => {
@@ -69,6 +85,8 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     for(let i = 0; i < 7; i++){
         dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('fr-FR', options))
     }
+
+    console.log(indexCard)
     
   return (
     <div className='background-forcast'>
@@ -98,18 +116,22 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                 
                   <p className='dayDate'>{el}</p>
                   
-                  <div className='daily-forecast-content'>
                   
-                  <ForecastCardMinified 
-                    surfDataHoule ={surfDataHoule}
-                    surfDataWind ={surfDataWind}
-                    number = {index}
-                    onLoad ={onLoad} 
-                    onLoadMarine ={onLoadMarine}
-                    tide={TideDatas}
-                    dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                  />
-
+                  <div className='daily-forecast-content'>
+                  {indexCard !== index ? (
+                      <ForecastCardMinified 
+                        surfDataHoule ={surfDataHoule}
+                        surfDataWind ={surfDataWind}
+                        number = {index}
+                        onLoad ={onLoad} 
+                        onLoadMarine ={onLoadMarine}
+                        tide={TideDatas}
+                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                        functionChange ={changeIndex}
+                        addActive ={addActive}
+                        isActive = {isActive}
+                      />
+                  ) : (
                     <div className='extended-background'>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
@@ -117,15 +139,20 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         onLoadMarine={onLoadMarine}
                         onLoad ={onLoad}
                         index={index}
+                        functionChange ={changeIndex}
+                        addActive ={addActive}
+                        isActive = {isActive}
                       />
                       
                       <DailyTide
                         tide={TideDatas}
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                       />
-                      
+                  
                     </div>
+                  )}
                   </div>
+                  
                 </div>
               ))
             }
