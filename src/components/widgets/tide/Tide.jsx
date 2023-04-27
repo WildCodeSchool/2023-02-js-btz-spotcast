@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ToggleButton from '../../utilities/ToggleButton'
 import './Tide.css'
-import TideDatas from './TideDatas'
+import TideDatas from '../../utilities/TideDatas'
 import tideShape from '../../../tide-shape.svg'
 
 const Tide = ({ date }) => {

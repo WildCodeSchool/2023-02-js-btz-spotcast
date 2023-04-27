@@ -64,3 +64,11 @@
 .daily-forecast{
     position: relative;
 }
+.daily-forecast-content{
+    position: relative
+}
+.extended-background{
+    /* position:absolute;
+        top: 0; */
+}
+ 

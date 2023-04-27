@@ -1,6 +1,8 @@
 import React from 'react'
 import './ForecastCardExtended.css'
 import HourlyForecast from './forecast-extended-components/HourlyForecast'
+import { v4 as uuidv4 } from 'uuid';
+
 
 const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine, index}) => {
   
@@ -19,7 +21,7 @@ const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine
     <div className='daily-extended-forecast'>
       {Array(7).fill().map((_, index)=>(
         <HourlyForecast 
-        key = {`daily-infos ${index}`}
+        key={uuidv4()}
         windSpeedByDay ={windSpeedByDay}
         windDirectionByDay = {windDirectionByDay}
         waveHeightByDay = {waveHeightByDay}

@@ -1,7 +1,5 @@
 .daily-extended-forecast{
     display: flex;
-    /* position:absolute;
-    top: 0; */
 }
 
 .hourly-forecast{
