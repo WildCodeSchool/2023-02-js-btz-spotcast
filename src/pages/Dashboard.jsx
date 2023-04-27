@@ -113,7 +113,7 @@ const Dashboard = () => {
       setTimeStampIndex(wind.time.indexOf(timeStamp));
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
 
-  console.log(selectedSpots[0])
+  
 
   return (
     <div className="dashboard">

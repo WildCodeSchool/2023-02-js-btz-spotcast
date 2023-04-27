@@ -97,9 +97,11 @@ const ForecastCardBackground = ({selectedSpots}) => {
                   <p className='dayDate'>{el}</p>
                   <ForecastCardMinified 
                     
+                    surfDataHoule ={surfDataHoule}
                     surfDataWind ={surfDataWind}
                     number = {index}
-                    onLoad ={onLoad}
+                    onLoad ={onLoad} 
+                    onLoadMarine ={onLoadMarine}
                   />
                   <p className='dayDate'>{el}</p>
                   <ForecastCardExtended 

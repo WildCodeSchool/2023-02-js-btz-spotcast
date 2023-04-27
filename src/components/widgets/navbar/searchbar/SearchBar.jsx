@@ -43,7 +43,7 @@ const SearchBar = () => {
   );
     
   }
-
+  
   const handleFavorite=()=>{
     setIsFavorite(!isFavorite)
   }
@@ -58,7 +58,6 @@ const SearchBar = () => {
    
   },[currentSpots])
 
-  console.log(selectedSpots[0])
   
   return (
     <div className="searchbar">
