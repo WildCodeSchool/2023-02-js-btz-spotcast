@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import chartBar from "../../../../assets/images/swell-bar.svg";
 import chartWaveBar from "../../../../assets/images/swell-wave-bar.svg";
 import windDirectionIcon from '../../../../assets/images/wind-direction.svg'
+import EnergieExtended from "../extended-components/EnergieExtended";
 import { v4 as uuidv4 } from 'uuid';
 
 
 const HourlyForecast = ({
-  key,
   windSpeedByDay,
   windDirectionByDay,
   waveHeightByDay,
@@ -113,7 +113,6 @@ const HourlyForecast = ({
                 style={{ transform: `translate(-50%, -50%) rotate(${windDirectionByDay[hoursShowed[index]]}deg)`}} 
                 className="wind-direction-arrow" 
                 src={windDirectionIcon} alt="wind-direction" 
-                // ${windDirectionByDay[hoursShowed[index]]}
             />
           </div>
         </div>
@@ -128,7 +127,12 @@ const HourlyForecast = ({
               <img key={uuidv4()} className="swell-chart-bar" src={chartBar} alt="chart-bar" />
             ))}
         </div>
-        <p className="hourly-energy">1200</p>
+          <EnergieExtended
+            waveHeightByDay = {waveHeightByDay}
+            wavePeriodByDay = {wavePeriodByDay}
+            index ={index}
+            onLoadMarine ={onLoadMarine}
+          />
         <p className="hourly-swell">
           {onLoadMarine ? "" : waveHeightByDay[hoursShowed[index]].toFixed(1)}
         </p>

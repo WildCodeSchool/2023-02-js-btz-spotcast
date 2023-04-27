@@ -107,13 +107,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                     onLoad ={onLoad} 
                     onLoadMarine ={onLoadMarine}
                   />
-                  
-                  <ForecastCardExtended 
-                      surfDataWind ={surfDataWind}
-                      number = {index}
-                      onLoad ={onLoad}
-                    />
-                    
+             
                     <div className='extended-background'>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
