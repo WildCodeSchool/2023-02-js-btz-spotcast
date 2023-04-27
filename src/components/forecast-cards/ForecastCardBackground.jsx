@@ -82,9 +82,11 @@ const ForecastCardBackground = ({selectedSpots}) => {
                   </p>
                   <img className='spotNameStars' src={stars} />
                 </div>
-              <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
+                {selectedSpots.webcam === false 
+                  ? <p></p>
+                  : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
                 Acceder à la webcam
-              </a>
+              </a>}
             </div>
             <div>
                 <ToggleButton />
