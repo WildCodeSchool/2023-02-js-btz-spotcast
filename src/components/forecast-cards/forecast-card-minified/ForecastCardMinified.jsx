@@ -5,10 +5,12 @@ import PeriodeMinified from './minified-components/PeriodeMinified'
 import Swell from './minified-components/Swell'
 
 import './ForecastCardMinified.css'
+import TideMinified from './minified-components/TideMinified'
 
 
-const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine}) => {
+const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate}) => {
 
+  console.log(tide, dayDate);
 
   return (
     <div className='minified-background'>
@@ -37,7 +39,10 @@ const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLo
           surfDataHoule = {surfDataHoule}
           onLoadMarine ={onLoadMarine}
         />
-        <div>Tide</div>
+        <TideMinified 
+          tide={tide}
+          dayDate={dayDate}
+        />
         </div>
     
     

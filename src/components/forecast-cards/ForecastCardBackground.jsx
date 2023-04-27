@@ -106,14 +106,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                     number = {index}
                     onLoad ={onLoad} 
                     onLoadMarine ={onLoadMarine}
+                    tide={TideDatas}
+                    dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                   />
-                  
-                  <ForecastCardExtended 
-                      surfDataWind ={surfDataWind}
-                      number = {index}
-                      onLoad ={onLoad}
-                    />
-                    
+                
                     <div className='extended-background'>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
@@ -126,7 +122,6 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                       <DailyTide
                         tide={TideDatas}
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                        timeStamp={timeStamp}
                       />
                       
                     </div>
