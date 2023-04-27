@@ -36,21 +36,28 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    width: 2.2em;
     aspect-ratio: 1/1;
     border-radius: 50%;
     position: relative;
 }
 
 .hourly-wind-direction{
+    width: 2em;
     color: #fff;
     background-color: var(--primary-color);
+}
+
+.hourly-swell{
+    border: 2px solid var(--primary-color-regular);
+    width: 2.2em;
 }
 
 .swell-chart{
  display: flex;
  flex-direction: column;
+ justify-content: flex-end;
  align-items: center;
+ min-height: 4.125em;
 }
 
 .swell-chart-bar{
@@ -58,6 +65,74 @@
     padding: .18em 0;
 }
 
+.hourly-energy,
 .hourly-swell{
-    border: 2px solid var(--primary-color-regular);
+    margin: .5em 0;
+}
+
+.hourly-wind{
+    margin: .7em 0 0.2em;
+}
+
+.hourly-wind-data{
+    z-index: 20;
+}
+
+.wind-direction-arrow{
+    position: absolute;
+    transform-origin: bottom center;
+    left: 50%; 
+    height: 1.5em;
+    z-index: 0;
+}
+
+.daily-tide{
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+    margin-top: 1em;
+}
+
+.coeff{
+    text-align: center;
+}
+
+.coeff-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    color: var(--primary-color-very-light);
+    background-color: var(--primary-color);
+    margin-bottom: .3em;
+}
+
+.tide{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1em;
+}
+
+.tide-shape{
+    width: 100%;
+    margin: .2em 0;
+}
+.daily-high-tide,
+.daily-low-tide{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5em;
+}
+
+.first-high-tide{
+    position: relative;
+    left:30%;
+}
+
+.second-low-tide{
+    position: relative;
+    right: 28%;
 }

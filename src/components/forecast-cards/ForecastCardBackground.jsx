@@ -7,6 +7,7 @@ import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
 import './ForecastCardBackground.css'
+import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
 
 const ForecastCardBackground = ({selectedSpots}) => {
     // Contient les donnés API
@@ -97,7 +98,6 @@ const ForecastCardBackground = ({selectedSpots}) => {
                     number = {index}
                     onLoad ={onLoad}
                   />
-                  <p className='dayDate'>{el}</p>
                   <ForecastCardExtended 
                     key={`extended ${index}`}
                     surfDataWind ={surfDataWind}
@@ -105,6 +105,9 @@ const ForecastCardBackground = ({selectedSpots}) => {
                     onLoadMarine={onLoadMarine}
                     onLoad ={onLoad}
                     index={index}
+                  />
+                  <DailyTide 
+                    tide={tide}
                   />
                 </div>
               ))
