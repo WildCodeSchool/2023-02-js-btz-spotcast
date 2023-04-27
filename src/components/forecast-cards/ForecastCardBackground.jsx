@@ -109,7 +109,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                     tide={TideDatas}
                     dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                   />
-                
+
                     <div className='extended-background'>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}

@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react'
 
-const EnergieMinified = ({surfDataHoule, onLoad, number, onLoadMarine}) => {
+const EnergieMinified = ({surfDataHoule, number, onLoadMarine}) => {
    
     const numberHours = [24, 48, 72, 96, 120, 144, 168]
  
