@@ -6,8 +6,6 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
-  const handleShow = () => props.setShow(!props.show);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = UsersDataBase.find(
@@ -16,7 +14,9 @@ const Login = (props) => {
     if (user) {
       props.setCurrentUserName(user.username);
       props.setCurrentUserPicture(user.img);
-      console.log('User found:', user);
+      setEmail('');
+      setPass('');
+      props.toggleModal();
 
       // Redirect to the dashboard or perform some other action
     } else {
@@ -30,7 +30,7 @@ const Login = (props) => {
       className={
         props.show ? 'auth-form-container invisible' : 'auth-form-container'
       }>
-      <button onClick={handleShow} className="closing-cross"></button>
+      <button onClick={props.toggleModal} className="closing-cross"></button>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-form" htmlfor="email">
           Email
@@ -48,7 +48,6 @@ const Login = (props) => {
         </label>
         <input
           className="input-form"
-          value={pass}
           onChange={(e) => setPass(e.target.value)}
           type="password"
           placeholder="*******"

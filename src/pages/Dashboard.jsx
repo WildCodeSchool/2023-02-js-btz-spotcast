@@ -87,13 +87,17 @@ const Dashboard = () => {
 
   // all the UseStates for login popup
   const [currentForm, setCurrentForm] = useState('login');
-  const [currentUserName, setCurrentUserName] = useState('Username');
+  const [currentUserName, setCurrentUserName] = useState('Doudou');
   const [currentUserPicture, setCurrentUserPicture] = useState(
-    'https://cdn.imgbin.com/5/6/5/imgbin-computer-icons-avatar-user-profile-photographer-yTHY2GAmFUKBhvVv8ikQwTMaH.jpg'
+    'https://i.pinimg.com/originals/f9/9c/f1/f99cf1db89af1ea64a7085eca75d98b2.jpg'
   );
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
+  };
+
+  const toggleModal = () => {
+    setShow(!show);
   };
 
   const [show, setShow] = useState(true);
@@ -102,6 +106,7 @@ const Dashboard = () => {
     <div className="dashboard">
       {currentForm === 'login' ? (
         <Login
+          toggleModal={toggleModal}
           setCurrentUserName={setCurrentUserName}
           setCurrentUserPicture={setCurrentUserPicture}
           onFormSwitch={toggleForm}
@@ -109,8 +114,16 @@ const Dashboard = () => {
           setShow={setShow}
         />
       ) : (
-        <Register show={show} setShow={setShow} onFormSwitch={toggleForm} />
+        <Register
+          toggleModal={toggleModal}
+          show={show}
+          setShow={setShow}
+          onFormSwitch={toggleForm}
+        />
       )}
+      <div
+        className={show ? 'overlay-modal invisible' : 'overlay-modal'}
+        onClick={toggleModal}></div>
       <NavBar
         setShow={setShow}
         show={show}
