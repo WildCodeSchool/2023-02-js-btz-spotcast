@@ -100,7 +100,7 @@ const Dashboard = () => {
     wind.time && //checking if 'wind.time' is already loaded
       setTimeStampIndex(wind.time.indexOf(timeStamp));
   }, [wind.time]); //setup timeStampIndex after ' wind.time' is updated
-
+  
 
   return (
     <div className="dashboard">

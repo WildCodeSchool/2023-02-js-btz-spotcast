@@ -43,7 +43,7 @@ const SearchBar = () => {
   );
     
   }
-
+  
   const handleFavorite=()=>{
     setIsFavorite(!isFavorite)
   }

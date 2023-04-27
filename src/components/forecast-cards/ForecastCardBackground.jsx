@@ -81,9 +81,11 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                   </p>
                   <img className='spotNameStars' src={stars} />
                 </div>
-              <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
+                {selectedSpots.webcam === false 
+                  ? <p></p>
+                  : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
                 Acceder à la webcam
-              </a>
+              </a>}
             </div>
             <div>
                 <ToggleButton />
@@ -93,14 +95,25 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
             {
               dayForecast.map((el,index) => (
                 <div key={uuidv4()}  className='daily-forecast'>
+                
                   <p className='dayDate'>{el}</p>
+                  
                   <div className='daily-forecast-content'>
-                    <ForecastCardMinified
-                    
+                  
+                  <ForecastCardMinified 
+                    surfDataHoule ={surfDataHoule}
+                    surfDataWind ={surfDataWind}
+                    number = {index}
+                    onLoad ={onLoad} 
+                    onLoadMarine ={onLoadMarine}
+                  />
+                  
+                  <ForecastCardExtended 
                       surfDataWind ={surfDataWind}
                       number = {index}
                       onLoad ={onLoad}
                     />
+                    
                     <div className='extended-background'>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
@@ -109,11 +122,13 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         onLoad ={onLoad}
                         index={index}
                       />
+                      
                       <DailyTide
                         tide={TideDatas}
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                         timeStamp={timeStamp}
                       />
+                      
                     </div>
                   </div>
                 </div>

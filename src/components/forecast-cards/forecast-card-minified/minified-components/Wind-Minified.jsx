@@ -17,7 +17,7 @@ const WindMinified = ({number, onLoad, surfDataWind}) => {
       dayWindRange = surfDataWind.hourly.windspeed_10m.filter((el,index)=>(
         number === 0 
         ? index <= numberHours[number] 
-        : index <=numberHours[number] & index >=numberHours[number -1]        
+        : index <=numberHours[number] & index >numberHours[number -1]        
     ))
     }
 
