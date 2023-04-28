@@ -16,27 +16,27 @@ const TideMinified = ({ tide, dayDate }) => {
     let dayLowTides  = dayTides.filter((tide) => tide.type==="low");
     
   return (
-    <div>
-        <p>Tides</p>
-        <div className="tides-minified">
-            <div className='low-tide-minified'>
-                ↓
-                <br /> 
+    <div className="tide">
+        <p className='title-minified'>Tides</p>
+        <div  className='tide-minified'>
+            <div className='data-minified-tide'>
+              <div className='arrow'> ↓</div>
+             
                 {dayHighTides[0] 
                 ? `${String(new Date(dayHighTides[0].time).getHours()).padStart(2, "0")}:${String(new Date(dayHighTides[0].time).getMinutes()).padStart(2, "0")} `
                 : ""}
-                <br /> 
+        
                 {dayHighTides[1] 
                 ? `${String(new Date(dayHighTides[1].time).getHours()).padStart(2, "0")}:${String(new Date(dayHighTides[0].time).getMinutes()).padStart(2, "0")} `
                 : ""}
             </div>
-            <div className='high-tide-minified'>
-             ↑
-             <br /> 
+            <div className='data-minified-tide'>
+            <div className='arrow'> ↑</div>
+         
                 {dayLowTides[0] 
                 ? `${String(new Date(dayLowTides[0].time).getHours()).padStart(2, "0")}:${String(new Date(dayLowTides[0].time).getMinutes()).padStart(2, "0")} `
                 : ""}
-                <br /> 
+              
                 {dayLowTides[1] 
                 ? `${String(new Date(dayLowTides[1].time).getHours()).padStart(2, "0")}:${String(new Date(dayLowTides[1].time).getMinutes()).padStart(2, "0")} `
                 : ""}

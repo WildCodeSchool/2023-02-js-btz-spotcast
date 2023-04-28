@@ -27,9 +27,9 @@ const WindMinified = ({number, onLoad, surfDataWind}) => {
   
   return (
     <div className='Wind'>
-    <p>Vent</p>
-    <p>{onLoad ? "" :`${surfDataWind &&  Math.min(...dayWindRange)} - ${surfDataWind &&  Math.max(...dayWindRange)} ` }</p>
-    <p>km/H</p>
+    <p className='title-minified' >Vent</p>
+    <p className='data-minified'>{onLoad ? "" :`${surfDataWind &&  Math.min(...dayWindRange)} - ${surfDataWind &&  Math.max(...dayWindRange)} ` }</p>
+    <p className='title-minified' >km/H</p>
     </div>
     
   )

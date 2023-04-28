@@ -21,22 +21,15 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
     // UseState qui active et désactive les cards
-    const [isActive, setIsActive] = useState(true)
     const [indexCard, setIndexCard] = useState(0)
 
-    const addActive = (newValue) => {
-      setIsActive(newValue)
-    }
 
     const changeIndex = (newValue) => {
       setIndexCard(newValue)
-      //isActive & indexCard.some(el => el !== newValue) ? 
-      //setIndexCard(el => [...el,newValue])
-      //: setIndexCard(el => el.filter((el, i) => i !== newValue))
     }
 
-    console.log(`isActive ${isActive}, indexCard ${indexCard} }`)
-  
+    
+    console.log(indexCard)
     
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
@@ -83,10 +76,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
 
     // boucle qui génère automatiquement les 7 prochains jours
     for(let i = 0; i < 7; i++){
-        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('fr-FR', options))
+        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('en-EN', options))
     }
 
-    console.log(indexCard)
+    
     
   return (
     <div className='background-forcast'>
@@ -114,12 +107,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
               dayForecast.map((el,index) => (
                 <div key={uuidv4()}  className='daily-forecast'>
                 
-                  <p className='dayDate'>{el}</p>
-                  
-                  
-                  <div className='daily-forecast-content'>
-                  {indexCard !== index ? (
+                  <div className={indexCard === index? "minified-background-invisible" : "minified-background-visible"}>
+                   
                       <ForecastCardMinified 
+                        date ={el}
                         surfDataHoule ={surfDataHoule}
                         surfDataWind ={surfDataWind}
                         number = {index}
@@ -128,11 +119,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         tide={TideDatas}
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                         functionChange ={changeIndex}
-                        addActive ={addActive}
-                        isActive = {isActive}
                       />
-                  ) : (
-                    <div className='extended-background'>
+                    </div>
+                    <div className={indexCard === index? "minified-background-visible" : "minified-background-invisible" }>
+                      <div className='date'><p className='dateTexte'>{el}</p></div>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
                         surfDataHoule={surfDataHoule}
@@ -140,8 +130,6 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         onLoad ={onLoad}
                         index={index}
                         functionChange ={changeIndex}
-                        addActive ={addActive}
-                        isActive = {isActive}
                       />
                       
                       <DailyTide
@@ -150,10 +138,9 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                       />
                   
                     </div>
-                  )}
                   </div>
                   
-                </div>
+            
               ))
             }
         </div>
