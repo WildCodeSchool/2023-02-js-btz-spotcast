@@ -1,21 +1,35 @@
-.dashboard{
-    max-width: 1280px;
-    width: 100%;
-    border-radius: 2.5em;
-    background-color: var(--primary-color-light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1.5em;
+.dashboard {
+  max-width: 1280px;
+  width: 100%;
+  border-radius: 2.5em;
+  background-color: var(--primary-color-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5em;
 }
-.widgets-container{
-    width: 98%;
-    position: relative;
-    top:-4em;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.25em;
+.widgets-container {
+  width: 98%;
+  position: relative;
+  top: -4em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25em;
+}
+
+.overlay-modal {
+  background: black;
+  opacity: 0.4;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+}
+
+.invisible {
+  display: none;
 }

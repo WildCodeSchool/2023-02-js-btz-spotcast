@@ -21,7 +21,6 @@ const WindMinified = ({number, onLoad, surfDataWind}) => {
 
     let dayWindRange = "";
     
-    console.log(onLoad)
     
     if(onLoad){
       dayWindRange = ""

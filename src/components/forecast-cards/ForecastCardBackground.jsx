@@ -36,7 +36,6 @@ const ForecastCardBackground = ({currentSpot}) => {
 
     },[])
 
-    console.log(tide)
 
       
       
