@@ -50,7 +50,6 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
 
     },[])
 
-
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
       axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
