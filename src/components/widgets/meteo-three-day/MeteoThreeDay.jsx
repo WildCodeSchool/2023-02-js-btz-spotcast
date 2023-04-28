@@ -42,7 +42,7 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
     }
 
     return (
-        <div className="small-square">
+        <div className="small-square item-content" id="D">
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
                 <ToggleButton />
@@ -53,19 +53,16 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
                         <div key ={uuidv4()} className="day-infos-3d">
                            
                             <DateThreeDays
-
                                 meteoDay={el.date}
                             />
-                            <IconMeteoThreeDays
-                                
+
+                            <IconMeteoThreeDays 
                                 meteoIcon={el.weatherCode}
                                 onLoadMeteo3D={onLoadMeteo3D}
-
                             />
-                            <TempThreeDays
-                            
-                                tempDay={el.temperature}
 
+                            <TempThreeDays
+                                tempDay={el.temperature}
                             />
 
                         </div>

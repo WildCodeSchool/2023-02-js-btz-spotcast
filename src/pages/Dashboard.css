@@ -9,7 +9,8 @@
     justify-content: flex-start;
     padding: 1.5em;
 }
-.widgets-container{
+
+.grid{
     width: 98%;
     position: relative;
     top:-4em;
@@ -19,3 +20,26 @@
     flex-wrap: wrap;
     gap: 1.25em;
 }
+
+
+  /*
+  
+  .my-custom-content {
+    width: 1000px;
+  }
+
+  .item.muuri-item-dragging {
+    z-index: 3;
+  }
+  .item.muuri-item-releasing {
+    z-index: 2;
+  }
+  .item.muuri-item-hidden {
+    z-index: 0;
+  }
+  .item-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */

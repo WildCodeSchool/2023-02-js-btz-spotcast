@@ -58,7 +58,7 @@ const Wind = ({
   }, [onLoadOpenMeteo]);
 
   return (
-    <div className="small-square">
+    <div className="small-square item-content" id="A">
       <div className="card-header">
         <p className="card-title">Wind</p>
         <ToggleButton />

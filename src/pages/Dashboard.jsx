@@ -9,12 +9,35 @@ import ForecastCardBackground from "../components/forecast-cards/ForecastCardBac
 import "./Dashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
+import Muuri from 'muuri';
+
 
 // instancier un useContext
 export const selectedSpotsContext = createContext();
 
 
 const Dashboard = () => {
+
+  //setting up the Muuri effect
+  const [grid, setGrid] = useState();
+
+  useEffect(() => {
+    setGrid(
+      new Muuri('.grid', {
+        dragEnabled: true,
+        layoutDuration: 300,
+        layoutEasing: 'ease',
+        fillGaps: true,
+        sortData: {
+          id: function(item, element) {
+            console.log(item);
+            console.log(element.children[0].id);
+            return element.children[0].id;
+          }
+        }
+      })
+    );
+  }, []);
 
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
@@ -106,35 +129,48 @@ const Dashboard = () => {
     <div className="dashboard">
       <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
         <NavBar/>
-        <div className="widgets-container">
-          <Wind
-            {...wind}
+        <div className="grid">
+          <div className="item">
+            <Wind
+              {...wind}
+              timeStampIndex={timeStampIndex}
+              onLoadOpenMeteo = {onLoadOpenMeteo}
+            />
+          </div>
+          
+          <div className="item">
+            <Tide
+              date={date}
+            />
+          </div>
+
+          <div className="item">
+            <MeteoDay
+            {...meteo}
+            onLoadMeteo={onLoadMeteo}
             timeStampIndex={timeStampIndex}
-            onLoadOpenMeteo = {onLoadOpenMeteo}
-          />
-          <Tide
-            date={date}
-          />
+            />
+          </div>
 
-          <MeteoDay
-          {...meteo}
-          onLoadMeteo={onLoadMeteo}
-          timeStampIndex={timeStampIndex}
-          />
+          <div className="item">
+            <MeteoThreeDay
+            meteo3D={meteo3D}
+            onLoadMeteo3D={onLoadMeteo3D}
+            />
+          </div>
 
-          <MeteoThreeDay
-          meteo3D={meteo3D}
-          onLoadMeteo3D={onLoadMeteo3D}
-          />
-
-          <Sunset />
+          <div className="item">
+            <Sunset />
+          </div>
 
           {selectedSpots.map(selectedSpots => (
-            <ForecastCardBackground
-            key={selectedSpots.id}
-            selectedSpots={selectedSpots}
-            timeStamp={timeStamp}
-            />
+            <div className="item">
+              <ForecastCardBackground
+              key={selectedSpots.id}
+              selectedSpots={selectedSpots}
+              timeStamp={timeStamp}
+              />
+            </div>
           ))}
       </div>
     </selectedSpotsContext.Provider>

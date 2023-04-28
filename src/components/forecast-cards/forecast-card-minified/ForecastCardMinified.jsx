@@ -10,7 +10,6 @@ import TideMinified from './minified-components/TideMinified'
 
 const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate}) => {
 
-  console.log(tide, dayDate);
 
   return (
     <div className='minified-background'>

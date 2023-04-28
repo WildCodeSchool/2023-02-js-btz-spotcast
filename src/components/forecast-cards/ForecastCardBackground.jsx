@@ -71,7 +71,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     }
     
   return (
-    <div className='background-forcast'>
+    <div className='background-forcast item-content' id="F">
         <div className='header'>
             <div>
               <div className='flexSpotName'>
