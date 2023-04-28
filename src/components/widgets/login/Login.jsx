@@ -1,10 +1,20 @@
-import { useState } from 'react';
-import './Login.css';
-import UsersDataBase from '../../utilities/UsersDataBase';
+import { useState } from "react";
+import "./Login.css";
+import UsersDataBase from "../../utilities/UsersDataBase";
 
-const Login = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+const Login = ({
+  setCurrentUserName,
+  setCurrentUserPicture,
+  toggleModal,
+  show,
+  onFormSwitch,
+  email,
+  setEmail,
+  pass,
+  setPass,
+  error,
+  setError,
+}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,25 +22,22 @@ const Login = (props) => {
       (u) => u.email === email && u.password === pass
     );
     if (user) {
-      props.setCurrentUserName(user.username);
-      props.setCurrentUserPicture(user.img);
-      setEmail('');
-      setPass('');
-      props.toggleModal();
+      setCurrentUserName(user.username);
+      setCurrentUserPicture(user.img);
+      toggleModal();
 
       // Redirect to the dashboard or perform some other action
     } else {
-      console.log('User not found');
+      setError("Details do not match");
       // Display an error message or perform some other action
     }
   };
 
   return (
     <div
-      className={
-        props.show ? 'auth-form-container invisible' : 'auth-form-container'
-      }>
-      <button onClick={props.toggleModal} className="closing-cross"></button>
+      className={show ? "auth-form-container invisible" : "auth-form-container"}
+    >
+      <button onClick={toggleModal} className="closing-cross"></button>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-form" htmlfor="email">
           Email
@@ -39,7 +46,8 @@ const Login = (props) => {
           className="input-form"
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          placeholder="youremail@example.com"
+          value={email}
+          placeholder="Your email"
           id="email"
           name="email"
         />
@@ -50,15 +58,17 @@ const Login = (props) => {
           className="input-form"
           onChange={(e) => setPass(e.target.value)}
           type="password"
-          placeholder="*******"
+          value={pass}
+          placeholder="Your password"
           id="password"
           name="password"
         />
-        <button className="btn-login">Log In</button>
+        <button type="submit" className="btn-login">
+          Log In
+        </button>
       </form>
-      <button
-        className="btn-link"
-        onClick={() => props.onFormSwitch('Register')}>
+      {error != "" ? <div className="error">{error}</div> : ""}
+      <button className="btn-link" onClick={() => onFormSwitch("Register")}>
         Don't have an account? Register here
       </button>
     </div>

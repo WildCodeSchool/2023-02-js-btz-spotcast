@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Wind from '../components/widgets/wind/Wind';
-import MeteoDay from '../components/widgets/meteo-day/MeteoDay';
-import MeteoThreeDay from '../components/widgets/meteo-three-day/MeteoThreeDay';
-import NavBar from '../components/widgets/navbar/NavBar';
-import './Dashboard.css';
-import Tide from '../components/widgets/tide/Tide';
-import Sunset from '../components/widgets/sunset/Sunset';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Wind from "../components/widgets/wind/Wind";
+import MeteoDay from "../components/widgets/meteo-day/MeteoDay"
+import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
+import NavBar from "../components/widgets/navbar/NavBar"
+import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
+import "./Dashboard.css";
+import Tide from "../components/widgets/tide/Tide";
+import Sunset from "../components/widgets/sunset/Sunset";
 import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
 
 const Dashboard = () => {
-  //usdeState to check when the Open-Meteo API is loaded
-  const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
 
-  //Setting up a realtime clock
-  const [date, setDate] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 60000);
-    return function () {
-      clearInterval(timer);
-    };
-  });
-
-  const timeStamp = `${date.getFullYear()}-${String(
-    date.getMonth() + 1
-  ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(
-    date.getHours()
-  ).padStart(2, '0')}:00`;
+  //setting up Selected Spot 
+  const [currentSpots, setCurrentSpots] = useState(
+    [{
+    id : 0,
+    name : "Biarritz - La Côte des Basques",
+    latitude : "43.48",
+    longitude : "-1.56",
+    webcam : "https://gosurf.fr/webcam/fr/84/Biarritz-La-Grande-Plage"
+  }],
+)
 
   //fetching the wind infos
   const [wind, setWind] = useState([]);
@@ -36,7 +30,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        'https://api.open-meteo.com/v1/forecast?latitude=42.47&longitude=-1.56&hourly=windspeed_10m,winddirection_10m'
+        `https://api.open-meteo.com/v1/forecast?latitude=${currentSpots[0].latitude}&longitude=${currentSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -77,7 +71,23 @@ const Dashboard = () => {
       });
   }, []);
 
-  //getting the index of current time in 'wind' array
+  //useState to check when the Open-Meteo API is loaded
+  const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
+
+  //Setting up a realtime clock
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setDate(new Date()), 60000);
+    return function () {
+      clearInterval(timer);
+    };
+  });
+
+  const timeStamp = 
+  `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
+
+  //getting the index of current time in API array
   const [timeStampIndex, setTimeStampIndex] = useState('');
 
   useEffect(() => {
@@ -94,13 +104,22 @@ const Dashboard = () => {
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
+    setEmail("");
+    setPass("");
+    setError("");
   };
 
   const toggleModal = () => {
     setShow(!show);
+    setEmail('');
+    setPass('');
+    setError('');
   };
 
   const [show, setShow] = useState(true);
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
 
   return (
     <div className="dashboard">
@@ -112,6 +131,12 @@ const Dashboard = () => {
           onFormSwitch={toggleForm}
           show={show}
           setShow={setShow}
+          email={email}
+          setEmail={setEmail}
+          pass={pass}
+          setPass={setPass}
+          error={error}
+          setError={setError}
         />
       ) : (
         <Register
@@ -144,9 +169,16 @@ const Dashboard = () => {
         />
         <MeteoThreeDay meteo3D={meteo3D} onLoadMeteo3D={onLoadMeteo3D} />
         <Sunset />
-      </div>
+
+        {currentSpots.map(currentSpot => (
+          <ForecastCardBackground
+          key={currentSpot.id}
+          currentSpot={currentSpot}
+          />
+        ))}
     </div>
+  </div>
   );
 };
 
-export default Dashboard;
+export default Dashboard
