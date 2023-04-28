@@ -2,10 +2,9 @@ import IconMeteoThreeDays from "./components/IconMeteoThreeDays";
 import DateThreeDays from "./components/DateThreeDays";
 import TempThreeDays from "./components/TempThreeDays";
 import ToggleButton from "../../utilities/ToggleButton";
+import { v4 as uuidv4 } from 'uuid';
 import "../cards.css";
 import "./MeteoThreeDay.css";
-
-
 
 const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
 
@@ -51,16 +50,20 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
             <div className="card-content meteo-infos-3d">
                 {onLoadMeteo3D ? "" :
                     indexInfoMeteo.map((el) => (
-                        <div className="day-infos-3d">
+                        <div key ={uuidv4()} className="day-infos-3d">
+                           
                             <DateThreeDays
+
                                 meteoDay={el.date}
                             />
                             <IconMeteoThreeDays
+                                
                                 meteoIcon={el.weatherCode}
                                 onLoadMeteo3D={onLoadMeteo3D}
 
                             />
                             <TempThreeDays
+                            
                                 tempDay={el.temperature}
 
                             />
@@ -72,7 +75,5 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
         </div>
     )
 }
-
-
 
 export default MeteoThreeDay
