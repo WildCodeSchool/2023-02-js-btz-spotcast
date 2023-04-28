@@ -10,7 +10,6 @@ import TideMinified from './minified-components/TideMinified'
 
 const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate, functionChange, date}) => {
 
-
   const sendBackIndex = () => {
     functionChange(number)
   }

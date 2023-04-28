@@ -16,7 +16,7 @@ const TideMinified = ({ tide, dayDate }) => {
     let dayLowTides  = dayTides.filter((tide) => tide.type==="low");
     
   return (
-    <div className="tide">
+    <div className="tides">
         <p className='title-minified'>Tides</p>
         <div  className='tide-minified'>
             <div className='data-minified-tide'>

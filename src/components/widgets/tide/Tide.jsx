@@ -50,7 +50,7 @@ const Tide = ({ date }) => {
 
 
     return (
-        <div className='big-rectangle-width tide-card'>
+        <div className='big-rectangle-width tide-card item-content' id="B">
             <div className="card-header">
                 <p className="card-title">Tide</p>
                 <ToggleButton />
