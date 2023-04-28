@@ -104,14 +104,22 @@ const Dashboard = () => {
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
+    setEmail("");
+    setPass("");
+    setError("");
   };
 
   const toggleModal = () => {
     setShow(!show);
-    
+    setEmail('');
+    setPass('');
+    setError('');
   };
 
   const [show, setShow] = useState(true);
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
 
   return (
     <div className="dashboard">
@@ -123,6 +131,12 @@ const Dashboard = () => {
           onFormSwitch={toggleForm}
           show={show}
           setShow={setShow}
+          email={email}
+          setEmail={setEmail}
+          pass={pass}
+          setPass={setPass}
+          error={error}
+          setError={setError}
         />
       ) : (
         <Register
