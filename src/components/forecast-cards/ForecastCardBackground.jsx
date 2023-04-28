@@ -20,8 +20,15 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     // UseState(s) qui vérifient que l'API est chargée
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
-  
-    
+    // UseState qui active et désactive les cards
+    const [indexCard, setIndexCard] = useState(0)
+
+
+    const changeIndex = (newValue) => {
+      setIndexCard(newValue)
+    }
+
+        
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
       const delayTide = setTimeout(() => {
@@ -40,7 +47,6 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
       }, 3*60*60*1000); 
 
     },[])
-
 
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
@@ -61,14 +67,16 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
-    const options = { weekday: 'long', day: '2-digit' }; // affiche le jours en long et la date en chiffres
+    const options = {day: '2-digit', weekday: 'long' }; // affiche le jours en long et la date en chiffres
     const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
     const dayForecast = [] // array qui receveras les dates
 
     // boucle qui génère automatiquement les 7 prochains jours
     for(let i = 0; i < 7; i++){
-        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('fr-FR', options))
+        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('en-EN', options))
     }
+
+    
     
   return (
     <div className='background-forcast item-content' id="F">
@@ -96,37 +104,40 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
               dayForecast.map((el,index) => (
                 <div key={uuidv4()}  className='daily-forecast'>
                 
-                  <p className='dayDate'>{el}</p>
-                  
-                  <div className='daily-forecast-content'>
-                  
-                  <ForecastCardMinified 
-                    surfDataHoule ={surfDataHoule}
-                    surfDataWind ={surfDataWind}
-                    number = {index}
-                    onLoad ={onLoad} 
-                    onLoadMarine ={onLoadMarine}
-                    tide={TideDatas}
-                    dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                  />
-
-                    <div className='extended-background'>
+                  <div className={indexCard === index? "minified-background-invisible" : "minified-background-visible"}>
+                   
+                      <ForecastCardMinified 
+                        date ={el}
+                        surfDataHoule ={surfDataHoule}
+                        surfDataWind ={surfDataWind}
+                        number = {index}
+                        onLoad ={onLoad} 
+                        onLoadMarine ={onLoadMarine}
+                        tide={TideDatas}
+                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                        functionChange ={changeIndex}
+                      />
+                    </div>
+                    <div className={indexCard === index? "minified-background-visible" : "minified-background-invisible" }>
+                      <div className='date'><p className='dateTexte'>{el}</p></div>
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
                         surfDataHoule={surfDataHoule}
                         onLoadMarine={onLoadMarine}
                         onLoad ={onLoad}
                         index={index}
+                        functionChange ={changeIndex}
                       />
                       
                       <DailyTide
                         tide={TideDatas}
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                       />
-                      
+                  
                     </div>
                   </div>
-                </div>
+                  
+            
               ))
             }
         </div>

@@ -40,9 +40,9 @@ const EnergieMinified = ({surfDataHoule, number, onLoadMarine}) => {
 
 
   return (
-    <div>
-      <p>Medium Energie</p>
-      <div>{energie}</div>
+    <div className='energie'>
+      <p className='title-minified'>Average Energie</p>
+      <p className='data-minified'>{energie}</p>
     </div>
   )
 }

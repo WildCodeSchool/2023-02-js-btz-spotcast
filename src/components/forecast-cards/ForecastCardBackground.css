@@ -1,5 +1,6 @@
-.background-forcast{
-    width: 100%;
+.background-forcast {
+    width: 67.5em;
+    height: 39em;
     display: flex;
     background-color: white;
     border-radius: 1.6em;
@@ -10,65 +11,163 @@
     flex-direction: column;
 }
 
-.header{
+.header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    
+
 }
 
-.flexSpotName{
+
+
+.flexSpotName {
     display: flex;
 }
 
-.spotNameLocalisation{
+.spotNameLocalisation {
     height: 20px;
     width: 20px;
     margin-right: 0.5em;
- 
- }
 
-.spotName{
+}
+
+.spotName {
     font-size: 1.2em;
     margin-bottom: 0.3em;
 }
 
-.spotNameStars{
-   height: 20px;
-   width: 20px;
-   margin-left: 0.8em;
+.spotNameStars {
+    height: 20px;
+    width: 20px;
+    margin-left: 0.8em;
 
 }
 
-.spotNameWebcam{
-   text-decoration: none;
-   color: var(--primary-color-regular);
-   margin-left: 28px;
- }
-
-.spotNameWebcam:hover{
-    text-decoration:underline;
+.spotNameWebcam {
+    text-decoration: none;
+    color: var(--primary-color-regular);
+    margin-left: 28px;
 }
 
-.bodyForecastCard{
-    margin-top: 2em;
+.spotNameWebcam:hover {
+    text-decoration: underline;
+}
+
+.bodyForecastCard {
+    margin-top: 1em;
     display: flex;
-    /* overflow: hidden; */
-    overflow-y: scroll;
+    flex: 1;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 
-.dayDate{
+.date {
+    text-align: center;
+    height: 11.7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.daily-forecast {
+    display: flex;
+}
+
+.daily-forecast-content {
+    height: 100%;
+}
+
+.minified-background-visible {
+    height: 100%;
+}
+
+.minified-background {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.minified-background {
     text-align: center;
 }
 
-.daily-forecast{
-    position: relative;
+.minified-background-visible {
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px var(--primary-color-light);
+    border-left: solid 1px var(--primary-color-light);
 }
-.daily-forecast-content{
-    position: relative
+
+.minified-background-invisible {
+    display: none;
 }
-.extended-background{
-    /* position:absolute;
-        top: 0; */
+
+.title-minified {
+    font-size: 0.85rem;
 }
- 
+
+.data-minified {
+    font-size: 1.2rem;
+    margin: 0.2rem 0;
+}
+
+.tide-minified {
+    display: flex;
+}
+
+.data-minified-tide {
+    padding: 0.5rem;
+}
+
+.Wind,
+.swell{
+    height: 19%;
+}
+
+.tides,
+.energie {
+    height: 18.5%;
+}
+
+.swell,
+.energie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Period {
+    height: 11.56%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.Wind,
+.Period {
+    background-color: var(--primary-color-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+    color: var(--secondary-color);
+
+}
+
+.tide{
+    display: flex;
+    flex-direction: column;
+    padding: .5em 1em;
+}
+
+.tides{
+    display: flex;
+    flex-direction: column;
+    padding: .5em 1em;
+}

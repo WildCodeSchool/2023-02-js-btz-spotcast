@@ -18,9 +18,9 @@ const PeriodeMinified = ({number, surfDataHoule,onLoadMarine}) => {
 
 
   return (
-    <div>
-        <p>Period medium</p>
-        <p>{(sumPeriod/24).toFixed(0)}</p>
+    <div className='Period'>
+        <p className='title-minified'>Average Period</p>
+        <p className='data-minified'>{(sumPeriod/24).toFixed(0)}s</p>
 
     </div>
   )
