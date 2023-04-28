@@ -179,19 +179,6 @@ const Dashboard = () => {
         <MeteoThreeDay meteo3D={meteo3D} onLoadMeteo3D={onLoadMeteo3D} />
         <Sunset />
 
-        {currentSpots.map(currentSpot => (
-          <ForecastCardBackground
-          key={currentSpot.id}
-          currentSpot={currentSpot}
-          />
-
-          <MeteoThreeDay
-          meteo3D={meteo3D}
-          onLoadMeteo3D={onLoadMeteo3D}
-          />
-
-          <Sunset />
-
           {selectedSpots.map(selectedSpots => (
             <ForecastCardBackground
             key={selectedSpots.id}
