@@ -1,0 +1,86 @@
+.auth-form-container {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 1em;
+  padding: 2em;
+  background-color: var(--primary-color-light);
+  box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
+}
+
+.invisible {
+  display: none;
+}
+
+.auth-form-container::backdrop {
+  background: darkgray;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+
+.label-form {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+.input-form,
+.btn-login {
+  margin: 0.5rem 0;
+  border: none;
+  background-color: white;
+  padding: 0.5em 2em;
+  border-radius: 2em;
+  cursor: pointer;
+  outline: none;
+  background-color: #fff;
+}
+
+.btn-link {
+  background: none;
+  text-decoration: underline;
+  border: none;
+  font-size: 0.7em;
+}
+
+.closing-cross {
+  position: absolute;
+  right: 0;
+  transform: translateX(-100%);
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+}
+.closing-cross:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 60%;
+  height: 1px;
+  background-color: var(--primary-color);
+  border-radius: 1px;
+}
+.closing-cross:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 60%;
+  height: 1px;
+  background-color: var(--primary-color);
+  border-radius: 1px;
+}
