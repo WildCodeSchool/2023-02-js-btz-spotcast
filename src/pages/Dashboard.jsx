@@ -38,7 +38,8 @@ const Dashboard = () => {
       })
     );
   }, []);
-
+  // debugger
+  grid && console.log(grid._items[0]);
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -74,7 +75,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -90,7 +91,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -106,7 +107,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
