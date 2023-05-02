@@ -28,8 +28,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
       setIndexCard(newValue)
     }
 
-    
-    console.log(indexCard)
+   
     
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
@@ -69,7 +68,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
-    const options = { weekday: 'long', day: '2-digit' }; // affiche le jours en long et la date en chiffres
+    const options = {day: '2-digit',  weekday: 'long' }; // affiche le jours en long et la date en chiffres
     const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
     const dayForecast = [] // array qui receveras les dates
 
