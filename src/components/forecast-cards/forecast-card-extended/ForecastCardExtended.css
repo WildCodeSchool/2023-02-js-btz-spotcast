@@ -3,7 +3,7 @@
     height: 68.3%;
 }
 .hourly-wind-container{
-    height: 27.9%;
+    height: 28.9%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@
 }
 
 .hourly-swell-container{
-    height: 54%;
+    height: 57%;
 }
 
 .hourly-period{
@@ -27,9 +27,6 @@
     align-items: center;
     text-align: center;
 }
-
-
-
 
 .time,
 .hourly-energy,
@@ -110,11 +107,12 @@
     display: flex;
     justify-content: space-between;
     color: var(--text-color);
-    margin-top: 1em;
+    padding: 0 .5em;
 }
 
 .coeff{
     text-align: center;
+    padding-top: .5em;
 }
 
 .coeff-data{
@@ -129,13 +127,7 @@
     margin-bottom: .3em;
 }
 
-.tide{
-    display: flex;
-    flex-direction: column;
-    padding: 0 1em;
-}
-
-.tide-shape{
+.tide-shapes{
     width: 100%;
     margin: .2em 0;
 }

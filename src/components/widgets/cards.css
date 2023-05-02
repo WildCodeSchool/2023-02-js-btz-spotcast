@@ -1,3 +1,10 @@
+.item {
+  display: block;
+  position: absolute;
+  margin: 0.625em;
+  z-index: 1;
+}
+
 .small-rectangle,
 .small-square,
 .big-rectangle-width,

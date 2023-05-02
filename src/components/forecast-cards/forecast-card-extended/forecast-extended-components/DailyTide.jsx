@@ -36,7 +36,7 @@ const DailyTide = ({ tide, dayDate }) => {
                 : ""}
                 </p>
             </div>
-            <img src={tideShape} alt="" className="tide-shape" />
+            <img src={tideShape} alt="" className="tide-shapes" />
             <div className="daily-low-tide">
                 <p className="first-low-tide">{dayLowTides[0] 
                 ? `${String(new Date(dayLowTides[0].time).getHours()).padStart(2, "0")}:${String(new Date(dayLowTides[0].time).getMinutes()).padStart(2, "0")} `

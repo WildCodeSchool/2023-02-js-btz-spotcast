@@ -11,7 +11,7 @@ import neige from '../../../assets/images/neige.svg';
 import "../cards.css";
 import "./MeteoDay.css";
 
-const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo }) => {
+const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, time }) => {
 
     let [dayIcon, setDayIcon] = useState('')
     let [weatherCode, setweatherCode] = useState(onLoadMeteo ? "" : weathercode[timeStampIndex])
@@ -47,25 +47,28 @@ const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo }) 
     }, [onLoadMeteo])
 
     return (
-        <div>
-            {onLoadMeteo ? "" :
-                <div className="small-square">
-                    <div className="card-header">
-                        <p className="card-title">Meteo</p>
-                        <ToggleButton />
-                    </div>
-                    <div className="card-content card-meteo">
-                        <div className="day-icon">
-                            <img src={dayIcon} alt="soleil" />
-                        </div>
+        <div className="small-square item-content" id="A">
+            <div className="card-header">
+                <p className="card-title">Meteo</p>
+                <ToggleButton />
+            </div>
+            <div className="card-content card-meteo">
+                {onLoadMeteo ? "" :
+                <div className="day-icon">
+                    <img src={dayIcon} alt="soleil" />
+                </div>
+                }
+                {onLoadMeteo ? "" :
+                <div className="meteo-infos">
+                    <p className="meteo-temperature">{temperature_2m[timeStampIndex]}°</p>
+                    <p className="meteo-text">{weatherText}</p>
+                </div>
+                }
 
-                        <div className="meteo-infos">
-                            <p className="meteo-temperature">{temperature_2m[timeStampIndex]}°</p>
-                            <p className="meteo-text">{weatherText}</p>
-                        </div>
-                    </div>
-
-                </div>}
+                
+            </div>
+                
+                
         </div>
     )
 }

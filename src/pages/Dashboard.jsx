@@ -9,8 +9,10 @@ import ForecastCardBackground from "../components/forecast-cards/ForecastCardBac
 import "./Dashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
+import Muuri from 'muuri';
 import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
+
 
 // instancier un useContext
 export const selectedSpotsContext = createContext();
@@ -18,6 +20,26 @@ export const selectedSpotsContext = createContext();
 
 const Dashboard = () => {
 
+  //setting up the Muuri effect
+  const [grid, setGrid] = useState();
+
+  useEffect(() => {
+    setGrid(
+      new Muuri('.grid', {
+        dragEnabled: true,
+        layoutDuration: 300,
+        layoutEasing: 'ease',
+        fillGaps: true,
+        sortData: {
+          id: function(item, element) {
+            return element.children[0].id;
+          }
+        }
+      })
+    );
+  }, []);
+  // debugger
+  grid && console.log(grid._items[0]);
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -53,7 +75,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=windspeed_10m,winddirection_10m&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -69,7 +91,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&hourly=temperature_2m,weathercode&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -85,7 +107,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots[0].latitude}&longitude=${selectedSpots[0].longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -132,60 +154,80 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
-      {currentForm === 'login' ? (
-        <Login
-          toggleModal={toggleModal}
-          setCurrentUserName={setCurrentUserName}
-          setCurrentUserPicture={setCurrentUserPicture}
-          onFormSwitch={toggleForm}
-          show={show}
+        {currentForm === 'login' ? (
+          <Login
+            toggleModal={toggleModal}
+            setCurrentUserName={setCurrentUserName}
+            setCurrentUserPicture={setCurrentUserPicture}
+            onFormSwitch={toggleForm}
+            show={show}
+            setShow={setShow}
+            email={email}
+            setEmail={setEmail}
+            pass={pass}
+            setPass={setPass}
+            error={error}
+            setError={setError}
+          />
+        ) : (
+          <Register
+            toggleModal={toggleModal}
+            show={show}
+            setShow={setShow}
+            onFormSwitch={toggleForm}
+          />
+        )}
+        <div className={show ? 'overlay-modal invisible' : 'overlay-modal'}
+          onClick={toggleModal}>
+        </div>
+        <NavBar
           setShow={setShow}
-          email={email}
-          setEmail={setEmail}
-          pass={pass}
-          setPass={setPass}
-          error={error}
-          setError={setError}
-        />
-      ) : (
-        <Register
-          toggleModal={toggleModal}
           show={show}
-          setShow={setShow}
-          onFormSwitch={toggleForm}
+          currentUserName={currentUserName}
+          currentUserPicture={currentUserPicture}
         />
-      )}
-      <div
-        className={show ? 'overlay-modal invisible' : 'overlay-modal'}
-        onClick={toggleModal}></div>
-      <NavBar
-        setShow={setShow}
-        show={show}
-        currentUserName={currentUserName}
-        currentUserPicture={currentUserPicture}
-      />
-      <div className="widgets-container">
-        <Wind
-          {...wind}
-          timeStampIndex={timeStampIndex}
-          onLoadOpenMeteo={onLoadOpenMeteo}
-        />
-        <Tide date={date} />
-        <MeteoDay
-          {...meteo}
-          onLoadMeteo={onLoadMeteo}
-          timeStampIndex={timeStampIndex}
-        />
-        <MeteoThreeDay meteo3D={meteo3D} onLoadMeteo3D={onLoadMeteo3D} />
-        <Sunset />
+        <div className="grid">
+          <div className="item">
+            <Wind
+              {...wind}
+              timeStampIndex={timeStampIndex}
+              onLoadOpenMeteo = {onLoadOpenMeteo}
+            />
+          </div>
+          
+          <div className="item">
+            <Tide
+              date={date}
+            />
+          </div>
+
+          <div className="item">
+            <MeteoDay
+            {...meteo}
+            onLoadMeteo={onLoadMeteo}
+            timeStampIndex={timeStampIndex}
+            />
+          </div>
+
+          <div className="item">
+            <MeteoThreeDay
+            meteo3D={meteo3D}
+            onLoadMeteo3D={onLoadMeteo3D}
+            />
+          </div>
 
           {selectedSpots.map(selectedSpots => (
-            <ForecastCardBackground
-            key={selectedSpots.id}
-            selectedSpots={selectedSpots}
-            timeStamp={timeStamp}
-            />
+            <div className="item">
+              <ForecastCardBackground
+              key={selectedSpots.id}
+              selectedSpots={selectedSpots}
+              timeStamp={timeStamp}
+              />
+            </div>
           ))}
+          <div className="item">
+            <Sunset />
+          </div>
       </div>
     </selectedSpotsContext.Provider>
   </div>

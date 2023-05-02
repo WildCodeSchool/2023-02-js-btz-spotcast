@@ -31,7 +31,7 @@ const Sunset = () => {
 
 
   return (
-    <div className='big-rectangle-width-sunset'>
+    <div className='big-rectangle-width-sunset item-content' id="E">
         <div className="sunrise">
             <p className="card-title-sunset">Sun cycle</p>
             <div className="sunrise-forecast">

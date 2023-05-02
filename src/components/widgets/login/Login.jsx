@@ -39,7 +39,7 @@ const Login = ({
     >
       <button onClick={toggleModal} className="closing-cross"></button>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label className="label-form" htmlfor="email">
+        <label className="label-form" htmlFor="email">
           Email
         </label>
         <input
@@ -51,7 +51,7 @@ const Login = ({
           id="email"
           name="email"
         />
-        <label className="label-form" htmlfor="password">
+        <label className="label-form" htmlFor="password">
           Password
         </label>
         <input

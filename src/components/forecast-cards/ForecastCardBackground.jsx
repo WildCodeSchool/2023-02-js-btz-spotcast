@@ -28,8 +28,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
       setIndexCard(newValue)
     }
 
-   
-    
+        
     useEffect(() => {
       // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
       const delayTide = setTimeout(() => {
@@ -51,7 +50,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
 
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
-      axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
+      axios.get(`https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
         .then((req) => req.data)
         .then((data) => {
           setSurfDataWind(data);
@@ -68,7 +67,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
-    const options = {day: '2-digit',  weekday: 'long' }; // affiche le jours en long et la date en chiffres
+    const options = {day: '2-digit', weekday: 'long' }; // affiche le jours en long et la date en chiffres
     const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
     const dayForecast = [] // array qui receveras les dates
 
@@ -80,7 +79,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     
     
   return (
-    <div className='background-forcast'>
+    <div className='background-forcast item-content' id="F">
         <div className='header'>
             <div>
               <div className='flexSpotName'>
