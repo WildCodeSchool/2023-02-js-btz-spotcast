@@ -11,7 +11,7 @@ import neige from '../../../assets/images/neige.svg';
 import "../cards.css";
 import "./MeteoDay.css";
 
-const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo }) => {
+const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, time }) => {
 
     let [dayIcon, setDayIcon] = useState('')
     let [weatherCode, setweatherCode] = useState(onLoadMeteo ? "" : weathercode[timeStampIndex])
@@ -64,6 +64,7 @@ const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo }) 
                     <p className="meteo-text">{weatherText}</p>
                 </div>
                 }
+
                 
             </div>
                 
