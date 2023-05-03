@@ -1,12 +1,17 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { WhatsappShareButton } from "react-share";
 import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
 import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
 import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
+
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
+import share from '../../assets/share-button.png'
+
+
 import './ForecastCardBackground.css'
 import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
@@ -88,6 +93,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     for(let i = 0; i < 7; i++){
         dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('en-EN', options))
     }
+    
+    // url a changer quand on sera en ligne. 
+    const url ="http://localhost:3000/"
+    const titleShare = "Let's go riding my friend ! 🤙🏽"
 
     
     
@@ -101,6 +110,9 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                     {selectedSpots.name} 
                   </p>
                   <img className='spotNameStars' src={stars} />
+                  <WhatsappShareButton url={url} title={titleShare}>
+                    <button><img className='spotNameShare' src={share} /></button>
+                  </WhatsappShareButton>
                 </div>
                 {selectedSpots.webcam === false 
                   ? <p></p>

@@ -47,6 +47,16 @@
 
 }
 
+button{
+    all: unset;
+}
+
+.spotNameShare{
+    height: 30px;
+    width: 30px;
+    margin-left: 0.8em;
+}
+
 
 
 .spotNameWebcam {
