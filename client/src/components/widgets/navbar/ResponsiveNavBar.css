@@ -39,3 +39,10 @@
     }
 
 }
+
+@media (max-width : 960px) {
+    .navbar{
+        border-radius: 0;
+    }
+
+}
