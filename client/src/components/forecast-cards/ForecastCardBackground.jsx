@@ -8,6 +8,7 @@ import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
 import './ForecastCardBackground.css'
+import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
 import TideDatas from '../utilities/TideDatas'
 
@@ -21,8 +22,20 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
     // UseState qui active et désactive les cards
-    const [indexCard, setIndexCard] = useState(0)
+    const [indexCard, setIndexCard] = useState("")
 
+    // UseState qui détecte la taille de l'écran
+    const [widthSize, setWidthSize] = useState(window.innerWidth)
+
+    useEffect(()=> {
+      const widthSizeDetector = () => {
+        setWidthSize(window.innerWidth)
+      }
+
+      window.addEventListener('resize', widthSizeDetector)
+    },[])
+
+    
 
     const changeIndex = (newValue) => {
       setIndexCard(newValue)
@@ -67,7 +80,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
-    const options = {day: '2-digit', weekday: 'long' }; // affiche le jours en long et la date en chiffres
+    const options = widthSize > 1180 ? {day: '2-digit', weekday: 'long' } : { weekday: 'short', day:'2-digit' }; // affiche le jours en long et la date en chiffres en fonction de la taille ecran
     const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
     const dayForecast = [] // array qui receveras les dates
 
@@ -104,8 +117,8 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
               dayForecast.map((el,index) => (
                 <div key={uuidv4()}  className='daily-forecast'>
                 
-                  <div className={indexCard === index? "minified-background-invisible" : "minified-background-visible"}>
-                   
+                  <div className= {indexCard === index? "background-invisible" : "background-visible"}>
+
                       <ForecastCardMinified 
                         date ={el}
                         surfDataHoule ={surfDataHoule}
@@ -118,8 +131,10 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         functionChange ={changeIndex}
                       />
                     </div>
-                    <div className={indexCard === index? "minified-background-visible" : "minified-background-invisible" }>
+                    <div className={indexCard === index?  "background-visible" : "background-invisible" }>
+                      <div className='extendedCard'>
                       <div className='date'><p className='dateTexte'>{el}</p></div>
+                      
                       <ForecastCardExtended
                         surfDataWind ={surfDataWind}
                         surfDataHoule={surfDataHoule}
@@ -134,6 +149,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                       />
                   
+                    </div>
                     </div>
                   </div>
                   

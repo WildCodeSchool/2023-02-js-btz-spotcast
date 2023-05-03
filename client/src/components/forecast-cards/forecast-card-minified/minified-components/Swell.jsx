@@ -16,7 +16,7 @@ const Swell = ({number, surfDataHoule,onLoadMarine}) => {
 
   return (
     <div className='swell'>
-    <p className='title-minified'>Average Swell</p>  
+    <p className='title-minified'>Swell</p>  
     <p className='data-minified'>{onLoadMarine ? "" :`${ Math.min(...swellWeek)} - ${ Math.max(...swellWeek)} ` }</p>
     <p className="title-minified">m</p>
     </div>

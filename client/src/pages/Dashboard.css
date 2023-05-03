@@ -1,6 +1,7 @@
 .dashboard {
   max-width: 1280px;
   width: 100%;
+  overflow: hidden;
   border-radius: 2.5em;
   background-color: var(--primary-color-light);
   display: flex;
@@ -46,24 +47,10 @@
     gap: 1.25em;
 }
 
-  /*
-  .my-custom-content {
-    width: 1000px;
+@media (max-width : 531px) {
+
+  .grid{
+    margin: auto;
   }
 
-  .item.muuri-item-dragging {
-    z-index: 3;
-  }
-  .item.muuri-item-releasing {
-    z-index: 2;
-  }
-  .item.muuri-item-hidden {
-    z-index: 0;
-  }
-  .item-content {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } 
-  */
+}

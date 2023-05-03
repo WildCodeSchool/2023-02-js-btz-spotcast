@@ -7,6 +7,7 @@ import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
 import NavBar from "../components/widgets/navbar/NavBar"
 import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
 import "./Dashboard.css";
+import "./ResponsiveDashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
 import Muuri from 'muuri';
@@ -39,7 +40,6 @@ const Dashboard = () => {
     );
   }, []);
   // debugger
-  grid && console.log(grid._items[0]);
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
