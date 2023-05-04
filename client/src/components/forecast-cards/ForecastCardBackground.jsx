@@ -1,6 +1,7 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import { WhatsappShareButton } from "react-share";
 import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
@@ -15,19 +16,27 @@ import share from '../../assets/share-button.png'
 import './ForecastCardBackground.css'
 import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
-import TideDatas from '../utilities/TideDatas'
 
 
-const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
-    // Contient les donnés API
-    const [tide, setTide] = useState([])
-    const [surfDataWind,  setSurfDataWind] = useState([])
-    const [surfDataHoule, setSurfDataHoule] = useState([])
-    // UseState(s) qui vérifient que l'API est chargée
-    const [onLoad, setOnLoad] = useState(true)
-    const [onLoadMarine, setOnLoadMarine] = useState(true)
-    // UseState qui active et désactive les cards
-    const [indexCard, setIndexCard] = useState("")
+const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
+  // Contient les donnés API
+  const [tide, setTide] = useState([]);
+  const [surfDataWind, setSurfDataWind] = useState([]);
+  const [surfDataHoule, setSurfDataHoule] = useState([]);
+  // UseState(s) qui vérifient que l'API est chargée
+  const [onLoad, setOnLoad] = useState(true);
+  const [onLoadMarine, setOnLoadMarine] = useState(true);
+  // UseState qui active et désactive les cards
+  const [indexCard, setIndexCard] = useState(0);
+
+
+  const changeIndex = (newValue) => {
+    setIndexCard(newValue);
+  };
+
+  useEffect(() => {
+    axios.get('/tides').then(({ data }) => setTide(data));
+  }, []);
 
     // UseState qui détecte la taille de l'écran
     const [widthSize, setWidthSize] = useState(window.innerWidth)
@@ -42,29 +51,46 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
 
     
 
-    const changeIndex = (newValue) => {
-      setIndexCard(newValue)
-    }
 
-        
-    useEffect(() => {
-      // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
-      const delayTide = setTimeout(() => {
-        axios
-        .get(
-          `https://api.stormglass.io/v2/tide/extremes/point?lat=${selectedSpots.latitude}&lng=${selectedSpots.longitude}`,{
-          headers: {
-              'Authorization': '492f25ae-e4d0-11ed-8d52-0242ac130002-492f2662-e4d0-11ed-8d52-0242ac130002'
-            }}
-        )
-        .then((res) => res.data)
-        .then((data) => {
-          setTide(data);
-        });
+  useEffect(() => {
+    // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
+    axios
+      .get(
+        `https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`
+      )
+      .then((req) => req.data)
+      .then((data) => {
+        setSurfDataWind(data);
+        setOnLoad(false);
+      });
 
-      }, 3*60*60*1000); 
+    // API HOULE (Hourly : Wave height et wave period / Daily : Wave height Max et Wave direction dominant)
+    axios
+      .get(
+        `https://marine-api.open-meteo.com/v1/marine?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=wave_height,wave_period,wave_direction&daily=wave_height_max,wave_direction_dominant&timezone=Europe%2FBerlin`
+      )
+      .then((req) => req.data)
+      .then((data) => {
+        setSurfDataHoule(data);
+        setOnLoadMarine(false);
+      });
+  }, []);
 
-    },[])
+  const today = new Date(); // Créer un objet Date avec la date et l'heure actuelles
+  const options = { day: '2-digit', weekday: 'long' }; // affiche le jours en long et la date en chiffres
+  const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
+  const dayForecast = []; // array qui receveras les dates
+
+  // boucle qui génère automatiquement les 7 prochains jours
+  for (let i = 0; i < 7; i++) {
+    dayForecast.push(
+      new Date(today.getTime() + i * oneDay).toLocaleDateString(
+        'en-EN',
+        options
+      )
+    );
+  }
+
 
     useEffect(() => {
       // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
@@ -138,7 +164,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                           number = {index}
                           onLoad ={onLoad} 
                           onLoadMarine ={onLoadMarine}
-                          tide={TideDatas}
+                          tide={tide}
                           dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                           functionChange ={changeIndex}
                         />
@@ -157,7 +183,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         />
                         
                         <DailyTide
-                          tide={TideDatas}
+                          tide={tide}
                           dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                         />
                     
@@ -173,4 +199,4 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     )
 }
 
-export default ForecastCardBackground
+export default ForecastCardBackground;
