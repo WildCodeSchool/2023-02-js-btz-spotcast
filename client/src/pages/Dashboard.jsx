@@ -60,7 +60,6 @@ const Dashboard = () => {
       .then((res) => setAllSpots(res.data));
   }, [])
 
-  allSpots && console.log(allSpots);
 
   //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
@@ -227,11 +226,10 @@ const Dashboard = () => {
             />
           </div>
 
-          {selectedSpots.map(selectedSpots => (
-            <div className="item">
+          {selectedSpots.map(selectedSpot => (
+            <div key={selectedSpot.id} className="item">
               <ForecastCardBackground
-              key={selectedSpots.id}
-              selectedSpots={selectedSpots}
+              selectedSpots={selectedSpot}
               timeStamp={timeStamp}
               />
             </div>
