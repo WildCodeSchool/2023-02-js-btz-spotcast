@@ -1,0 +1,11 @@
+@media (max-width : 960px) {
+    
+    .dashboard{
+        border-radius: 0;
+        width: 100%;
+        padding :0;
+    }
+
+
+}
+
