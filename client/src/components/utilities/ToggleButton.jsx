@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "./ToggleButton.css";
 
-const ToggleButton = ({ formInfos, widgetName}) => {
-  
-  const [isOn, setIsOn] = useState(true);
-
+const ToggleButton = ({ setFormInfos, formInfos, widgetName}) => {
   const buttonToggle = () => {
-    setIsOn(!isOn);
-    formInfos[widgetName] = !formInfos[widgetName];
-    console.log(formInfos);
+    setFormInfos({
+      ...formInfos,
+      [widgetName] : !formInfos[widgetName]
+    })
   };
 
  
@@ -16,11 +14,11 @@ const ToggleButton = ({ formInfos, widgetName}) => {
     <div
       onClick={buttonToggle}
       className={
-        isOn ? "switch-background" : "switch-background switched-background"
+        formInfos[widgetName] ? "switch-background" : "switch-background switched-background"
       }
     >
       <div
-        className={isOn ? "switch-button" : "switch-button switched-button"}
+        className={formInfos[widgetName] ? "switch-button" : "switch-button switched-button"}
       ></div>
     </div>
   );

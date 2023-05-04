@@ -1,12 +1,19 @@
-import logo from '../../../assets/logo-header.svg';
-import './NavBar.css';
-import SearchBar from './searchbar/SearchBar';
+import { useState } from "react";
+import logo from "../../../assets/logo-header.svg";
+import "./NavBar.css";
+import SearchBar from "./searchbar/SearchBar";
 
-const NavBar = ({ setShow, show, currentUserPicture, currentUserName }) => {
+const NavBar = ({
+  setShow,
+  show,
+  currentUserPicture,
+  currentUserName,
+  showDropMenu,
+  setShowDropMenu,
+}) => {
   const handleShow = () => setShow(!show);
-  const ShowDropdownMenu = () => {
 
-  }
+  const ShowDropdownMenu = () => {setShowDropMenu(!showDropMenu)};
 
   return (
     <div className="navbar">
@@ -23,8 +30,8 @@ const NavBar = ({ setShow, show, currentUserPicture, currentUserName }) => {
           </div>
         </div>
         <div className="burger">
-          <label for="check">
-            <input onClick={ShowDropdownMenu} type="checkbox" id="check"/>
+          <label htmlFor="check">
+            <input onChange={ShowDropdownMenu} type="checkbox" id="check" checked={showDropMenu}/>
             <span></span>
             <span></span>
             <span></span>

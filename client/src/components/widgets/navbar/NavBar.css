@@ -142,8 +142,12 @@
 
 /* ------------------ Menu Burger -------------------------- */
 
+.burger {
+  z-index: 1001;
+}
+
 .burger label{
- display:flex;
+  display:flex;
   flex-direction:column;
   width:2.2em;
   cursor:pointer;
@@ -175,16 +179,19 @@
 
 .burger input[type="checkbox"]:checked ~ span:nth-of-type(1){
   transform-origin:bottom;
-  transform:rotatez(45deg) translate(.20em,0.015em)
+  transform:rotatez(45deg) translate(.20em,0.015em);
+  background-color: var(--text-color);
 }
 
 .burger input[type="checkbox"]:checked ~ span:nth-of-type(2){
   transform-origin:top;
-  transform:rotatez(-45deg)
+  transform:rotatez(-45deg);
+  background-color: var(--text-color);
 }
 
 .burger input[type="checkbox"]:checked ~ span:nth-of-type(3){
   transform-origin:bottom;
   width:50%;
   transform: translate(.9em,-0.24em) rotatez(45deg);
+  background-color: var(--text-color);
 }

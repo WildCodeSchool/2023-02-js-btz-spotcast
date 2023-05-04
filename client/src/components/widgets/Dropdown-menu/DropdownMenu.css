@@ -1,21 +1,74 @@
 .dropdown-menu{
-    display:none;
-    z-index: 11000;
+    opacity:0;
+    z-index: 1000;
     position: fixed;
     top: 0;
     height: 100%;
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
+    transition: all .5s ease-out;
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4em;
+    overflow-y: auto;
+}
+
+.dropdown-menu.visible{
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .dropdown-menu h3{
     font-size: 1.2em;
     text-align: center;
+    font-weight: 100;
 }
 
-.dropdown-menu .widgets-grid{
-    width: 80%;
-    margin: auto;
+.login-menu,
+.widgets-menu{
+    width: 100%;
+    max-width: 1280px;
+}
+
+.login-menu-dropdown{
+    width: 100%;
+}
+
+.login-dropdown{
+    display: flex;
+    align-items: center;
+}
+
+.user-img-dropdown{
+    width: 3.75em;
+    height: 3.75em;
+    border-radius:50%;
+    cursor: pointer;
+    overflow: hidden;
+    margin-right: .75em;
+}
+
+.user-name-dropdown{
+    cursor: pointer;
+}
+
+.widgets-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex :1;
+}
+
+ .widgets-grid{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap:1em;
+    margin-top: 2em;
 }
 
 .widget-checkbox,

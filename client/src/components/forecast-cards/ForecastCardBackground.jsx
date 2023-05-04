@@ -95,9 +95,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                 Acceder à la webcam
               </a>}
             </div>
-            <div>
-                <ToggleButton />
-            </div>
+            
         </div>
         <div className='bodyForecastCard'>
             {

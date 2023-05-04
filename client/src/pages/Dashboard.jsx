@@ -23,11 +23,11 @@ const Dashboard = () => {
 
   //Widget status
   const [formInfos, setFormInfos] = useState({
-    "meteo-widget" : false,
-    "meteo3d-widget" : false,
-    "sun-widget" : false,
-    "tide-widget" : false,
-    "wind-widget" : false,
+    "meteo-widget" : true,
+    "meteo3d-widget" : true,
+    "sun-widget" : true,
+    "tide-widget" : true,
+    "wind-widget" : true,
   });
 
   
@@ -165,12 +165,20 @@ const Dashboard = () => {
 
   console.log(formInfos);
 
+  const [showDropMenu, setShowDropMenu] = useState(false);
+
   return (
-    <div className="dashboard">
+    <div className={showDropMenu ? "dashboard fixed" : "dashboard"}>
       <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
         <DropdownMenu 
           formInfos={formInfos}
           setFormInfos={setFormInfos}
+          showDropMenu = {showDropMenu}
+          setShowDropMenu = {setShowDropMenu}
+          currentUserName={currentUserName}
+          currentUserPicture={currentUserPicture}
+          setShow ={setShow}
+          show = {show}
         />
         {currentForm === 'login' ? (
           <Login
@@ -201,11 +209,13 @@ const Dashboard = () => {
         <NavBar
           setShow={setShow}
           show={show}
+          showDropMenu = {showDropMenu}
+          setShowDropMenu = {setShowDropMenu}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
         />
         <div className="grid">
-          <div className="item">
+          <div className={formInfos["wind-widget"] ? "item" : "invisible"}>
             <Wind
               {...wind}
               timeStampIndex={timeStampIndex}
@@ -215,7 +225,7 @@ const Dashboard = () => {
             />
           </div>
           
-          <div className="item">
+          <div className={formInfos["tide-widget"] ? "item" : "invisible"}>
             <Tide
               date={date}
               formInfos={formInfos}
@@ -223,7 +233,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className={formInfos["meteo-widget"] ? "invisible" : "item"}>
+          <div className={formInfos["meteo-widget"] ? "item" : "invisible"}>
             <MeteoDay
               {...meteo}
               onLoadMeteo={onLoadMeteo}
@@ -233,7 +243,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="item">
+          <div className={formInfos["meteo3d-widget"] ? "item" : "invisible"}>
             <MeteoThreeDay
             meteo3D={meteo3D}
             onLoadMeteo3D={onLoadMeteo3D}
@@ -251,7 +261,7 @@ const Dashboard = () => {
               />
             </div>
           ))}
-          <div className="item">
+          <div className={formInfos["sun-widget"] ? "item" : "invisible"}>
             <Sunset 
               formInfos={formInfos}
               setFormInfos={setFormInfos}
