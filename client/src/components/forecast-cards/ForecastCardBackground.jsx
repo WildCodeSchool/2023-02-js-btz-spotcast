@@ -1,13 +1,19 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { WhatsappShareButton } from "react-share";
 import axios from 'axios'
 import ToggleButton from '../utilities/ToggleButton'
 import ForecastCardExtended from './forecast-card-extended/ForecastCardExtended'
 import ForecastCardMinified from './forecast-card-minified/ForecastCardMinified'
+
 import stars from '../../assets/etoile-32px.png'
 import localisation from '../../assets/marqueur-32px.png'
+import share from '../../assets/share-button.png'
+
+
 import './ForecastCardBackground.css'
+import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
 import TideDatas from '../utilities/TideDatas'
 
@@ -21,8 +27,20 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     const [onLoad, setOnLoad] = useState(true)
     const [onLoadMarine, setOnLoadMarine] = useState(true)
     // UseState qui active et désactive les cards
-    const [indexCard, setIndexCard] = useState(0)
+    const [indexCard, setIndexCard] = useState("")
 
+    // UseState qui détecte la taille de l'écran
+    const [widthSize, setWidthSize] = useState(window.innerWidth)
+
+    useEffect(()=> {
+      const widthSizeDetector = () => {
+        setWidthSize(window.innerWidth)
+      }
+
+      window.addEventListener('resize', widthSizeDetector)
+    },[])
+
+    
 
     const changeIndex = (newValue) => {
       setIndexCard(newValue)
@@ -67,7 +85,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     },[])
 
     const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
-    const options = {day: '2-digit', weekday: 'long' }; // affiche le jours en long et la date en chiffres
+    const options = widthSize > 1180 ? {day: '2-digit', weekday: 'long' } : { weekday: 'short', day:'2-digit' }; // affiche le jours en long et la date en chiffres en fonction de la taille ecran
     const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
     const dayForecast = [] // array qui receveras les dates
 
@@ -75,74 +93,84 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     for(let i = 0; i < 7; i++){
         dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('en-EN', options))
     }
+    
+    // url a changer quand on sera en ligne. 
+    const url ="http://localhost:3000/"
+    const titleShare = "Let's go riding my friend ! 🤙🏽"
 
     
     
   return (
-    <div className='background-forcast item-content' id="F">
-        <div className='header'>
-            <div>
-              <div className='flexSpotName'>
-                <p className='spotName'>
-                  <img className='spotNameLocalisation' src={localisation} />
-                    {selectedSpots.name} 
-                  </p>
-                  <img className='spotNameStars' src={stars} />
-                </div>
-                {selectedSpots.webcam === false 
-                  ? <p></p>
-                  : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
-                Acceder à la webcam
-              </a>}
-            </div>
-            <div>
-                <ToggleButton />
-            </div>
-        </div>
-        <div className='bodyForecastCard'>
-            {
-              dayForecast.map((el,index) => (
-                <div key={uuidv4()}  className='daily-forecast'>
-                
-                  <div className={indexCard === index? "minified-background-invisible" : "minified-background-visible"}>
-                   
-                      <ForecastCardMinified 
-                        date ={el}
-                        surfDataHoule ={surfDataHoule}
-                        surfDataWind ={surfDataWind}
-                        number = {index}
-                        onLoad ={onLoad} 
-                        onLoadMarine ={onLoadMarine}
-                        tide={TideDatas}
-                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                        functionChange ={changeIndex}
-                      />
-                    </div>
-                    <div className={indexCard === index? "minified-background-visible" : "minified-background-invisible" }>
-                      <div className='date'><p className='dateTexte'>{el}</p></div>
-                      <ForecastCardExtended
-                        surfDataWind ={surfDataWind}
-                        surfDataHoule={surfDataHoule}
-                        onLoadMarine={onLoadMarine}
-                        onLoad ={onLoad}
-                        index={index}
-                        functionChange ={changeIndex}
-                      />
-                      
-                      <DailyTide
-                        tide={TideDatas}
-                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                      />
-                  
-                    </div>
+  <div className='background-forcast item-content' id="F">
+          <div className='header'>
+              <div>
+                <div className='flexSpotName'>
+                  <p className='spotName'>
+                    <img className='spotNameLocalisation' src={localisation} />
+                      {selectedSpots.name} 
+                    </p>
+                    <img className='spotNameStars' src={stars} />
+                    <WhatsappShareButton url={url} title={titleShare}>
+                        <img className='spotNameShare' src={share} />
+                    </WhatsappShareButton>
                   </div>
+                  {selectedSpots.webcam === false 
+                    ? <p></p>
+                    : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
+                  Acceder à la webcam
+                </a>}
+              </div>
+              <div>
+                  <ToggleButton />
+              </div>
+          </div>
+          <div className='bodyForecastCard'>
+              {
+                dayForecast.map((el,index) => (
+                  <div key={uuidv4()}  className='daily-forecast'>
                   
-            
-              ))
-            }
-        </div>
-    </div>
-  )
+                    <div className= {indexCard === index? "background-invisible" : "background-visible"}>
+
+                        <ForecastCardMinified 
+                          date ={el}
+                          surfDataHoule ={surfDataHoule}
+                          surfDataWind ={surfDataWind}
+                          number = {index}
+                          onLoad ={onLoad} 
+                          onLoadMarine ={onLoadMarine}
+                          tide={TideDatas}
+                          dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                          functionChange ={changeIndex}
+                        />
+                      </div>
+                      <div className={indexCard === index?  "background-visible" : "background-invisible" }>
+                        <div className='extendedCard'>
+                        <div className='date'><p className='dateTexte'>{el}</p></div>
+                        
+                        <ForecastCardExtended
+                          surfDataWind ={surfDataWind}
+                          surfDataHoule={surfDataHoule}
+                          onLoadMarine={onLoadMarine}
+                          onLoad ={onLoad}
+                          index={index}
+                          functionChange ={changeIndex}
+                        />
+                        
+                        <DailyTide
+                          tide={TideDatas}
+                          dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                        />
+                    
+                      </div>
+                      </div>
+                    </div>
+                    
+              
+                ))
+              }
+          </div>
+      </div>
+    )
 }
 
 export default ForecastCardBackground

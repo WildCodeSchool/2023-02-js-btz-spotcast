@@ -56,3 +56,22 @@
   flex: 1;
   position: relative;
 }
+
+@media (max-width : 400px) {
+
+.small-rectangle,
+.small-square,
+.big-rectangle-width,
+.big-rectangle-height,
+.big-square{
+  padding: 1em 1.3em;
+  border-radius: 1.25em;;
+}
+
+.big-rectangle-width {
+  width: 26.25em;
+  height: 12.5em;
+}
+
+
+}

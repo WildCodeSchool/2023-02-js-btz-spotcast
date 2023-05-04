@@ -1,5 +1,6 @@
 import logo from '../../../assets/logo-header.svg';
 import './NavBar.css';
+import './ResponsiveNavBar.css';
 import SearchBar from './searchbar/SearchBar';
 
 const NavBar = ({ setShow, show, currentUserPicture, currentUserName }) => {

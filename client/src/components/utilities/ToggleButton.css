@@ -28,3 +28,10 @@
 left:20px;
 }
 
+@media (max-width : 400px) {
+    .switch-background{
+        height:12px;
+        width:31px;
+    }
+}
+

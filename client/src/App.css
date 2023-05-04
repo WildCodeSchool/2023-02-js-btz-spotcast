@@ -16,6 +16,10 @@
 
   /*Typography variables*/
   --text-font-main: 'n27', sans-serif, Arial, Helvetica;
+
+  /*Break point responsive*/
+  --mobile : 440px;
+  --computer :1080px;
 }
 
 * {
@@ -35,4 +39,16 @@
     padding: 1em;
     background-color: var(--primary-color-regular);
 }
+
+@media (max-width : 960px) {
+  .App{
+    padding: 0;
+  }
+
+   *{
+    font-size: 12px;
+  }
+    
+}
+
 
