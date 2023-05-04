@@ -1,5 +1,5 @@
 .dropdown-menu{
-    opacity:0;
+    opacity: 0;
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 4em;
+    padding: 4.5em;
     overflow-y: auto;
 }
 
@@ -75,7 +75,7 @@
 .widget-checkbox-wide{
     height: 9em;
     border-radius: 2em;
-    box-shadow:7px 0 12px rgba(65, 89, 89, 0.3);
+    box-shadow:0 0 12px rgba(65, 89, 89, 0.3);
 }
 
 .widget-checkbox{
@@ -98,7 +98,13 @@ input[type="checkbox"]{
 .dropdown-menu label{
     cursor: pointer;
 }
-/* .widget-checkbox{
-    box-shadow:7px 0 12px rgba(65, 89, 89, 0.3) ;
-} */
 
+@media (max-width: 980px){
+    .dropdown-menu{
+        font-size: 16px;
+        padding: 1.5em 2.5em;
+    }
+}
+    
+
+    

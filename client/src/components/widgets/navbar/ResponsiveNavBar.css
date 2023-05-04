@@ -1,0 +1,55 @@
+@media (max-width : 980px) {
+    .navbar{
+        border-radius: 0;
+        font-size: 14px;
+    }
+}
+
+@media (max-width : 785px) {
+    .navbar{
+        font-size: 12px;
+        border-radius: 0;
+        flex-direction:column-reverse;
+        align-items: center;
+    }
+
+    .logo-and-burger{
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .login-align{
+        display: none;
+    }
+
+    .logo{
+        height: 100%;
+        width: 100%;
+        justify-content: flex-start;
+
+    }
+
+    .logo img {
+        width: 4em;
+    }
+
+    .searchbar{
+        display: block;
+        width: 100%;
+    }
+
+    .search-input {
+        border-radius: 15px;
+    }
+    
+    .current-location{
+        display: none;
+    }
+
+    .webcam-link{
+        display: none;
+    }
+}
+

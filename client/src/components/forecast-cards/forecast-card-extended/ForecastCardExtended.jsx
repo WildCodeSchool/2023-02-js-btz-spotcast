@@ -7,8 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine, index,functionChange}) => {
 
   const sendBackIndex = () => {
-    functionChange(index)
+    functionChange(!index)
   }
+
   
   const range = (index+1)*24;
   const {windspeed_10m, winddirection_10m} = onLoad ? "" : surfDataWind.hourly;
@@ -23,6 +24,12 @@ const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine
 
   return (
     <div className='daily-extended-forecast' onClick={sendBackIndex}>
+       <div className="dataCategorie">
+        <p className="WindCategorie">Wind km/h</p>
+        <p className="EnergieCategorie">Energie</p>
+        <p className="swellCategorie">Swell m</p>
+        <p className="periodeCategorie">Periode</p>
+      </div>
       {Array(7).fill().map((_, index)=>(
         <HourlyForecast 
         
@@ -37,6 +44,8 @@ const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine
         onLoadMarine ={onLoadMarine}
       />
       ))} 
+     
+
     </div>
   )
 }

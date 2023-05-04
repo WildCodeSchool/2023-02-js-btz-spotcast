@@ -7,6 +7,7 @@ import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
 import NavBar from "../components/widgets/navbar/NavBar"
 import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
 import "./Dashboard.css";
+import "./ResponsiveDashboard.css";
 import Tide from "../components/widgets/tide/Tide";
 import Sunset from "../components/widgets/sunset/Sunset";
 import Muuri from 'muuri';
@@ -51,7 +52,6 @@ const Dashboard = () => {
     );
   }, []);
 
-
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -62,6 +62,18 @@ const Dashboard = () => {
     webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
     }
   ]);
+
+  // Fetch of 'Surf Spots' database
+  const[allSpots, setAllSpots] = useState([])
+  const [onLoadAllSpots, setOnLoadAllSpots] = useState(true)
+
+  useEffect(()=>{
+    axios
+      .get(`http://localhost:5002/spots`)
+      .then((res) => setAllSpots(res.data))
+        setOnLoadAllSpots(false)
+  }, [])
+
 
   //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
@@ -163,7 +175,6 @@ const Dashboard = () => {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
 
-  console.log(formInfos);
 
   const [showDropMenu, setShowDropMenu] = useState(false);
 
@@ -213,6 +224,8 @@ const Dashboard = () => {
           setShowDropMenu = {setShowDropMenu}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
+          allSpots ={allSpots}
+          onLoadAllSpots ={onLoadAllSpots}
         />
         <div className="grid">
           <div className={formInfos["wind-widget"] ? "item" : "invisible"}>
@@ -252,11 +265,11 @@ const Dashboard = () => {
             />
           </div>
 
-          {selectedSpots.map(selectedSpots => (
-            <div className="item">
+          {selectedSpots.map(selectedSpot => (
+            <div  className="item">
               <ForecastCardBackground
-              key={selectedSpots.id}
-              selectedSpots={selectedSpots}
+              key={selectedSpot.id}
+              selectedSpots={selectedSpot}
               timeStamp={timeStamp}
               />
             </div>

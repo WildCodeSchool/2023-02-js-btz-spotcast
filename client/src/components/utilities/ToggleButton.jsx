@@ -14,11 +14,11 @@ const ToggleButton = ({ setFormInfos, formInfos, widgetName}) => {
     <div
       onClick={buttonToggle}
       className={
-        formInfos[widgetName] ? "switch-background" : "switch-background switched-background"
+        formInfos && formInfos[widgetName] ? "switch-background" : "switch-background switched-background"
       }
     >
       <div
-        className={formInfos[widgetName] ? "switch-button" : "switch-button switched-button"}
+        className={formInfos && formInfos[widgetName] ? "switch-button" : "switch-button switched-button"}
       ></div>
     </div>
   );
