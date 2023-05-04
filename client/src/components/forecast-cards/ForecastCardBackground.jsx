@@ -101,76 +101,76 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
     
     
   return (
-    <div className='background-forcast item-content' id="F">
-        <div className='header'>
-            <div>
-              <div className='flexSpotName'>
-                <p className='spotName'>
-                  <img className='spotNameLocalisation' src={localisation} />
-                    {selectedSpots.name} 
-                  </p>
-                  <img className='spotNameStars' src={stars} />
-                  <WhatsappShareButton url={url} title={titleShare}>
-                      <img className='spotNameShare' src={share} />
-                  </WhatsappShareButton>
-                </div>
-                {selectedSpots.webcam === false 
-                  ? <p></p>
-                  : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
-                Acceder à la webcam
-              </a>}
-            </div>
-            <div>
-                <ToggleButton />
-            </div>
-        </div>
-        <div className='bodyForecastCard'>
-            {
-              dayForecast.map((el,index) => (
-                <div key={uuidv4()}  className='daily-forecast'>
-                
-                  <div className= {indexCard === index? "background-invisible" : "background-visible"}>
-
-                      <ForecastCardMinified 
-                        date ={el}
-                        surfDataHoule ={surfDataHoule}
-                        surfDataWind ={surfDataWind}
-                        number = {index}
-                        onLoad ={onLoad} 
-                        onLoadMarine ={onLoadMarine}
-                        tide={TideDatas}
-                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                        functionChange ={changeIndex}
-                      />
-                    </div>
-                    <div className={indexCard === index?  "background-visible" : "background-invisible" }>
-                      <div className='extendedCard'>
-                      <div className='date'><p className='dateTexte'>{el}</p></div>
-                      
-                      <ForecastCardExtended
-                        surfDataWind ={surfDataWind}
-                        surfDataHoule={surfDataHoule}
-                        onLoadMarine={onLoadMarine}
-                        onLoad ={onLoad}
-                        index={index}
-                        functionChange ={changeIndex}
-                      />
-                      
-                      <DailyTide
-                        tide={TideDatas}
-                        dayDate = {(new Date(today.getTime() + (index * oneDay)))}
-                      />
-                  
-                    </div>
-                    </div>
+  <div className='background-forcast item-content' id="F">
+          <div className='header'>
+              <div>
+                <div className='flexSpotName'>
+                  <p className='spotName'>
+                    <img className='spotNameLocalisation' src={localisation} />
+                      {selectedSpots.name} 
+                    </p>
+                    <img className='spotNameStars' src={stars} />
+                    <WhatsappShareButton url={url} title={titleShare}>
+                        <img className='spotNameShare' src={share} />
+                    </WhatsappShareButton>
                   </div>
+                  {selectedSpots.webcam === false 
+                    ? <p></p>
+                    : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
+                  Acceder à la webcam
+                </a>}
+              </div>
+              <div>
+                  <ToggleButton />
+              </div>
+          </div>
+          <div className='bodyForecastCard'>
+              {
+                dayForecast.map((el,index) => (
+                  <div key={uuidv4()}  className='daily-forecast'>
                   
-            
-              ))
-            }
-        </div>
-    </div>
-  )
+                    <div className= {indexCard === index? "background-invisible" : "background-visible"}>
+
+                        <ForecastCardMinified 
+                          date ={el}
+                          surfDataHoule ={surfDataHoule}
+                          surfDataWind ={surfDataWind}
+                          number = {index}
+                          onLoad ={onLoad} 
+                          onLoadMarine ={onLoadMarine}
+                          tide={TideDatas}
+                          dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                          functionChange ={changeIndex}
+                        />
+                      </div>
+                      <div className={indexCard === index?  "background-visible" : "background-invisible" }>
+                        <div className='extendedCard'>
+                        <div className='date'><p className='dateTexte'>{el}</p></div>
+                        
+                        <ForecastCardExtended
+                          surfDataWind ={surfDataWind}
+                          surfDataHoule={surfDataHoule}
+                          onLoadMarine={onLoadMarine}
+                          onLoad ={onLoad}
+                          index={index}
+                          functionChange ={changeIndex}
+                        />
+                        
+                        <DailyTide
+                          tide={TideDatas}
+                          dayDate = {(new Date(today.getTime() + (index * oneDay)))}
+                        />
+                    
+                      </div>
+                      </div>
+                    </div>
+                    
+              
+                ))
+              }
+          </div>
+      </div>
+    )
 }
 
 export default ForecastCardBackground

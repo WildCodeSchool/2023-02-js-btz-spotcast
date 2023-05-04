@@ -227,7 +227,7 @@ const Dashboard = () => {
           </div>
 
           {selectedSpots.map(selectedSpot => (
-            <div className="item" >
+            <div  className="item">
               <ForecastCardBackground
               key={selectedSpot.id}
               selectedSpots={selectedSpot}
