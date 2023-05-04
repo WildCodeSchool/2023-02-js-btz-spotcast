@@ -3,12 +3,15 @@ import './NavBar.css';
 import './ResponsiveNavBar.css';
 import SearchBar from './searchbar/SearchBar';
 
-const NavBar = ({ setShow, show, currentUserPicture, currentUserName }) => {
+const NavBar = ({ setShow, show, currentUserPicture, currentUserName,onLoadAllSpots, allSpots }) => {
   const handleShow = () => setShow(!show);
 
   return (
     <div className="navbar">
-      <SearchBar />
+      <SearchBar
+        onLoadAllSpots={onLoadAllSpots}
+        allSpots={allSpots}
+      />
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>

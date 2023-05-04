@@ -52,12 +52,14 @@ const Dashboard = () => {
   ]);
 
   // Fetch of 'Surf Spots' database
-  const[allSpots, setAllSpots] = useState()
+  const[allSpots, setAllSpots] = useState([])
+  const [onLoadAllSpots, setOnLoadAllSpots] = useState(true)
 
   useEffect(()=>{
     axios
       .get(`http://localhost:5002/spots`)
-      .then((res) => setAllSpots(res.data));
+      .then((res) => setAllSpots(res.data))
+        setOnLoadAllSpots(false)
   }, [])
 
 
@@ -195,6 +197,8 @@ const Dashboard = () => {
           show={show}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
+          allSpots ={allSpots}
+          onLoadAllSpots ={onLoadAllSpots}
         />
         <div className="grid">
           <div className="item">
