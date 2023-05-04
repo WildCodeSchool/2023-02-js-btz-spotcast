@@ -43,24 +43,33 @@ const Dashboard = () => {
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
-    id : 0,
-    name : "Biarritz - La Côte des Basques",
-    latitude : "43.48",
-    longitude : "-1.56",
-    webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
+      Maree: "Basse ou mi-marée",
+      id : 0,
+      name : "Biarritz - La Côte des Basques",
+      latitude : "43.3947",
+      longitude : "-1.5691",
+      niveau: "Tous Niveaux",
+      webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
     }
   ]);
+  
 
   // Fetch of 'Surf Spots' database
-  const[allSpots, setAllSpots] = useState()
+  const[allSpots, setAllSpots] = useState(["jo le bg"]);
+  const [onLoadAllSpots, setOnLoadSetAllSpots] = useState(true)
+  
+  
 
   useEffect(()=>{
     axios
       .get(`http://localhost:5002/spots`)
-      .then((res) => setAllSpots(res.data));
+      .then((res) => {
+        setAllSpots(res.data);
+        setOnLoadSetAllSpots(false)
+      });
   }, [])
 
-  allSpots && console.log(allSpots);
+  
 
   //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
@@ -196,6 +205,8 @@ const Dashboard = () => {
           show={show}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
+          allSpots={allSpots}
+          onLoadAllSpots={onLoadAllSpots}
         />
         <div className="grid">
           <div className="item">

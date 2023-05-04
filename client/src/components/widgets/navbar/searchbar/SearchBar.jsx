@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
 import { useContext } from 'react';
 import { selectedSpotsContext } from '../../../../pages/Dashboard';
-import SpotDataBase from '../../../utilities/SpotDataBase';
 import starfilled from '../../../../assets/images/star-filled.svg';
 import staroutline from '../../../../assets/images/star-outline.svg';
 import '../NavBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({allSpots, onLoadAllSpots}) => {
 
   
     // -----------------------------------------Fav icon useState
@@ -23,7 +22,10 @@ const SearchBar = () => {
   const[searchActive, setSearchActive] = useState(false)
 
   //------------------------------------------Create a new array with filtered database
-  let spots= SpotDataBase.filter((spot) =>
+  let spots= 
+  onLoadAllSpots 
+    ? "" 
+    : allSpots.filter((spot) =>
       spot.name.toLowerCase().match(searchInput.toLowerCase())
   );
 
@@ -38,8 +40,10 @@ const SearchBar = () => {
   // -------------------------------------------Create a variable to implement the data on the search bar
   const onChange = (e) => {
     setSearchInput(e.target.value);
-    spots = SpotDataBase.filter((spot) =>
-      spot.name.toLowerCase().match(searchInput.toLowerCase())
+    spots = onLoadAllSpots
+    ? ""
+    : allSpots.filter((spot) =>
+        spot.name.toLowerCase().match(searchInput.toLowerCase())
   );
     
   }
@@ -52,11 +56,13 @@ const SearchBar = () => {
   useEffect(() => {
 
     searchActive ?
-      setSelectedSpots(SpotDataBase.filter((selectSpot) => 
+      setSelectedSpots(onLoadAllSpots? "": allSpots.filter((selectSpot) => 
       selectSpot.name == currentSpots))
     : setSelectedSpots(selectedSpots)
    
   },[currentSpots])
+
+  console.log(selectedSpots[0].webcam)
 
   
   return (
@@ -96,8 +102,8 @@ const SearchBar = () => {
        <div className="webcam-link">
         {selectedSpots.length === 0 
           ? "" 
-          : selectedSpots[0].webcam === false
-            ? "" 
+          : selectedSpots[0].webcam === "0"
+            ? ""
             : <a href={selectedSpots[0].webcam} target='_blank'>Access the webcam</a> }
             {/* The ternary operator here ask if the object selectedSpots is empty or not, 
             then fetch the value of the key webcam and display it if it exists */}
