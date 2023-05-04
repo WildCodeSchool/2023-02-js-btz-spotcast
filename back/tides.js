@@ -14,6 +14,9 @@ const selectAllTides = async (req, res) => {
   const [tide] = await database.query('SELECT * FROM tide WHERE time >= ? ', [
     dateMin.toISOString(),
   ]);
+
+  console.log('=====', process.env.API_TOKEN);
+
   if (tide.length && tide[tide.length - 1].time >= dateMax.toISOString())
     return res.status(200).json(tide);
 
@@ -24,8 +27,7 @@ const selectAllTides = async (req, res) => {
     `https://api.stormglass.io/v2/tide/extremes/point?lat=43.481&lng=-1.562`,
     {
       headers: {
-        Authorization:
-          '492f25ae-e4d0-11ed-8d52-0242ac130002-492f2662-e4d0-11ed-8d52-0242ac130002',
+        Authorization: process.env.API_TOKEN,
       },
     }
   );

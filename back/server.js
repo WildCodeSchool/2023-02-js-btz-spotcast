@@ -1,7 +1,6 @@
 // Importing environment variables
 require('dotenv').config();
-// Importing cors
-const cors = require('cors');
+
 // Importing Express
 const express = require('express');
 // Creating a variable app that use express functions
@@ -11,7 +10,6 @@ const PORT = process.env.APP_PORT || 5002;
 
 //--------CREATING ALL THE ROUTES-----------
 
-app.use(cors()); // Allow this API to be requested from multiple adresses
 app.use(express.json()); // Parse & format the data of all express routes
 // Possible d'utiliser un parser par Router -- exemple : userRouter.use(express.json())
 
