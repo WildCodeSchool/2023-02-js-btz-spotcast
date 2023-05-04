@@ -114,7 +114,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                         <img className='spotNameShare' src={share} />
                     </WhatsappShareButton>
                   </div>
-                  {selectedSpots.webcam === false 
+                  {selectedSpots.webcam === "0" 
                     ? <p></p>
                     : <a className='spotNameWebcam' href={selectedSpots.webcam} target='_blank'>
                   Acceder à la webcam
