@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 140" style="enable-background:new 0 0 300 140;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#C7CCCB;}
+	.st2{fill:none;stroke:#ECC385;stroke-width:0.8002;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#F0F4F2;stroke-width:0.6126;stroke-miterlimit:10;}
+	.st4{fill:#ECC385;}
+	.st5{fill:none;stroke:#ECC385;stroke-width:2.0553;stroke-linecap:round;stroke-miterlimit:10;}
+	.st6{fill:#F0F4F2;}
+	.st7{fill:#293737;}
+	.st8{fill:#52746E;}
+	.st9{fill:#A2C8BD;}
+	.st10{fill:#446963;}
+	.st11{font-family:'N27-Regular';}
+	.st12{font-size:10.6922px;}
+	.st13{font-size:9px;}
+	.st14{font-size:23.7509px;}
+	.st15{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st16{fill:#C7CCCB;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st17{fill:none;stroke:#EFBC80;stroke-width:2;stroke-miterlimit:10;}
+	.st18{fill:#446963;stroke:#EFBC80;stroke-width:2;stroke-miterlimit:10;}
+	.st19{fill:none;stroke:#FFFFFF;stroke-width:1.7;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st1" d="M280,140H20c-11,0-20-9-20-20V20C0,9,9,0,20,0h260c11,0,20,9,20,20v100C300,131,291,140,280,140z"/>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 16.7018 26.4618)" class="st0 st11 st12">Tide</text>
+		</g>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 66.2164 120.3105)" class="st0 st11 st13">Low tide</text>
+		<text transform="matrix(1 0 0 1 54.7526 109.163)" class="st0 st11 st14">18:23</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 196.3014 120.3105)" class="st0 st11 st13">High tide</text>
+		<text transform="matrix(1 0 0 1 183.1686 109.163)" class="st0 st11 st14">00:40</text>
+	</g>
+</g>
+<path class="st15" d="M17.4,74.7c36.5,7.9,68.8,1.7,95.7-15.3s53.3-26.5,89.5-21.5c36,5,62.6,32.7,85.8,37.3"/>
+<circle class="st16" cx="121.5" cy="54" r="7.6"/>
+</svg>

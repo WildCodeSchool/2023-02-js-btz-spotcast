@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import "./ToggleButton.css";
 
-const ToggleButton = () => {
+const ToggleButton = ({ formInfos, widgetName}) => {
+  
   const [isOn, setIsOn] = useState(true);
 
   const buttonToggle = () => {
     setIsOn(!isOn);
+    formInfos[widgetName] = !formInfos[widgetName];
+    console.log(formInfos);
   };
 
+ 
   return (
     <div
       onClick={buttonToggle}

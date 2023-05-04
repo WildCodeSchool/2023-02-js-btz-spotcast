@@ -6,7 +6,7 @@ import Aube from '../../../assets/images/aube.svg'
 import Crepuscule from '../../../assets/images/crepuscule.svg'
 import Separator from '../../../assets/images/sunset-separator.svg'
 
-const Sunset = () => {
+const Sunset = ({ formInfos, setFormInfos}) => {
     
     const [sunset, setSunset] = useState();
 
@@ -50,7 +50,11 @@ const Sunset = () => {
             <img src={Separator} alt="separator" />
         </div>
         <div className="sunset">
-            <ToggleButton className="sunset-toggle" />
+            <ToggleButton className="sunset-toggle"
+                widgetName = "sun-widget"
+                formInfos={formInfos}
+                setFormInfos={setFormInfos}
+            />
             <div className="sunset-forecast">
                 <img src={Crepuscule} alt="moon" className="moon" />
                 <div className='sunset-forecast-container'>

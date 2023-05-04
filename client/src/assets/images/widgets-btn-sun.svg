@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 140" style="enable-background:new 0 0 300 140;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#C7CCCB;}
+	.st2{fill:none;stroke:#ECC385;stroke-width:0.8002;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#F0F4F2;stroke-width:0.6126;stroke-miterlimit:10;}
+	.st4{fill:#ECC385;}
+	.st5{fill:none;stroke:#ECC385;stroke-width:2.0553;stroke-linecap:round;stroke-miterlimit:10;}
+	.st6{fill:#F0F4F2;}
+	.st7{fill:#293737;}
+	.st8{fill:#52746E;}
+	.st9{fill:#A2C8BD;}
+	.st10{fill:#446963;}
+	.st11{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st12{fill:#C7CCCB;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st13{fill:none;stroke:#EFBC80;stroke-width:2;stroke-miterlimit:10;}
+	.st14{fill:#446963;stroke:#EFBC80;stroke-width:2;stroke-miterlimit:10;}
+	.st15{fill:none;stroke:#FFFFFF;stroke-width:1.7;stroke-miterlimit:10;}
+	.st16{font-family:'N27-Regular';}
+	.st17{font-size:10.8197px;}
+	.st18{font-size:11px;}
+	.st19{font-size:23.7509px;}
+</style>
+<path class="st0" d="M300,20v100c0,11-9,20-20,20H20c-11,0-20-9-20-20V20C0,9,9,0,20,0h260C291,0,300,9,300,20z"/>
+<path class="st1" d="M300,20v100c0,11-9,20-20,20H153.8c-7.3-21.9-2.1-39.2,1.2-52.7c3.4-14.1,0.8-28.5-3.1-44.3
+	c-3.8-15.1-2.1-33.5,2.7-43H280C291,0,300,9,300,20z"/>
+<g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 16.7018 26.462)" class="st1 st16 st17">Sun cycle</text>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<text transform="matrix(1 0 0 1 85.6888 68.2402)" class="st1 st16 st18">Dawn</text>
+		<text transform="matrix(1 0 0 1 71.4466 92.5986)" class="st1 st16 st19">18:23</text>
+	</g>
+</g>
+<g>
+	<g>
+		<path class="st1" d="M38,93.2c-8,0-14.4-6.5-14.4-14.4S30,64.3,38,64.3s14.4,6.5,14.4,14.4S45.9,93.2,38,93.2z M38,66.3
+			c-6.9,0-12.5,5.6-12.5,12.5S31.1,91.2,38,91.2s12.5-5.6,12.5-12.5S44.8,66.3,38,66.3z"/>
+		<g>
+			<g>
+				<g>
+					<circle class="st1" cx="37.9" cy="57.8" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="27.5" cy="60.5" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="19.8" cy="68.1" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="17" cy="78.6" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="19.7" cy="89" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="27.4" cy="96.7" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="37.8" cy="99.5" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="48.2" cy="96.8" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="55.9" cy="89.2" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="58.8" cy="78.7" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="56" cy="68.3" r="1.7"/>
+				</g>
+				<g>
+					<circle class="st1" cx="48.4" cy="60.6" r="1.7"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+<path class="st15" d="M208.2,87.3C205.1,93,199,97,192,97c-10.1,0-18.3-8.2-18.3-18.3c0-10.1,8.2-18.3,18.3-18.3
+	c7,0,13.1,3.9,16.2,9.7c-2.5-3.1-6.3-5-10.6-5c-7.6,0-13.7,6.1-13.7,13.7c0,7.5,6.1,13.7,13.7,13.7
+	C201.9,92.3,205.7,90.4,208.2,87.3z"/>
+<g>
+	<text transform="matrix(1 0 0 1 236.8587 68.2402)" class="st0 st16 st18">Dusk</text>
+	<text transform="matrix(1 0 0 1 217.8627 92.5986)" class="st0 st16 st19">00:40</text>
+</g>
+</svg>

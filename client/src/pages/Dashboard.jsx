@@ -12,6 +12,7 @@ import Sunset from "../components/widgets/sunset/Sunset";
 import Muuri from 'muuri';
 import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
+import DropdownMenu from "../components/widgets/Dropdown-menu/DropdownMenu";
 
 
 // instancier un useContext
@@ -20,6 +21,16 @@ export const selectedSpotsContext = createContext();
 
 const Dashboard = () => {
 
+  //Widget status
+  const [formInfos, setFormInfos] = useState({
+    "meteo-widget" : false,
+    "meteo3d-widget" : false,
+    "sun-widget" : false,
+    "tide-widget" : false,
+    "wind-widget" : false,
+  });
+
+  
   //setting up the Muuri effect
   const [grid, setGrid] = useState();
 
@@ -27,9 +38,10 @@ const Dashboard = () => {
     setGrid(
       new Muuri('.grid', {
         dragEnabled: true,
-        layoutDuration: 300,
-        layoutEasing: 'ease',
+        layoutDuration: 350,
+        layoutEasing: 'ease-in-out',
         fillGaps: true,
+        layoutOnResize: 0,
         sortData: {
           id: function(item, element) {
             return element.children[0].id;
@@ -38,8 +50,8 @@ const Dashboard = () => {
       })
     );
   }, []);
-  // debugger
-  grid && console.log(grid._items[0]);
+
+
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -151,9 +163,15 @@ const Dashboard = () => {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
 
+  console.log(formInfos);
+
   return (
     <div className="dashboard">
       <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
+        <DropdownMenu 
+          formInfos={formInfos}
+          setFormInfos={setFormInfos}
+        />
         {currentForm === 'login' ? (
           <Login
             toggleModal={toggleModal}
@@ -192,20 +210,26 @@ const Dashboard = () => {
               {...wind}
               timeStampIndex={timeStampIndex}
               onLoadOpenMeteo = {onLoadOpenMeteo}
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
             />
           </div>
           
           <div className="item">
             <Tide
               date={date}
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
             />
           </div>
 
-          <div className="item">
+          <div className={formInfos["meteo-widget"] ? "invisible" : "item"}>
             <MeteoDay
-            {...meteo}
-            onLoadMeteo={onLoadMeteo}
-            timeStampIndex={timeStampIndex}
+              {...meteo}
+              onLoadMeteo={onLoadMeteo}
+              timeStampIndex={timeStampIndex}
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
             />
           </div>
 
@@ -213,6 +237,8 @@ const Dashboard = () => {
             <MeteoThreeDay
             meteo3D={meteo3D}
             onLoadMeteo3D={onLoadMeteo3D}
+            formInfos={formInfos}
+            setFormInfos={setFormInfos}
             />
           </div>
 
@@ -226,7 +252,10 @@ const Dashboard = () => {
             </div>
           ))}
           <div className="item">
-            <Sunset />
+            <Sunset 
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
+            />
           </div>
       </div>
     </selectedSpotsContext.Provider>
