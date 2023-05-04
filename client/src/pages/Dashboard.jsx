@@ -39,7 +39,7 @@ const Dashboard = () => {
       })
     );
   }, []);
-  // debugger
+  
   //setting up Selected Spot 
   const [selectedSpots, setSelectedSpots] = useState(
     [{
@@ -50,6 +50,17 @@ const Dashboard = () => {
     webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
     }
   ]);
+
+  // Fetch of 'Surf Spots' database
+  const[allSpots, setAllSpots] = useState()
+
+  useEffect(()=>{
+    axios
+      .get(`http://localhost:5002/spots`)
+      .then((res) => setAllSpots(res.data));
+  }, [])
+
+  allSpots && console.log(allSpots);
 
   //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);

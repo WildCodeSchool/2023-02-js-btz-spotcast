@@ -111,7 +111,7 @@ const ForecastCardBackground = ({selectedSpots, timeStamp}) => {
                   </p>
                   <img className='spotNameStars' src={stars} />
                   <WhatsappShareButton url={url} title={titleShare}>
-                    <button><img className='spotNameShare' src={share} /></button>
+                      <img className='spotNameShare' src={share} />
                   </WhatsappShareButton>
                 </div>
                 {selectedSpots.webcam === false 
