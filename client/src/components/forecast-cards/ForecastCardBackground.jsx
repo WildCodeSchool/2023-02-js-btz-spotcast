@@ -29,48 +29,6 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
     axios.get('/tides').then(({ data }) => setTide(data));
   }, []);
 
-  // useEffect(() => {
-  //   // API TIDE récupère la marée haute et basse sur 10jours mais attention car que 10 fetch par jour donc delay de 3h appliqué
-
-  //   // axios
-  //   //   .get(
-  //   //     `https://api.stormglass.io/v2/tide/extremes/point?lat=${selectedSpots.latitude}&lng=${selectedSpots.longitude}`,
-  //   //     {
-  //   //       headers: {
-  //   //         Authorization:
-  //   //           '492f25ae-e4d0-11ed-8d52-0242ac130002-492f2662-e4d0-11ed-8d52-0242ac130002',
-  //   //       },
-  //   //     }
-  //   //   )
-  //   //   .then((res) => res.json)
-  //   //   .then((data) => {
-  //   //     setTide(data);
-
-  //       // axios
-  //       //   .post(
-  //       //     `https://api.stormglass.io/v2/tide/extremes/point?lat=43.481&lng=-1.562`,
-  //       //     {
-  //       //       headers: {
-  //       //         Accept: 'application/json',
-  //       //         'Content-Type': 'application/json',
-  //       //         Authorization:
-  //       //           '492f25ae-e4d0-11ed-8d52-0242ac130002-492f2662-e4d0-11ed-8d52-0242ac130002',
-  //       //       },
-  //       //       body: JSON.stringify({
-  //       //         height: this.tide.height,
-  //       //         time: this.tide.time,
-  //       //         type: this.tide.type,
-  //       //       }),
-  //       //     }
-  //       //   )
-  //       //   .then((res) => res.json())
-  //       //   .then((data) => console.log(data))
-  //       //   .catch((err) => console.log(err));
-  //     });
-  //   //}, 3 * 60 * 60 * 1000);
-  // }, []);
-  // console.log(tide);
-
   useEffect(() => {
     // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
     axios
