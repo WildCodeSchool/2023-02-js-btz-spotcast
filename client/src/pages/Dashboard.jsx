@@ -15,6 +15,7 @@ import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
 import DropdownMenu from '../components/widgets/Dropdown-menu/DropdownMenu';
 
+
 // instancier un useContext
 export const selectedSpotsContext = createContext();
 
@@ -59,9 +60,31 @@ const Dashboard = () => {
     },
   ]);
 
+  
+  // Fetch of 'Surf Tides' database
+  const[tides, setTides] = useState([])
+  const [onLoadAllTides, setOnLoadAllTides] = useState(true)
+
+  useEffect(() => {
+    axios.get('/tides')
+      .then(({ data }) => setTides(data))
+      setOnLoadAllTides(false);
+  }, []);
+
+  
+
   // Fetch of 'Surf Spots' database
-  const [allSpots, setAllSpots] = useState([]);
-  const [onLoadAllSpots, setOnLoadAllSpots] = useState(true);
+
+  const[allSpots, setAllSpots] = useState([])
+  const [onLoadAllSpots, setOnLoadAllSpots] = useState(true)
+
+  useEffect(()=>{
+    axios
+      .get(`http://localhost:5002/spots`)
+      .then((res) => setAllSpots(res.data))
+      setOnLoadAllSpots(false)
+  }, [])
+
 
   useEffect(() => {
     axios.get(`/spots`).then((res) => setAllSpots(res.data));
@@ -135,6 +158,7 @@ const Dashboard = () => {
         setOnLoadMeteo3D(false);
       });
   }, []);
+
 
   //getting the index of current time in API array
   const [timeStampIndex, setTimeStampIndex] = useState('');
@@ -247,6 +271,8 @@ const Dashboard = () => {
               date={date}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
+              TideDatas={tides}
+              onLoadAllTides ={onLoadAllTides}
             />
           </div>
 
@@ -262,9 +288,13 @@ const Dashboard = () => {
           {selectedSpots.map((selectedSpot) => (
             <div className="item">
               <ForecastCardBackground
-                key={selectedSpot.id}
-                selectedSpots={selectedSpot}
-                timeStamp={timeStamp}
+
+              key={selectedSpot.id}
+              selectedSpots={selectedSpot}
+              timeStamp={timeStamp}
+              tide={tides}
+              onLoadAllTides={onLoadAllTides}
+
               />
             </div>
           ))}

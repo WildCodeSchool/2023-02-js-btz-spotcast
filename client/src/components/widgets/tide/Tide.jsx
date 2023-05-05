@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import ToggleButton from '../../utilities/ToggleButton'
 import './Tide.css'
-import TideDatas from '../../utilities/TideDatas'
+
 import tideShape from '../../../tide-shape.svg'
 
-const Tide = ({ date, formInfos, setFormInfos }) => {
+const Tide = ({ date, formInfos, setFormInfos,TideDatas }) => {
 
     const tideTime = TideDatas.map((el) => el.time);
     //Création d'un tableau qui contient tous les TimeStamps des marées
