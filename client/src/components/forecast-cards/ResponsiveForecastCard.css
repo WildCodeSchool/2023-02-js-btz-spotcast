@@ -4,15 +4,17 @@
     .background-forcast{
         max-width: 32,5rem;
         width: 26.4rem;
-        height: 100%;
-        padding: 0
+        height:53.75em;
+        padding: 0;
+        overflow: hidden;
     }
 
    .bodyForecastCard{
     position: relative;
     display: block;
     flex-direction: column;
-    overflow-y: visible;
+    
+    overflow-y: auto;
    }
 
 
