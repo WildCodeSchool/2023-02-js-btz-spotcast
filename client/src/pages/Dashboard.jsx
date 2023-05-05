@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { createContext } from 'react';
-import Wind from "../components/widgets/wind/Wind";
-import MeteoDay from "../components/widgets/meteo-day/MeteoDay"
-import MeteoThreeDay from "../components/widgets/meteo-three-day/MeteoThreeDay"
-import NavBar from "../components/widgets/navbar/NavBar"
-import ForecastCardBackground from "../components/forecast-cards/ForecastCardBackground";
-import "./Dashboard.css";
-import "./ResponsiveDashboard.css";
-import Tide from "../components/widgets/tide/Tide";
-import Sunset from "../components/widgets/sunset/Sunset";
+import Wind from '../components/widgets/wind/Wind';
+import MeteoDay from '../components/widgets/meteo-day/MeteoDay';
+import MeteoThreeDay from '../components/widgets/meteo-three-day/MeteoThreeDay';
+import NavBar from '../components/widgets/navbar/NavBar';
+import ForecastCardBackground from '../components/forecast-cards/ForecastCardBackground';
+import './Dashboard.css';
+import './ResponsiveDashboard.css';
+import Tide from '../components/widgets/tide/Tide';
+import Sunset from '../components/widgets/sunset/Sunset';
 import Muuri from 'muuri';
 import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
-import DropdownMenu from "../components/widgets/Dropdown-menu/DropdownMenu";
-
+import DropdownMenu from '../components/widgets/Dropdown-menu/DropdownMenu';
 
 
 // instancier un useContext
 export const selectedSpotsContext = createContext();
 
-
 const Dashboard = () => {
-
   //Widget status
   const [formInfos, setFormInfos] = useState({
-    "meteo-widget" : true,
-    "meteo3d-widget" : true,
-    "sun-widget" : true,
-    "tide-widget" : true,
-    "wind-widget" : true,
+    'meteo-widget': true,
+    'meteo3d-widget': true,
+    'sun-widget': true,
+    'tide-widget': true,
+    'wind-widget': true,
   });
 
-  
   //setting up the Muuri effect
   const [grid, setGrid] = useState();
 
@@ -45,23 +41,23 @@ const Dashboard = () => {
         fillGaps: true,
         layoutOnResize: 0,
         sortData: {
-          id: function(item, element) {
+          id: function (item, element) {
             return element.children[0].id;
-          }
-        }
+          },
+        },
       })
     );
   }, []);
 
-  //setting up Selected Spot 
-  const [selectedSpots, setSelectedSpots] = useState(
-    [{
-    id : 0,
-    name : "Biarritz - La Côte des Basques",
-    latitude : "43.48",
-    longitude : "-1.56",
-    webcam : "https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques"
-    }
+  //setting up Selected Spot
+  const [selectedSpots, setSelectedSpots] = useState([
+    {
+      id: 0,
+      name: 'Biarritz - La Côte des Basques',
+      latitude: '43.48',
+      longitude: '-1.56',
+      webcam: 'https://gosurf.fr/webcam/fr/7/Biarritz-La-Cote-des-Basques',
+    },
   ]);
 
   
@@ -78,6 +74,7 @@ const Dashboard = () => {
   
 
   // Fetch of 'Surf Spots' database
+
   const[allSpots, setAllSpots] = useState([])
   const [onLoadAllSpots, setOnLoadAllSpots] = useState(true)
 
@@ -88,6 +85,11 @@ const Dashboard = () => {
       setOnLoadAllSpots(false)
   }, [])
 
+
+  useEffect(() => {
+    axios.get(`/spots`).then((res) => setAllSpots(res.data));
+    setOnLoadAllSpots(false);
+  }, []);
 
   //useState to check when the Open-Meteo API is loaded
   const [onLoadOpenMeteo, setOnLoadOpenMeteo] = useState(true);
@@ -104,8 +106,11 @@ const Dashboard = () => {
   });
 
   //creating a time stamp written as the one in the API
-  const timeStamp = 
-  `${date.getFullYear()}-${String(date.getMonth() +1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}T${String(date.getHours()).padStart(2,"0")}:00`;
+  const timeStamp = `${date.getFullYear()}-${String(
+    date.getMonth() + 1
+  ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(
+    date.getHours()
+  ).padStart(2, '0')}:00`;
 
   //fetching the wind infos
   const [wind, setWind] = useState([]);
@@ -154,8 +159,6 @@ const Dashboard = () => {
       });
   }, []);
 
- 
-
 
   //getting the index of current time in API array
   const [timeStampIndex, setTimeStampIndex] = useState('');
@@ -174,9 +177,9 @@ const Dashboard = () => {
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
-    setEmail("");
-    setPass("");
-    setError("");
+    setEmail('');
+    setPass('');
+    setError('');
   };
 
   const toggleModal = () => {
@@ -187,25 +190,24 @@ const Dashboard = () => {
   };
 
   const [show, setShow] = useState(true);
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [error, setError] = useState("");
-
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
 
   const [showDropMenu, setShowDropMenu] = useState(false);
 
   return (
-    <div className={showDropMenu ? "dashboard fixed" : "dashboard"}>
-      <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots] }>
-        <DropdownMenu 
+    <div className={showDropMenu ? 'dashboard fixed' : 'dashboard'}>
+      <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots]}>
+        <DropdownMenu
           formInfos={formInfos}
           setFormInfos={setFormInfos}
-          showDropMenu = {showDropMenu}
-          setShowDropMenu = {setShowDropMenu}
+          showDropMenu={showDropMenu}
+          setShowDropMenu={setShowDropMenu}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
-          setShow ={setShow}
-          show = {show}
+          setShow={setShow}
+          show={show}
         />
         {currentForm === 'login' ? (
           <Login
@@ -230,31 +232,31 @@ const Dashboard = () => {
             onFormSwitch={toggleForm}
           />
         )}
-        <div className={show ? 'overlay-modal invisible' : 'overlay-modal'}
-          onClick={toggleModal}>
-        </div>
+        <div
+          className={show ? 'overlay-modal invisible' : 'overlay-modal'}
+          onClick={toggleModal}></div>
         <NavBar
           setShow={setShow}
           show={show}
-          showDropMenu = {showDropMenu}
-          setShowDropMenu = {setShowDropMenu}
+          showDropMenu={showDropMenu}
+          setShowDropMenu={setShowDropMenu}
           currentUserName={currentUserName}
           currentUserPicture={currentUserPicture}
-          allSpots ={allSpots}
-          onLoadAllSpots ={onLoadAllSpots}
+          allSpots={allSpots}
+          onLoadAllSpots={onLoadAllSpots}
         />
         <div className="grid">
-          <div className={formInfos["wind-widget"] ? "item" : "invisible"}>
+          <div className={formInfos['wind-widget'] ? 'item' : 'invisible'}>
             <Wind
               {...wind}
               timeStampIndex={timeStampIndex}
-              onLoadOpenMeteo = {onLoadOpenMeteo}
+              onLoadOpenMeteo={onLoadOpenMeteo}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
             />
           </div>
-          
-          <div className={formInfos["meteo-widget"] ? "item" : "invisible"}>
+
+          <div className={formInfos['meteo-widget'] ? 'item' : 'invisible'}>
             <MeteoDay
               {...meteo}
               onLoadMeteo={onLoadMeteo}
@@ -263,8 +265,8 @@ const Dashboard = () => {
               setFormInfos={setFormInfos}
             />
           </div>
-          
-          <div className={formInfos["tide-widget"] ? "item" : "invisible"}>
+
+          <div className={formInfos['tide-widget'] ? 'item' : 'invisible'}>
             <Tide
               date={date}
               formInfos={formInfos}
@@ -274,37 +276,35 @@ const Dashboard = () => {
             />
           </div>
 
-
-          <div className={formInfos["meteo3d-widget"] ? "item" : "invisible"}>
+          <div className={formInfos['meteo3d-widget'] ? 'item' : 'invisible'}>
             <MeteoThreeDay
-            meteo3D={meteo3D}
-            onLoadMeteo3D={onLoadMeteo3D}
-            formInfos={formInfos}
-            setFormInfos={setFormInfos}
+              meteo3D={meteo3D}
+              onLoadMeteo3D={onLoadMeteo3D}
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
             />
           </div>
 
-          {selectedSpots.map(selectedSpot => (
-            <div  className="item">
+          {selectedSpots.map((selectedSpot) => (
+            <div className="item">
               <ForecastCardBackground
+
               key={selectedSpot.id}
               selectedSpots={selectedSpot}
               timeStamp={timeStamp}
               tide={tides}
               onLoadAllTides={onLoadAllTides}
+
               />
             </div>
           ))}
-          <div className={formInfos["sun-widget"] ? "item" : "invisible"}>
-            <Sunset 
-              formInfos={formInfos}
-              setFormInfos={setFormInfos}
-            />
+          <div className={formInfos['sun-widget'] ? 'item' : 'invisible'}>
+            <Sunset formInfos={formInfos} setFormInfos={setFormInfos} />
           </div>
-      </div>
-    </selectedSpotsContext.Provider>
-  </div>
+        </div>
+      </selectedSpotsContext.Provider>
+    </div>
   );
 };
 
-export default Dashboard
+export default Dashboard;
