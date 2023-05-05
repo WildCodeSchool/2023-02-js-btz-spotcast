@@ -54,7 +54,7 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
     },[])
 
     return (
-        <div className={ widthSize >= 785 ? "small-square item-content" : "big-rectangle-width item-content" } id="D">
+        <div className={ widthSize >= 980 ? "small-square item-content" : "big-rectangle-width item-content" } id="D">
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
                 <ToggleButton 

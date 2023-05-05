@@ -62,7 +62,7 @@
   overflow: hidden;
   padding: 1em 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 800;
 }
 
 .dropdown-search li {

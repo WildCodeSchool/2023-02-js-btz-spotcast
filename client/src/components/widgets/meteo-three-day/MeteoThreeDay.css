@@ -27,7 +27,7 @@
     width: 55%;
 }
 
-@media screen and (max-width : 785px) {
+@media screen and (max-width : 980px) {
     .card-content.meteo-infos-3d {
         flex-direction: row;
     }
