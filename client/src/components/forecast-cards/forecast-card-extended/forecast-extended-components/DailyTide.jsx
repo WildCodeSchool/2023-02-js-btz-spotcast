@@ -1,7 +1,7 @@
 import React from 'react'
 import tideShape from '../../../../assets/images/tide-shape.svg'
 
-const DailyTide = ({ tide, dayDate }) => {
+const DailyTide = ({ tide, dayDate,onLoadAllTides }) => {
 
     //Création d'un tableau qui contient tous les TimeStamps des marées
     const tideTime = tide.map((el) => el.time);
@@ -10,18 +10,29 @@ const DailyTide = ({ tide, dayDate }) => {
     const dayDateFormat = dayDate.toISOString().slice(0,10)
     
     // get the tides of the current day
-    let dayTides = tide.filter((dayTide) => dayTide.time.match(dayDateFormat))
+    const dayTides = onLoadAllTides ? [] : tide.filter((dayTide) => dayTide.time.match(dayDateFormat))
 
     //separate high tides and low tides
-    let dayHighTides = dayTides.filter((tide) => tide.type==="high");
-    let dayLowTides  = dayTides.filter((tide) => tide.type==="low");
-    
+    const dayHighTides = onLoadAllTides? [] : dayTides.filter((tide) => tide.type==="high");
+    const dayLowTides  = onLoadAllTides ? [] : dayTides.filter((tide) => tide.type==="low");
+
+    if(onLoadAllTides || !dayTides.length || !dayLowTides.length || !dayHighTides.length){
+        return(null)
+    }
+
+   /*const highHeight = 5.83 - parseFloat(dayHighTides[0].height)
+    const lowHeight = 2.59 - Math.abs(parseFloat(dayLowTides[0].height))*/
+
+    const highHeight = parseFloat(dayHighTides[0].height)
+    const lowHeight = parseFloat(dayLowTides[0].height)
+  
+    const coeff = ((((highHeight - lowHeight)) / 3.9) *100 )
 
   return (
     <div className="daily-tide">
         <div className="coeff">
             <p className="coeff-data">
-                120
+                {coeff.toFixed(0)}
             </p>
             <p>Coeff</p>
         </div>

@@ -18,9 +18,9 @@ import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
 
 
-const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
+const ForecastCardBackground = ({ selectedSpots, timeStamp, tide, onLoadAllTides }) => {
   // Contient les donnés API
-  const [tide, setTide] = useState([]);
+  
   const [surfDataWind, setSurfDataWind] = useState([]);
   const [surfDataHoule, setSurfDataHoule] = useState([]);
   // UseState(s) qui vérifient que l'API est chargée
@@ -34,9 +34,8 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
     setIndexCard(newValue);
   };
 
-  useEffect(() => {
-    axios.get('/tides').then(({ data }) => setTide(data));
-  }, []);
+
+  
 
     // UseState qui détecte la taille de l'écran
     const [widthSize, setWidthSize] = useState(window.innerWidth)
@@ -134,6 +133,7 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
                         <div className='date'><p className='dateTexte'>{el}</p></div>
                         
                         <ForecastCardExtended
+                     
                           surfDataWind ={surfDataWind}
                           surfDataHoule={surfDataHoule}
                           onLoadMarine={onLoadMarine}
@@ -144,6 +144,7 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
                         
                         <DailyTide
                           tide={tide}
+                          onLoadAllTides={onLoadAllTides}
                           dayDate = {(new Date(today.getTime() + (index * oneDay)))}
                         />
                     

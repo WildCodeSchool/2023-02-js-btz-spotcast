@@ -22,14 +22,18 @@ const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine
   const wavePeriodByDay = onLoadMarine ? "" : wave_period.slice(range-24, range);
   const waveDirectionByDay = onLoadMarine ? "" : wave_direction.slice(range-24, range);
 
+
   return (
+    
     <div className='daily-extended-forecast' onClick={sendBackIndex}>
+     
        <div className="dataCategorie">
         <p className="WindCategorie">Wind km/h</p>
         <p className="EnergieCategorie">Energie</p>
         <p className="swellCategorie">Swell m</p>
         <p className="periodeCategorie">Periode</p>
       </div>
+      
       {Array(7).fill().map((_, index)=>(
         <HourlyForecast 
         
