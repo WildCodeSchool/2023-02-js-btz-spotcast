@@ -136,9 +136,6 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
                       {selectedSpots.name} 
                     </p>
                     <img className='spotNameStars' src={stars} />
-                    <WhatsappShareButton url={url} title={titleShare}>
-                        <img className='spotNameShare' src={share} />
-                    </WhatsappShareButton>
                   </div>
                   {selectedSpots.webcam === "0" 
                     ? <p></p>
@@ -146,10 +143,11 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp }) => {
                   Acceder à la webcam
                 </a>}
               </div>
-              <div>
-                  <ToggleButton />
-              </div>
+              <WhatsappShareButton url={url} title={titleShare}>
+                  <img className='spotNameShare' src={share} />
+              </WhatsappShareButton> 
           </div>
+          
           <div className='bodyForecastCard'>
               {
                 dayForecast.map((el,index) => (

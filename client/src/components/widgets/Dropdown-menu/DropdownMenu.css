@@ -1,0 +1,112 @@
+.dropdown-menu{
+    opacity: 0;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all .5s ease-out;
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : 2em;
+    padding: 4.5em;
+    overflow-y: auto;
+}
+
+.dropdown-menu.visible{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.dropdown-menu h3{
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 100;
+}
+
+.login-menu-dropdown,
+.widgets-menu{
+    width: 100%;
+    max-width: 1280px;
+}
+
+.login-menu-dropdown{
+    width: 100%;
+}
+
+.login-dropdown{
+    display: flex;
+    align-items: center;
+}
+
+.user-img-dropdown{
+    width: 3.75em;
+    height: 3.75em;
+    border-radius:50%;
+    cursor: pointer;
+    overflow: hidden;
+    margin-right: .75em;
+}
+
+.user-name-dropdown{
+    cursor: pointer;
+}
+
+.widgets-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex :1;
+    padding-top: 2em;
+}
+
+ .widgets-grid{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap:1em;
+    margin-top: 2em;
+}
+
+.widget-checkbox,
+.widget-checkbox-wide{
+    height: 9em;
+    border-radius: 2em;
+    box-shadow:0 0 12px rgba(65, 89, 89, 0.3);
+}
+
+.widget-checkbox{
+    width: 9em; 
+}
+
+.widget-checkbox-wide{
+    width: 19.25em;
+}
+
+.dropdown-menu img{
+    height: 100%
+}
+
+input[type="checkbox"]{
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+}
+.dropdown-menu label{
+    cursor: pointer;
+}
+
+@media (max-width: 980px){
+    .dropdown-menu{
+        font-size: 16px;
+        padding: 1.5em 2.5em;
+    }
+}
+    
+
+    

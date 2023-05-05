@@ -101,9 +101,7 @@ button{
     display: flex;
     flex-direction: column;
     height: 100%;
-}
-
-.minified-background {
+    min-width: 9.375em;
     text-align: center;
 }
 

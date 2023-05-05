@@ -62,3 +62,9 @@
     left: 19.53em;
 }
 
+@media screen and (max-width : 980px) {
+    .tide-data{
+        font-size: 1.9em;
+        line-height: .9em;
+    }
+}

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import IconMeteoThreeDays from "./components/IconMeteoThreeDays";
 import DateThreeDays from "./components/DateThreeDays";
 import TempThreeDays from "./components/TempThreeDays";
@@ -6,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import "../cards.css";
 import "./MeteoThreeDay.css";
 
-const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
+const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
 
     // Setup the date
     const today = new Date();  // Obtenir la date et l'heure actuelles
@@ -41,16 +42,31 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D }) => {
         }]
     }
 
+    // UseState qui détecte la taille de l'écran
+    const [widthSize, setWidthSize] = useState(window.innerWidth)
+
+    useEffect(()=> {
+      const widthSizeDetector = () => {
+        setWidthSize(window.innerWidth)
+      }
+
+      window.addEventListener('resize', widthSizeDetector)
+    },[])
+
     return (
-        <div className="small-square item-content" id="D">
+        <div className={ widthSize >= 785 ? "small-square item-content" : "big-rectangle-width item-content" } id="D">
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
-                <ToggleButton />
+                <ToggleButton 
+                    widgetName = "meteo3d-widget"
+                    formInfos={formInfos}
+                    setFormInfos={setFormInfos}
+                />
             </div>
             <div className="card-content meteo-infos-3d">
                 {onLoadMeteo3D ? "" :
                     indexInfoMeteo.map((el) => (
-                        <div key ={uuidv4()} className="day-infos-3d">
+                        <div key ={el.date} className="day-infos-3d">
                            
                             <DateThreeDays
                                 meteoDay={el.date}

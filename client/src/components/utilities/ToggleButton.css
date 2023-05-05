@@ -13,7 +13,7 @@
 /*Toggle button*/
 .switch-button{
     position:absolute;
-    left:2px;
+    left:20px;
     top:50%;
     transform: translateY(-50%);
     background-color: var(--primary-color);
@@ -25,13 +25,7 @@
 
 /*Toggle button when switched off*/
 .switched-button{
-left:20px;
+    left:2px;
 }
 
-@media (max-width : 400px) {
-    .switch-background{
-        height:12px;
-        width:31px;
-    }
-}
 

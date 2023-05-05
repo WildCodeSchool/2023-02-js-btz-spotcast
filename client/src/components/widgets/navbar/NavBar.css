@@ -11,6 +11,12 @@
   box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
 }
 
+.logo-and-burger{
+  display: flex;
+  align-items: flex-start;
+  width: 67%;
+}
+
 .logo {
   display: flex;
   width: 100%;
@@ -108,9 +114,10 @@
 
 .login {
   display: flex;
-  flex-direction: column;
-  align-items: end;
-  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2em;
 }
 
 .login-align {
@@ -123,6 +130,7 @@
   color: var(--primary-color-light);
   padding-left: 0.5em;
   padding-right: 0.5em;
+  cursor: pointer;
 }
 
 .user-img {
@@ -130,9 +138,66 @@
   height: 3.75em;
   border-radius: 50%;
   background-color: var(--primary-color-light);
+  cursor: pointer;
 }
 
 .user-img img {
   width: 100%;
   border-radius: 50%;
+}
+
+/* ------------------ Menu Burger -------------------------- */
+
+.burger {
+  z-index: 1001;
+}
+
+.burger label{
+  display:flex;
+  flex-direction:column;
+  width:2.2em;
+  cursor:pointer;
+}
+
+.burger label span{
+  background: var(--primary-color-light);
+  border-radius:.8em;
+  height:.2em;
+  margin: .2em 0;
+  transition: .4s  cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.burger span:nth-of-type(1){
+  width:50%;
+}
+
+.burger span:nth-of-type(2){
+  width:100%;
+}
+
+.burger span:nth-of-type(3){
+  width:75%;
+}
+
+.burger input[type="checkbox"]{
+  display:none;
+}
+
+.burger input[type="checkbox"]:checked ~ span:nth-of-type(1){
+  transform-origin:bottom;
+  transform:rotatez(45deg) translate(.20em,0.015em);
+  background-color: var(--text-color);
+}
+
+.burger input[type="checkbox"]:checked ~ span:nth-of-type(2){
+  transform-origin:top;
+  transform:rotatez(-45deg);
+  background-color: var(--text-color);
+}
+
+.burger input[type="checkbox"]:checked ~ span:nth-of-type(3){
+  transform-origin:bottom;
+  width:50%;
+  transform: translate(.9em,-0.24em) rotatez(45deg);
+  background-color: var(--text-color);
 }

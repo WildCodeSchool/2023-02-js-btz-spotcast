@@ -27,10 +27,3 @@
     font-size: 1.2em;
     color: var(--text-color);
 }
-
-@media (max-width : 440px) {
-    .meteo-temperature,
-    .meteo-text {
-        font-size: 1.4em;
-}
-}

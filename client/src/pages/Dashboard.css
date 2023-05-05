@@ -1,4 +1,5 @@
 .dashboard {
+  position: relative;
   max-width: 1280px;
   width: 100%;
   overflow: hidden;
@@ -9,7 +10,14 @@
   align-items: center;
   justify-content: flex-start;
   padding: 1.5em;
+  margin: 1em;
 }
+
+.dashboard.fixed{
+  position: fixed;
+  width: calc(100vw - 2em);
+}
+
 .widgets-container {
   width: 98%;
   position: relative;
