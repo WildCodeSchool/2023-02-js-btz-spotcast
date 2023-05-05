@@ -1,6 +1,5 @@
-import { useState } from "react";
-import "./Login.css";
-import UsersDataBase from "../../utilities/UsersDataBase";
+import axios from 'axios';
+import './Login.css';
 
 const Login = ({
   setCurrentUserName,
@@ -15,12 +14,15 @@ const Login = ({
   error,
   setError,
 }) => {
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = UsersDataBase.find(
-      (u) => u.email === email && u.password === pass
-    );
+    // create function that will push data from our DB at our login route
+    const userResponse = await axios.post('/users/login', {
+      email,
+      password: pass,
+    });
+    const user = userResponse.data;
+
     if (user) {
       setCurrentUserName(user.username);
       setCurrentUserPicture(user.img);
@@ -28,15 +30,16 @@ const Login = ({
 
       // Redirect to the dashboard or perform some other action
     } else {
-      setError("Details do not match");
+      setError('Details do not match');
       // Display an error message or perform some other action
     }
   };
 
   return (
     <div
-      className={show ? "auth-form-container invisible" : "auth-form-container"}
-    >
+      className={
+        show ? 'auth-form-container invisible' : 'auth-form-container'
+      }>
       <button onClick={toggleModal} className="closing-cross"></button>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-form" htmlFor="email">
@@ -67,8 +70,8 @@ const Login = ({
           Log In
         </button>
       </form>
-      {error != "" ? <div className="error">{error}</div> : ""}
-      <button className="btn-link" onClick={() => onFormSwitch("Register")}>
+      {error != '' ? <div className="error">{error}</div> : ''}
+      <button className="btn-link" onClick={() => onFormSwitch('Register')}>
         Don't have an account? Register here
       </button>
     </div>

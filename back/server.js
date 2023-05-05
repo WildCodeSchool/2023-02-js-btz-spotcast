@@ -16,24 +16,30 @@ app.use(express.json()); // Parse & format the data of all express routes
 //Créer le router pour les spots
 const spotRouter = express.Router();
 app.use('/spots', spotRouter);
-
 // Importing all the functions to get 'surf spots'
 const spots = require('./spots');
+// To get all spots
+spotRouter.get('', spots.selectAllSpots);
+// To select a spot with its 'id'
+spotRouter.get('/:spotId', spots.selectSpotById);
+// To select a spot with its name
+spotRouter.get('/spot/:spotName', spots.selectSpotByName);
 
 //Create router for the tides
 const tidesRouter = express.Router();
 app.use('/tides', tidesRouter);
-
 // Importing all the functions to get 'Tide from surf spots'
 const tides = require('./tides');
-
-// Creating all routes to get 'surf spots'
-spotRouter.get('/', spots.selectAllSpots); // To get all spots
-spotRouter.get('/:spotId', spots.selectSpotById); // To select a spot with its 'id'
-spotRouter.get('/spot/:spotName', spots.selectSpotByName); // To select a spot with its name
-
 // Creating all routes to get 'Tides'
-tidesRouter.get('', tides.selectAllTides); // To get all tides
+tidesRouter.get('', tides.selectAllTides);
+
+//Créer le router pour les users
+const userRouter = express.Router();
+app.use('/users', userRouter);
+//Importing all the functions to get 'users'
+const users = require('./users');
+// Creating the route for our login
+userRouter.post('/login', users.loginUser);
 
 // Setting up the listening port of the server
 app.listen(PORT, (err) => {
