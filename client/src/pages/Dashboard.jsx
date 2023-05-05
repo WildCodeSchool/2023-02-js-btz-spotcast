@@ -238,14 +238,6 @@ const Dashboard = () => {
             />
           </div>
           
-          <div className={formInfos["tide-widget"] ? "item" : "invisible"}>
-            <Tide
-              date={date}
-              formInfos={formInfos}
-              setFormInfos={setFormInfos}
-            />
-          </div>
-
           <div className={formInfos["meteo-widget"] ? "item" : "invisible"}>
             <MeteoDay
               {...meteo}
@@ -255,6 +247,15 @@ const Dashboard = () => {
               setFormInfos={setFormInfos}
             />
           </div>
+          
+          <div className={formInfos["tide-widget"] ? "item" : "invisible"}>
+            <Tide
+              date={date}
+              formInfos={formInfos}
+              setFormInfos={setFormInfos}
+            />
+          </div>
+
 
           <div className={formInfos["meteo3d-widget"] ? "item" : "invisible"}>
             <MeteoThreeDay

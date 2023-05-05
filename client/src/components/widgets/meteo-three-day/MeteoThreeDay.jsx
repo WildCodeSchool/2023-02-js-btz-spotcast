@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import IconMeteoThreeDays from "./components/IconMeteoThreeDays";
 import DateThreeDays from "./components/DateThreeDays";
 import TempThreeDays from "./components/TempThreeDays";
@@ -41,8 +42,19 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
         }]
     }
 
+    // UseState qui détecte la taille de l'écran
+    const [widthSize, setWidthSize] = useState(window.innerWidth)
+
+    useEffect(()=> {
+      const widthSizeDetector = () => {
+        setWidthSize(window.innerWidth)
+      }
+
+      window.addEventListener('resize', widthSizeDetector)
+    },[])
+
     return (
-        <div className="small-square item-content" id="D">
+        <div className={ widthSize >= 785 ? "small-square item-content" : "big-rectangle-width item-content" } id="D">
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
                 <ToggleButton 
@@ -54,7 +66,7 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
             <div className="card-content meteo-infos-3d">
                 {onLoadMeteo3D ? "" :
                     indexInfoMeteo.map((el) => (
-                        <div key ={uuidv4()} className="day-infos-3d">
+                        <div key ={el.date} className="day-infos-3d">
                            
                             <DateThreeDays
                                 meteoDay={el.date}
