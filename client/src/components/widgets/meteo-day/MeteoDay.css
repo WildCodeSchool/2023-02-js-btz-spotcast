@@ -1,0 +1,29 @@
+.card-meteo {
+    display: flex;
+    flex-direction: column;
+}
+
+.meteo-infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.day-icon {
+    flex: 1;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.day-icon img {
+    width: 70%;
+    height: 70%;
+}
+
+.meteo-temperature,
+.meteo-text {
+    font-size: 1.2em;
+    color: var(--text-color);
+}

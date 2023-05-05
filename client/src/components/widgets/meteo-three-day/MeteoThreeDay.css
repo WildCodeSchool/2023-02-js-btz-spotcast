@@ -1,0 +1,62 @@
+.meteo-infos-3d {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: .8em;
+}
+
+.day-infos-3d {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--primary-color-light);
+}
+
+.day-infos-3d:last-child {
+    border-bottom: none;
+}
+
+.day-icon-3d {
+    width: 2em;
+}
+
+.day-date-3d {
+    font-size: .8em;
+    width: 55%;
+}
+
+@media screen and (max-width : 980px) {
+    .card-content.meteo-infos-3d {
+        flex-direction: row;
+    }
+
+    .day-infos-3d {
+        flex-direction: column;
+        flex:1;
+        align-items: center;
+        justify-content: center;
+        border-bottom: none;
+        border-right: 1px solid var(--primary-color-light);
+    }
+
+    .day-infos-3d:last-child {
+        border-right: none;
+    }
+
+    .day-date-3d{
+        width:90%;
+        text-align: center;
+        font-size: 1em;
+    }
+
+    .day-icon-3d{
+        width: 3em;
+        margin: .25em 0;
+    }
+
+    .day-temp{
+        font-size: 1.2em;
+    }
+}

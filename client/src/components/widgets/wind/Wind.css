@@ -1,0 +1,91 @@
+.wind-chart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.cardinal-points{
+    position: relative;
+    width: 6.25em;
+    height: 6.25em;
+    border-radius: 50%;
+    background: var(--primary-color-light);
+}
+
+.cardinal-points span{
+    width:.365em;
+    height:.365em;
+    position:absolute;
+    background: var(--primary-color);
+    border-radius:50%;
+    transform: rotate(calc(var(--n) * 45deg));
+    transform-origin: 50px 50px;
+}
+
+.cardinal-points span.checked {
+    width:.55em;
+    height:.55em;
+    box-shadow: 0 0 0 5px var(--primary-color-light);
+}
+
+.wind-stats{
+    color: var(--text-color);
+    position: absolute;
+    text-align: center;
+}
+
+.wind-strenght{
+    font-size: 3.2em;
+   margin-bottom: -.15em;
+}
+
+@media (max-width : 980px) {
+    .card-title{
+        font-size: 1.4rem;
+    }
+
+    .cardinal-points{
+        width: 5.75em;
+        height: 5.75em;
+    }
+
+    .wind-strenght{
+        font-size: 2.7em;
+    }
+
+    .cardinal-points span{
+        transform-origin: 41px 41px;
+    }
+
+    .cardinal-points span.checked {
+        width:.35em;
+        height:.35em;
+        box-shadow: 0 0 0 3px var(--primary-color);
+    }
+}
+
+@media (max-width : 785px) {
+    .card-title{
+        font-size: 1.4rem;
+    }
+
+    .cardinal-points{
+        width: 5.5em;
+        height: 5.5em;
+    }
+
+    .wind-strenght{
+        font-size: 2.7em;
+    }
+
+    .cardinal-points span{
+        transform-origin: 34px 34px;
+    }
+
+    .cardinal-points span.checked {
+        width:.35em;
+        height:.35em;
+        box-shadow: 0 0 0 3px var(--primary-color);
+    }
+}

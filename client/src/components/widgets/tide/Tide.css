@@ -1,0 +1,70 @@
+.tide-card {
+    background-color: var(--primary-color);
+}
+
+.tide-card .card-title {
+    color: white;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tide-shape {
+    position: relative;
+}
+
+.tide-datas {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.high-tide,
+.low-tide {
+    width: 50%;
+    text-align: center;
+    color: white;
+}
+
+.tide-data {
+    font-size: 2em;
+}
+
+.circle {
+    background-color: var(--primary-color);
+    border: 4px solid var(--secondary-color);
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.low {
+    top: 3.63em;
+    left: 1.945em;
+}
+
+.going-high {
+    top: 2.055em;
+    left: 7.43em;
+}
+
+.high {
+    top: 0.1em;
+    left: 13.46em;
+}
+
+.going-low {
+    top: 2.05em;
+    left: 19.53em;
+}
+
+@media screen and (max-width : 980px) {
+    .tide-data{
+        font-size: 1.9em;
+        line-height: .9em;
+    }
+}

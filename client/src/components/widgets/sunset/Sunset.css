@@ -1,0 +1,79 @@
+.big-rectangle-width-sunset{
+    display: flex;
+    border-radius: 1.6em;
+    box-shadow: 7px 0 12px rgba(65, 89, 89, 0.3);
+    width: 26.25em;
+    height: 12.5em;
+    overflow: hidden;
+    position: relative;
+}
+
+.sunset, .sunrise{
+    padding: 1.2em 1.5em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sunrise{
+    background-color: var(--primary-color-regular);
+    align-items: flex-start;
+}
+
+.sunset{
+    background-color: var(--primary-color);
+    align-items: flex-end;
+}
+
+
+
+.sunrise-forecast, .sunset-forecast{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: .6em;
+   width: 100%;
+   height: 100%;
+}
+
+.sunset-forecast{
+    color: var(--primary-color-light);
+}
+
+.sunrise-forecast{
+    color: var(--text-color);
+}
+
+.sunrise-forecast img{
+    width: 40%;
+}
+
+.sunset-forecast img{
+    width: 33%;
+}
+
+
+.card-header-sunset {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    color: #fff;
+    padding: 1.2em 1.5em 0 ;
+}
+
+.sunset-forecast-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sunset-value, .sunrise-value{
+    font-size: 2em;
+}
+
+.separator{
+    width: .7em;
+    position: absolute;
+    left: 49.7%;
+    top:-.5%
+}
