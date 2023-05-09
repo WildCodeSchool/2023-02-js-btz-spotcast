@@ -80,7 +80,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     axios
-      .get(`http://localhost:5002/spots`)
+      .get(`/spots`)
       .then((res) => setAllSpots(res.data))
       setOnLoadAllSpots(false)
   }, [])
