@@ -20,9 +20,6 @@ const DailyTide = ({ tide, dayDate,onLoadAllTides }) => {
         return(null)
     }
 
-   /*const highHeight = 5.83 - parseFloat(dayHighTides[0].height)
-    const lowHeight = 2.59 - Math.abs(parseFloat(dayLowTides[0].height))*/
-
     const highHeight = parseFloat(dayHighTides[0].height)
     const lowHeight = parseFloat(dayLowTides[0].height)
   

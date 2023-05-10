@@ -1,5 +1,9 @@
 .minified-background{
     width: 100%;
     display: flex;
-    
+    transition: transform .3s ease-out;
+    /* transform-origin: top; */
+}
+.minified-background:hover{
+    transform: scale(1.025);
 }

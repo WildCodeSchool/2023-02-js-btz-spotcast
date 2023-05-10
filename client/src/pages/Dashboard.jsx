@@ -1,20 +1,25 @@
+//Importing React Elements
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
+//Importing Components
 import Wind from '../components/widgets/wind/Wind';
 import MeteoDay from '../components/widgets/meteo-day/MeteoDay';
 import MeteoThreeDay from '../components/widgets/meteo-three-day/MeteoThreeDay';
 import NavBar from '../components/widgets/navbar/NavBar';
 import ForecastCardBackground from '../components/forecast-cards/ForecastCardBackground';
-import './Dashboard.css';
-import './ResponsiveDashboard.css';
 import Tide from '../components/widgets/tide/Tide';
 import Sunset from '../components/widgets/sunset/Sunset';
 import Muuri from 'muuri';
 import Login from '../../src/components/widgets/login/Login';
 import Register from '../../src/components/widgets/login/Register';
 import DropdownMenu from '../components/widgets/Dropdown-menu/DropdownMenu';
+
+//Importing CSS
+import './Dashboard.css';
+import './ResponsiveDashboard.css';
 
 
 // instancier un useContext

@@ -5,7 +5,7 @@ const selectAllSpots = (req, res) => {
     database
         .query('SELECT * FROM spots')
         .then(([spots]) => {
-            res.json(spots)
+            res.json(spots);
         })
         .catch((err) => {
             console.log(err)
@@ -43,7 +43,6 @@ const selectSpotByName = (req, res) => {
     database
         .query('SELECT * FROM spots WHERE name LIKE "%"?"%"', [spotName])
         .then(([spots]) => {
-            console.log(spots);
             if(spots != null){
                  res.json(spots)
             }else{
