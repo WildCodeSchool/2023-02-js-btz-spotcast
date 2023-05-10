@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
 import './ForecastCardExtended.css'
 import HourlyForecast from './forecast-extended-components/HourlyForecast'
 import { v4 as uuidv4 } from 'uuid';
+import { gridRefresh } from '../../../pages/Dashboard';
 
 
 const ForecastCardExtended = ({surfDataWind, surfDataHoule, onLoad, onLoadMarine, index,functionChange}) => {
 
+  const [gridResize, setGridResize] = useContext(gridRefresh)
+
   const sendBackIndex = () => {
     functionChange(!index)
+    setGridResize(!gridResize)
   }
 
   
