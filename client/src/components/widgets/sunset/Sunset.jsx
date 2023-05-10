@@ -6,7 +6,13 @@ import Aube from '../../../assets/images/aube.svg'
 import Crepuscule from '../../../assets/images/crepuscule.svg'
 import Separator from '../../../assets/images/sunset-separator.svg'
 
-const Sunset = ({ formInfos, setFormInfos, grid}) => {
+const Sunset = ({ 
+    formInfos, 
+    setFormInfos, 
+    grid,
+    itemsToHide,
+    setItemsToHide,
+}) => {
     
     const [sunset, setSunset] = useState();
 
@@ -56,6 +62,8 @@ const Sunset = ({ formInfos, setFormInfos, grid}) => {
                 setFormInfos={setFormInfos}
                 grid={grid}
                 elemItem={elemItem}
+                itemsToHide={itemsToHide}
+                setItemsToHide={setItemsToHide}
             />
             <div className="sunset-forecast">
                 <img src={Crepuscule} alt="moon" className="moon" />

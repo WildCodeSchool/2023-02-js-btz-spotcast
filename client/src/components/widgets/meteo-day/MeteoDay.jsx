@@ -11,7 +11,18 @@ import neige from '../../../assets/images/neige.svg';
 import "../cards.css";
 import "./MeteoDay.css";
 
-const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, time, formInfos, setFormInfos, grid }) => {
+const MeteoDay = ({ 
+    weathercode, 
+    temperature_2m, 
+    timeStampIndex, 
+    onLoadMeteo, 
+    time, 
+    formInfos, 
+    setFormInfos, 
+    grid,
+    itemsToHide,
+    setItemsToHide,
+}) => {
 
     let [dayIcon, setDayIcon] = useState('')
     let [weatherCode, setweatherCode] = useState(onLoadMeteo ? "" : weathercode[timeStampIndex])
@@ -58,6 +69,8 @@ const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, ti
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}
                     elemItem={elemItem}
+                    itemsToHide={itemsToHide}
+                    setItemsToHide={setItemsToHide}
                 />
             </div>
             <div className="card-content card-meteo">

@@ -10,11 +10,14 @@ const Wind = ({
   onLoadOpenMeteo,
   formInfos,
   setFormInfos,
-  grid
+  grid,
+  itemsToHide,
+  setItemsToHide,
 }) => {
   // useState et useEffect to transform the wind direction in "north, north-east, east,..."
   const [windDirection, setWindDirection] = useState("");
 
+  console.log(itemsToHide);
   useEffect(() => {
     if (onLoadOpenMeteo) {
       return;
@@ -67,11 +70,13 @@ const Wind = ({
       <div className="card-header">
         <p className="card-title">Wind</p>
         <ToggleButton 
-            grid={grid}
             widgetName = "wind-widget"
             formInfos={formInfos}
             setFormInfos={setFormInfos}
+            grid={grid}
             elemItem={elemItem}
+            itemsToHide={itemsToHide}
+            setItemsToHide={setItemsToHide}
         />
       </div>
       <div className="card-content">

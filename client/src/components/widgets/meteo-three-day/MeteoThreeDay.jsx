@@ -7,7 +7,15 @@ import { v4 as uuidv4 } from 'uuid';
 import "../cards.css";
 import "./MeteoThreeDay.css";
 
-const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos, grid }) => {
+const MeteoThreeDay = ({ 
+    meteo3D, 
+    onLoadMeteo3D, 
+    formInfos, 
+    setFormInfos, 
+    grid,
+    setItemsToHide,
+    itemsToHide,
+}) => {
 
     // Setup the date
     const today = new Date();  // Obtenir la date et l'heure actuelles
@@ -60,11 +68,13 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos, grid }
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
                 <ToggleButton 
-                    grid={grid}
                     widgetName = "meteo3d-widget"
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}
+                    grid={grid}
                     elemItem={elemItem}
+                    itemsToHide={itemsToHide}
+                    setItemsToHide={setItemsToHide}
                 />
             </div>
             <div className="card-content meteo-infos-3d">

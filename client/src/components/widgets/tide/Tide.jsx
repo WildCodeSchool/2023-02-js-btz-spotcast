@@ -4,7 +4,15 @@ import './Tide.css'
 
 import tideShape from '../../../tide-shape.svg'
 
-const Tide = ({ date, formInfos, setFormInfos, TideDatas, grid }) => {
+const Tide = ({
+    date,
+    formInfos,
+    setFormInfos,
+    TideDatas,
+    grid,
+    itemsToHide,
+    setItemsToHide,
+ }) => {
 
     const tideTime = TideDatas.map((el) => el.time);
     //Création d'un tableau qui contient tous les TimeStamps des marées
@@ -53,11 +61,13 @@ const Tide = ({ date, formInfos, setFormInfos, TideDatas, grid }) => {
             <div className="card-header">
                 <p className="card-title">Tide</p>
                 <ToggleButton
-                    elemItem = {elemItem}
-                    grid={grid}
                     widgetName = "tide-widget"
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}
+                    grid={grid}
+                    elemItem = {elemItem}
+                    itemsToHide={itemsToHide}
+                    setItemsToHide={setItemsToHide}
                 />
             </div>
             <div className='card-content tide-content'>

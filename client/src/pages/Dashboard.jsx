@@ -31,8 +31,9 @@ const Dashboard = () => {
 
   //setting up the Muuri effect
   const [grid, setGrid] = useState();
+  const [update, setUpdate] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
     setGrid(
       new Muuri('.grid', {
         dragEnabled: true,
@@ -46,12 +47,59 @@ const Dashboard = () => {
           }
         },
       })
-    );
-    
-    return () => {
-      grid.destroy();
-    };
-  }, []);
+    )
+
+}, []);
+
+useEffect(() =>{
+  if (grid) {
+    // Load layout from local storage
+    const savedLayout = window.localStorage.getItem('layout');
+    // console.log(savedLayout);
+    if (savedLayout) {
+      const itemIds = JSON.parse(savedLayout);
+      // console.log(itemIds);
+      itemIds.forEach((id, index) => {
+        const item = grid.getItems().find(item => item.getElement().getAttribute('data-id') === id);
+        if (item) {
+          grid.move(item, index);
+        }
+      });
+    }
+  }
+}, [grid, update]);
+
+//Event Listener when an item is moved
+grid && grid.on('move', function() {
+  saveLayout(grid);
+  grid.synchronize();
+  setUpdate(!update);
+});
+
+const [itemsToHide, setItemsToHide] = useState([]);
+console.log(`to hide = ${itemsToHide}`);
+
+//Event Listener when an item is hidden/shown
+useEffect(()=>{
+  if(itemsToHide.length > 0){
+    grid.hide(itemsToHide, { onFinish: () => grid.refreshItems().layout() });
+  }
+  grid && saveLayout(grid);
+  
+}, [grid && itemsToHide])
+
+
+
+// Save layout to local storage
+function saveLayout(grid) {
+  const layout = JSON.stringify(grid.getItems().map(item => item.getElement().getAttribute('data-id')));
+  window.localStorage.setItem('layout', layout);
+}
+
+  // const hiddenItems = JSON.stringify(itemsToHide.map(item => item.getElement().getAttribute('data-id')));
+  // const data = { layout, hiddenItems };
+
+
 
   //setting up Selected Spot
   const [selectedSpots, setSelectedSpots] = useState([
@@ -250,7 +298,7 @@ const Dashboard = () => {
           onLoadAllSpots={onLoadAllSpots}
         />
         <div className="grid">
-          <div className={formInfos['wind-widget'] ? 'item' : 'invisible'}>
+          <div className='item' data-id='1'>
             <Wind
               className="item-content"
               {...wind}
@@ -259,10 +307,12 @@ const Dashboard = () => {
               formInfos={formInfos}
               setFormInfos={setFormInfos}
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
             />
           </div>
 
-          <div className={formInfos['meteo-widget'] ? 'item' : 'invisible'}>
+          <div className='item' data-id='2'>
             <MeteoDay
               className="item-content"
               {...meteo}
@@ -271,10 +321,12 @@ const Dashboard = () => {
               formInfos={formInfos}
               setFormInfos={setFormInfos}
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
             />
           </div>
 
-          <div className='item'>
+          <div className='item' data-id='3'>
             <Tide
               className="item-content"
               date={date}
@@ -283,10 +335,12 @@ const Dashboard = () => {
               TideDatas={tides}
               onLoadAllTides ={onLoadAllTides}
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
             />
           </div>
 
-          <div className={formInfos['meteo3d-widget'] ? 'item' : 'invisible'}>
+          <div className='item' data-id='4'>
             <MeteoThreeDay
               className="item-content"
               meteo3D={meteo3D}
@@ -294,11 +348,13 @@ const Dashboard = () => {
               formInfos={formInfos}
               setFormInfos={setFormInfos}
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
             />
           </div>
 
           {selectedSpots.map((selectedSpot) => (
-            <div className="item">
+            <div className="item" data-id='5'>
               <ForecastCardBackground
               className="item-content"
               key={selectedSpot.id}
@@ -307,15 +363,19 @@ const Dashboard = () => {
               tide={tides}
               onLoadAllTides={onLoadAllTides}
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
               />
             </div>
           ))}
-          <div className={formInfos['sun-widget'] ? 'item' : 'invisible'}>
+          <div className='item' data-id='6'>
             <Sunset 
               className="item-content"
               formInfos={formInfos}
               setFormInfos={setFormInfos} 
               grid={grid}
+              itemsToHide={itemsToHide}
+              setItemsToHide={setItemsToHide}
             />
           </div>
         </div>
