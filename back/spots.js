@@ -5,7 +5,11 @@ const selectAllSpots = (req, res) => {
     database
         .query('SELECT * FROM spots')
         .then(([spots]) => {
+<<<<<<< HEAD
             res.json(spots);
+=======
+            res.json(spots)
+>>>>>>> 373427900546b1f1b71f6897edcdc18099e35485
         })
         .catch((err) => {
             console.log(err)

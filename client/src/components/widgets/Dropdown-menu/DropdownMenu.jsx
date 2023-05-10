@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./DropdownMenu.css";
+import { gridRefresh } from "../../../pages/Dashboard";
 import meteoImgActive from "../../../assets/images/widgets-btn-meteo-active.svg";
 import meteoImgInactive from "../../../assets/images/widgets-btn-meteo.svg";
 import meteo3dImgActive from "../../../assets/images/widgets-btn-meteo3d-active.svg";
@@ -10,6 +11,8 @@ import tideImgActive from "../../../assets/images/widgets-btn-tide-active.svg";
 import tideImgInactive from "../../../assets/images/widgets-btn-tide.svg";
 import windImgActive from "../../../assets/images/widgets-btn-wind-active.svg";
 import windImgInactive from "../../../assets/images/widgets-btn-wind.svg";
+
+
 
 const DropdownMenu = ({
   formInfos,
@@ -22,8 +25,12 @@ const DropdownMenu = ({
   show
 }) => {
 
+  // resize muuri
+  const[muuriRefresh, setMuuriRefresh] = useContext(gridRefresh)
+
   //function to update active widgets list
   const handleFormInfos = (e) => {
+    setMuuriRefresh(!muuriRefresh)
     setFormInfos({
     ...formInfos,
     [e.target.attributes.name.value]: e.target.checked,

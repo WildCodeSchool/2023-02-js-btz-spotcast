@@ -13,6 +13,7 @@
   margin: 1em;
 }
 
+
 .dashboard.fixed{
   position: fixed;
   width: calc(100vw - 2em);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { createContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Wind from '../components/widgets/wind/Wind';
 import MeteoDay from '../components/widgets/meteo-day/MeteoDay';
 import MeteoThreeDay from '../components/widgets/meteo-three-day/MeteoThreeDay';
@@ -18,6 +19,8 @@ import DropdownMenu from '../components/widgets/Dropdown-menu/DropdownMenu';
 
 // instancier un useContext
 export const selectedSpotsContext = createContext();
+// instancier un state pour muuri true ou false
+export const gridRefresh = createContext()
 
 const Dashboard = () => {
   //Widget status
@@ -29,25 +32,7 @@ const Dashboard = () => {
     'wind-widget': true,
   });
 
-  //setting up the Muuri effect
-  const [grid, setGrid] = useState();
-
-  useEffect(() => {
-    setGrid(
-      new Muuri('.grid', {
-        dragEnabled: true,
-        layoutDuration: 350,
-        layoutEasing: 'ease-in-out',
-        fillGaps: true,
-        layoutOnResize: 0,
-        sortData: {
-          id: function (item, element) {
-            return element.children[0].id;
-          },
-        },
-      })
-    );
-  }, []);
+  
 
   //setting up Selected Spot
   const [selectedSpots, setSelectedSpots] = useState([
@@ -196,9 +181,88 @@ const Dashboard = () => {
 
   const [showDropMenu, setShowDropMenu] = useState(false);
 
+//NE PAS TOUCHER
+// Setting up the Muuri effect
+const [grid, setGrid] = useState();
+const [savedPositionsJSON, setSavedPositionsJSON] = useState("")
+
+// créer use state avec savedPosiitons
+
+useEffect(() => {
+  const savedPositionsJSON = JSON.parse(localStorage.getItem('cardPositions'));
+
+  console.log(savedPositionsJSON)
+  setGrid(
+    new Muuri('.grid', {
+      dragEnabled: true,
+      layoutDuration: 350,
+      layoutEasing: 'ease-in-out',
+      fillGaps: true,
+      layoutOnResize: 0,
+      sortData: {
+        id: function (item, element) {
+          return element.children[0].id;
+        },
+      },
+    })
+  );
+
+  grid &&
+  savedPositionsJSON.map((el, index) => {
+    console.log(el.id)
+    console.log(index)
+    grid.move(el.id, index )
+  })
+  
+}, []);
+
+
+  
+
+// génération de l'objet à envoyer dans le local Storage
+  const itemsArray = grid && grid.getItems();
+  const positions = grid && itemsArray.map((item) => {
+  const element = item.getElement(); // Récupérer l'élément DOM de la carte
+  //const position = item.getPosition(); // Récupérer la position de la carte dans la grille
+   
+
+  return {
+    id : element.getAttribute('data-card-id'), // Identifiant unique de la carte (peut être personnalisé)
+    /*x: position.left,
+    y: position.top,*/
+    };
+  }
+);
+
+// Enregistrer les positions dans le local storage
+// Resize Muuri grid
+const [resizeGrid, setResizeGrid] = useState(true);
+
+useEffect(() => {
+  if (grid) {
+    const positionsJSON = JSON.stringify(positions);
+    localStorage.setItem('cardPositions', positionsJSON);
+  }
+  
+}, [resizeGrid]);
+
+
+
+
+useEffect(() => {
+  grid && grid.refreshItems().layout();
+  console.log(grid);
+}, []);
+
+useEffect(() => {
+  grid && grid.refreshItems().layout();
+}, [resizeGrid]);
+
+
   return (
     <div className={showDropMenu ? 'dashboard fixed' : 'dashboard'}>
       <selectedSpotsContext.Provider value={[selectedSpots, setSelectedSpots]}>
+        <gridRefresh.Provider value={[resizeGrid, setResizeGrid]}> 
         <DropdownMenu
           formInfos={formInfos}
           setFormInfos={setFormInfos}
@@ -246,7 +310,7 @@ const Dashboard = () => {
           onLoadAllSpots={onLoadAllSpots}
         />
         <div className="grid">
-          <div className={formInfos['wind-widget'] ? 'item' : 'invisible'}>
+          <div className= 'item' data-card-id="1">
             <Wind
               {...wind}
               timeStampIndex={timeStampIndex}
@@ -256,7 +320,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className={formInfos['meteo-widget'] ? 'item' : 'invisible'}>
+          <div className='item' data-card-id= "2">
             <MeteoDay
               {...meteo}
               onLoadMeteo={onLoadMeteo}
@@ -266,7 +330,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className={formInfos['tide-widget'] ? 'item' : 'invisible'}>
+          <div className='item'  data-card-id= "3">
             <Tide
               date={date}
               formInfos={formInfos}
@@ -276,7 +340,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className={formInfos['meteo3d-widget'] ? 'item' : 'invisible'}>
+          <div  className='item'  data-card-id= "4">
             <MeteoThreeDay
               meteo3D={meteo3D}
               onLoadMeteo3D={onLoadMeteo3D}
@@ -284,12 +348,15 @@ const Dashboard = () => {
               setFormInfos={setFormInfos}
             />
           </div>
+          <div className='item'  data-card-id= "5">
+            <Sunset formInfos={formInfos} setFormInfos={setFormInfos} />
+          </div>
 
-          {selectedSpots.map((selectedSpot) => (
-            <div className="item">
+          {selectedSpots.map((selectedSpot, index) => (
+            <div className="item"   key={selectedSpot.id} data-card-id= {5+index}>
               <ForecastCardBackground
 
-              key={selectedSpot.id}
+            
               selectedSpots={selectedSpot}
               timeStamp={timeStamp}
               tide={tides}
@@ -298,10 +365,9 @@ const Dashboard = () => {
               />
             </div>
           ))}
-          <div className={formInfos['sun-widget'] ? 'item' : 'invisible'}>
-            <Sunset formInfos={formInfos} setFormInfos={setFormInfos} />
-          </div>
+         
         </div>
+        </gridRefresh.Provider>
       </selectedSpotsContext.Provider>
     </div>
   );

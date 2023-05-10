@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { gridRefresh } from "../../pages/Dashboard";
 import "./ToggleButton.css";
 
+
 const ToggleButton = ({ setFormInfos, formInfos, widgetName}) => {
+
+  const [gridResize, setGridResize] = useContext(gridRefresh)
   const buttonToggle = () => {
     setFormInfos({
       ...formInfos,
       [widgetName] : !formInfos[widgetName]
     })
+    setGridResize(!gridResize)
   };
 
  

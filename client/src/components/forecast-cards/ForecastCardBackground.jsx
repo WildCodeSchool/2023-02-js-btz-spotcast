@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { WhatsappShareButton } from "react-share";
@@ -35,6 +35,7 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp, tide, onLoadAllTides
   };
 
 
+  
   
 
     // UseState qui détecte la taille de l'écran
@@ -85,7 +86,7 @@ const ForecastCardBackground = ({ selectedSpots, timeStamp, tide, onLoadAllTides
     const url ="http://localhost:3000/"
     const titleShare = "Let's go riding my friend ! 🤙🏽"
 
-    
+  
     
   return (
   <div className='background-forcast item-content' id="F">
