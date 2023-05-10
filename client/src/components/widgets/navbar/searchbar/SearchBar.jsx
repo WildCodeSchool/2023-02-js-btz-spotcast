@@ -72,7 +72,7 @@ const SearchBar = ({allSpots, onLoadAllSpots}) => {
           <input
             className="search-input"
             type="text"
-            placeholder="Select your spot here!"
+            placeholder="Select surf spot or city"
             value={searchInput}
             onChange={onChange}
           />

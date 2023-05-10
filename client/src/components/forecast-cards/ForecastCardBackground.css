@@ -1,5 +1,5 @@
 .background-forcast {
-    width: 67.5em; 
+    width: 67.5em;
     height: 39em;
     display: flex;
     background-color: white;
@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 
-.dataCategorie{
+.dataCategorie {
     display: none;
 }
 
@@ -19,7 +19,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-
 }
 
 
@@ -47,11 +46,11 @@
 
 }
 
-button{
+button {
     all: unset;
 }
 
-.spotNameShare{
+.spotNameShare {
     height: 30px;
     width: 30px;
     margin-left: 0.8em;
@@ -103,6 +102,7 @@ button{
     height: 100%;
     min-width: 9.375em;
     text-align: center;
+    cursor: pointer;
 }
 
 .background-visible {
@@ -112,9 +112,9 @@ button{
     border-left: solid 1px var(--primary-color-light);
 }
 
-.extendedCard{
+.extendedCard {
     height: 100%;
-   }
+}
 
 .background-invisible {
     display: none;
@@ -138,7 +138,7 @@ button{
 }
 
 .Wind,
-.swell{
+.swell {
     height: 19%;
 }
 
@@ -175,16 +175,15 @@ button{
 
 .arrow {
     color: var(--secondary-color);
-
 }
 
-.tide{
+.tide {
     display: flex;
     flex-direction: column;
     padding: .5em 1em;
 }
 
-.tides{
+.tides {
     display: flex;
     flex-direction: column;
     padding: .5em 1em;

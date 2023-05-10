@@ -1,7 +1,15 @@
 .daily-extended-forecast{
     display: flex;
-    height: 68.3%;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
 }
+
+.hour-by-hour{
+    display: flex;
+    height: 68.06%;
+}
+
 .hourly-wind-container{
     height: 28.9%;
     display: flex;

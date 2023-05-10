@@ -15,10 +15,7 @@ const selectAllTides = async (req, res) => {
     dateMin.toISOString(),
   ]);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 373427900546b1f1b71f6897edcdc18099e35485
   if (tide.length && tide[tide.length - 1].time >= dateMax.toISOString())
     return res.status(200).json(tide);
 
