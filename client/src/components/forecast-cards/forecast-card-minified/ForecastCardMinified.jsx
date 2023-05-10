@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { gridRefresh } from '../../../pages/Dashboard'
 import WindMinified from './minified-components/Wind-Minified'
 import EnergieMinified from './minified-components/Energie-Minified'
 import PeriodeMinified from './minified-components/PeriodeMinified'
@@ -10,8 +11,11 @@ import TideMinified from './minified-components/TideMinified'
 
 const ForecastCardMinified = ({number, surfDataWind, onLoad, surfDataHoule, onLoadMarine, tide, dayDate, functionChange, date}) => {
 
+  const[gridResize, setGridResize]= useContext(gridRefresh)
+
   const sendBackIndex = () => {
     functionChange(number)
+    setGridResize(!gridResize)
   }
   
 

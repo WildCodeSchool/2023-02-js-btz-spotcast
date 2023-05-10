@@ -6,7 +6,6 @@ const selectAllSpots = (req, res) => {
         .query('SELECT * FROM spots')
         .then(([spots]) => {
             res.json(spots)
-            console.log(spots);
         })
         .catch((err) => {
             console.log(err)
