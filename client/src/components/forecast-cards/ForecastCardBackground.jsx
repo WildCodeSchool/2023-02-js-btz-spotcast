@@ -94,6 +94,54 @@ const ForecastCardBackground = ({
   const url = "http://localhost:3000/";
   const titleShare = "Let's go riding my friend ! 🤙🏽";
 
+  // UseState qui détecte la taille de l'écran
+  const [widthSize, setWidthSize] = useState(window.innerWidth)
+
+    useEffect(()=> {
+      const widthSizeDetector = () => {
+        setWidthSize(window.innerWidth)
+      }
+
+      window.addEventListener('resize', widthSizeDetector)
+    },[])
+
+    
+
+
+  
+
+    useEffect(() => {
+      // API VENT( Orientation vent, Puissance en hourly et Daily sur 7 jours)
+      axios.get(`https://api.open-meteo.com/v1/gfs?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=windspeed_10m,winddirection_10m&daily=windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin`)
+        .then((req) => req.data)
+        .then((data) => {
+          setSurfDataWind(data);
+          setOnLoad(false);
+        });
+      
+        // API HOULE (Hourly : Wave height et wave period / Daily : Wave height Max et Wave direction dominant)
+      axios.get(`https://marine-api.open-meteo.com/v1/marine?latitude=${selectedSpots.latitude}&longitude=${selectedSpots.longitude}&hourly=wave_height,wave_period,wave_direction&daily=wave_height_max,wave_direction_dominant&timezone=Europe%2FBerlin`)
+        .then((req) => req.data)
+        .then((data) => {
+          setSurfDataHoule(data);
+          setOnLoadMarine(false);
+        });
+    },[])
+
+    const today = new Date();  // Créer un objet Date avec la date et l'heure actuelles
+    const options = widthSize > 1180 ? {day: '2-digit', weekday: 'long' } : { weekday: 'short', day:'2-digit' }; // affiche le jours en long et la date en chiffres en fonction de la taille ecran
+    const oneDay = 24 * 60 * 60 * 1000; // durée de 24h
+    const dayForecast = [] // array qui receveras les dates
+
+    // boucle qui génère automatiquement les 7 prochains jours
+    for(let i = 0; i < 7; i++){
+        dayForecast.push((new Date(today.getTime() + (i * oneDay))).toLocaleDateString('en-EN', options))
+    }
+    
+    // url a changer quand on sera en ligne. 
+    const url ="http://localhost:3000/"
+    const titleShare = "Let's go riding my friend ! 🤙🏽"
+
   return (
     <div className="background-forcast item-content" id="F">
       <div className="header">

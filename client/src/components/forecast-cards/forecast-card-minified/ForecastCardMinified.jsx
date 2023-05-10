@@ -19,7 +19,8 @@ const ForecastCardMinified = ({
   functionChange,
   date,
 }) => {
-  const [gridResize, setGridResize] = useContext(gridRefresh);
+
+  const[gridResize, setGridResize]= useContext(gridRefresh)
 
   const sendBackIndex = () => {
     functionChange(number);
