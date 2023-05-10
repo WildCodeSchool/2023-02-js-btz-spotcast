@@ -42,11 +42,15 @@ const Dashboard = () => {
         layoutOnResize: 0,
         sortData: {
           id: function (item, element) {
-            return element.children[0].id;
-          },
+            return parseFloat(element.getAttribute('data-id'));
+          }
         },
       })
     );
+    
+    return () => {
+      grid.destroy();
+    };
   }, []);
 
   //setting up Selected Spot
@@ -248,58 +252,71 @@ const Dashboard = () => {
         <div className="grid">
           <div className={formInfos['wind-widget'] ? 'item' : 'invisible'}>
             <Wind
+              className="item-content"
               {...wind}
               timeStampIndex={timeStampIndex}
               onLoadOpenMeteo={onLoadOpenMeteo}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
+              grid={grid}
             />
           </div>
 
           <div className={formInfos['meteo-widget'] ? 'item' : 'invisible'}>
             <MeteoDay
+              className="item-content"
               {...meteo}
               onLoadMeteo={onLoadMeteo}
               timeStampIndex={timeStampIndex}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
+              grid={grid}
             />
           </div>
 
-          <div className={formInfos['tide-widget'] ? 'item' : 'invisible'}>
+          <div className='item'>
             <Tide
+              className="item-content"
               date={date}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
               TideDatas={tides}
               onLoadAllTides ={onLoadAllTides}
+              grid={grid}
             />
           </div>
 
           <div className={formInfos['meteo3d-widget'] ? 'item' : 'invisible'}>
             <MeteoThreeDay
+              className="item-content"
               meteo3D={meteo3D}
               onLoadMeteo3D={onLoadMeteo3D}
               formInfos={formInfos}
               setFormInfos={setFormInfos}
+              grid={grid}
             />
           </div>
 
           {selectedSpots.map((selectedSpot) => (
             <div className="item">
               <ForecastCardBackground
-
+              className="item-content"
               key={selectedSpot.id}
               selectedSpots={selectedSpot}
               timeStamp={timeStamp}
               tide={tides}
               onLoadAllTides={onLoadAllTides}
-
+              grid={grid}
               />
             </div>
           ))}
           <div className={formInfos['sun-widget'] ? 'item' : 'invisible'}>
-            <Sunset formInfos={formInfos} setFormInfos={setFormInfos} />
+            <Sunset 
+              className="item-content"
+              formInfos={formInfos}
+              setFormInfos={setFormInfos} 
+              grid={grid}
+            />
           </div>
         </div>
       </selectedSpotsContext.Provider>

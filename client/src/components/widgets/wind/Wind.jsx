@@ -9,7 +9,8 @@ const Wind = ({
   timeStampIndex,
   onLoadOpenMeteo,
   formInfos,
-  setFormInfos
+  setFormInfos,
+  grid
 }) => {
   // useState et useEffect to transform the wind direction in "north, north-east, east,..."
   const [windDirection, setWindDirection] = useState("");
@@ -59,14 +60,18 @@ const Wind = ({
     }
   }, [onLoadOpenMeteo]);
 
+  const elemItem = document.querySelector("#A");
+
   return (
     <div className="small-square item-content" id="A">
       <div className="card-header">
         <p className="card-title">Wind</p>
         <ToggleButton 
+            grid={grid}
             widgetName = "wind-widget"
             formInfos={formInfos}
             setFormInfos={setFormInfos}
+            elemItem={elemItem}
         />
       </div>
       <div className="card-content">

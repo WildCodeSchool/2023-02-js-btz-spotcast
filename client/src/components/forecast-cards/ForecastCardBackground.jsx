@@ -18,7 +18,7 @@ import './ResponsiveForecastCard.css'
 import DailyTide from './forecast-card-extended/forecast-extended-components/DailyTide'
 
 
-const ForecastCardBackground = ({ selectedSpots, timeStamp, tide, onLoadAllTides }) => {
+const ForecastCardBackground = ({ selectedSpots, timeStamp, tide, onLoadAllTides, grid }) => {
   // Contient les donnés API
   
   const [surfDataWind, setSurfDataWind] = useState([]);

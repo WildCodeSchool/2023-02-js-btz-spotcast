@@ -4,7 +4,7 @@ import './Tide.css'
 
 import tideShape from '../../../tide-shape.svg'
 
-const Tide = ({ date, formInfos, setFormInfos,TideDatas }) => {
+const Tide = ({ date, formInfos, setFormInfos, TideDatas, grid }) => {
 
     const tideTime = TideDatas.map((el) => el.time);
     //Création d'un tableau qui contient tous les TimeStamps des marées
@@ -46,12 +46,15 @@ const Tide = ({ date, formInfos, setFormInfos,TideDatas }) => {
         }
     }
 
+    const elemItem = document.querySelector("#C")
 
     return (
-        <div className='big-rectangle-width tide-card item-content' id="B">
+        <div className='big-rectangle-width tide-card item-content' id="C">
             <div className="card-header">
                 <p className="card-title">Tide</p>
-                <ToggleButton 
+                <ToggleButton
+                    elemItem = {elemItem}
+                    grid={grid}
                     widgetName = "tide-widget"
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}

@@ -6,7 +6,7 @@ import Aube from '../../../assets/images/aube.svg'
 import Crepuscule from '../../../assets/images/crepuscule.svg'
 import Separator from '../../../assets/images/sunset-separator.svg'
 
-const Sunset = ({ formInfos, setFormInfos}) => {
+const Sunset = ({ formInfos, setFormInfos, grid}) => {
     
     const [sunset, setSunset] = useState();
 
@@ -27,8 +27,7 @@ const Sunset = ({ formInfos, setFormInfos}) => {
     let sunsetMinutes = String(new Date(sunset ? sunset.civil_twilight_end : "").getMinutes());
     let sunsetFormatedTime = `${sunsetHours.padStart(2,'0')}:${sunsetMinutes.padStart(2,'0')}`;
 
-    
-
+    const elemItem = document.querySelector("#E");
 
   return (
     <div className='big-rectangle-width-sunset item-content' id="E">
@@ -50,10 +49,13 @@ const Sunset = ({ formInfos, setFormInfos}) => {
             <img src={Separator} alt="separator" />
         </div>
         <div className="sunset">
-            <ToggleButton className="sunset-toggle"
+            <ToggleButton 
+                className="sunset-toggle"
                 widgetName = "sun-widget"
                 formInfos={formInfos}
                 setFormInfos={setFormInfos}
+                grid={grid}
+                elemItem={elemItem}
             />
             <div className="sunset-forecast">
                 <img src={Crepuscule} alt="moon" className="moon" />

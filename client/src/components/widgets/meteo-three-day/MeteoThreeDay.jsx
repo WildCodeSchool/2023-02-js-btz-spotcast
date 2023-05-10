@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import "../cards.css";
 import "./MeteoThreeDay.css";
 
-const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
+const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos, grid }) => {
 
     // Setup the date
     const today = new Date();  // Obtenir la date et l'heure actuelles
@@ -53,14 +53,18 @@ const MeteoThreeDay = ({ meteo3D, onLoadMeteo3D, formInfos, setFormInfos }) => {
       window.addEventListener('resize', widthSizeDetector)
     },[])
 
+    const elemItem = document.querySelector("#D");
+
     return (
         <div className={ widthSize >= 980 ? "small-square item-content" : "big-rectangle-width item-content" } id="D">
             <div className="card-header">
                 <p className="card-title">Meteo 3 days</p>
                 <ToggleButton 
+                    grid={grid}
                     widgetName = "meteo3d-widget"
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}
+                    elemItem={elemItem}
                 />
             </div>
             <div className="card-content meteo-infos-3d">

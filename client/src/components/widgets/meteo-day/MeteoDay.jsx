@@ -11,7 +11,7 @@ import neige from '../../../assets/images/neige.svg';
 import "../cards.css";
 import "./MeteoDay.css";
 
-const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, time, formInfos, setFormInfos }) => {
+const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, time, formInfos, setFormInfos, grid }) => {
 
     let [dayIcon, setDayIcon] = useState('')
     let [weatherCode, setweatherCode] = useState(onLoadMeteo ? "" : weathercode[timeStampIndex])
@@ -46,14 +46,18 @@ const MeteoDay = ({ weathercode, temperature_2m, timeStampIndex, onLoadMeteo, ti
         }
     }, [onLoadMeteo])
 
+    const elemItem = document.querySelector("#B")
+    
     return (
-        <div className="small-square item-content" id="A">
+        <div className="small-square item-content" id="B">
             <div className="card-header">
                 <p className="card-title">Meteo</p>
-                <ToggleButton 
+                <ToggleButton
+                    grid={grid}
                     widgetName = "meteo-widget"
                     formInfos={formInfos}
                     setFormInfos={setFormInfos}
+                    elemItem={elemItem}
                 />
             </div>
             <div className="card-content card-meteo">

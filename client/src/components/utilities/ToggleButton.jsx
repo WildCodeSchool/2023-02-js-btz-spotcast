@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import "./ToggleButton.css";
 
-const ToggleButton = ({ setFormInfos, formInfos, widgetName}) => {
+const ToggleButton = ({ setFormInfos, formInfos, widgetName, grid, elemItem}) => {
+
   const buttonToggle = () => {
+    const item = grid.getItem(elemItem.parentElement);
+    let hiddenItems = [];
+    hiddenItems.push(item);
+    grid.hide([item], { onFinish: () => grid.refreshItems().layout() });
+
+    console.log(grid._items)
+    console.log(hiddenItems)
+
     setFormInfos({
       ...formInfos,
       [widgetName] : !formInfos[widgetName]
     })
   };
 
- 
-  return (
+return (
     <div
       onClick={buttonToggle}
       className={
