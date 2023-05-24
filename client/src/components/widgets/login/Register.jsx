@@ -9,8 +9,8 @@ const Register = (props) => {
   const handleShow = () => props.setShow(!props.show);
 
   const handleSubmit = () => {
-    email.preventDefault();
-    console.log(email);
+    // email.preventDefault();
+    // console.log(email);
   };
   return (
     <div
