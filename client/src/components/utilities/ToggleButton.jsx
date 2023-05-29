@@ -10,7 +10,6 @@ const ToggleButton = ({
   itemsToHide,
   setItemsToHide,
 }) => {
-  console.log(itemsToHide);
 
   const buttonToggle = () => {
     const item = grid.getItem(elemItem.parentElement);

@@ -51,23 +51,43 @@ useEffect(() => {
 
 }, []);
 
-useEffect(() =>{
-  if (grid) {
-    // Load layout from local storage
-    const savedLayout = window.localStorage.getItem('layout');
-    // console.log(savedLayout);
-    if (savedLayout) {
-      const itemIds = JSON.parse(savedLayout);
-      // console.log(itemIds);
+useEffect(() => {
+  let hiddenItems = [];
+  const savedData = window.localStorage.getItem('muuriData');
+  if (savedData) {
+    const { layout, hiddenItems: savedHiddenItems } = JSON.parse(savedData);
+    const itemIds = JSON.parse(layout);
+    if (grid) {
       itemIds.forEach((id, index) => {
         const item = grid.getItems().find(item => item.getElement().getAttribute('data-id') === id);
         if (item) {
           grid.move(item, index);
         }
       });
+      const hiddenItemIds = JSON.parse(savedHiddenItems);
+      const items = grid.getItems();
+      hiddenItems = hiddenItemIds.map(itemId => items.find(item => item.getElement().getAttribute('data-id') === itemId)).filter(item => item);
     }
   }
-}, [grid, update]);
+  setItemsToHide(hiddenItems);
+  
+}, [grid && update]);
+
+
+
+const [itemsToHide, setItemsToHide] = useState([]);
+console.log(`to hide = ${itemsToHide}`);
+
+//Event Listener when an item is hidden/shown
+useEffect(()=>{
+  if(grid){
+    if(itemsToHide.length > 0){
+      grid.hide(itemsToHide, { onFinish: () => grid.refreshItems().layout() });
+    }
+    saveLayout(grid);
+  }
+  
+}, [grid && itemsToHide])
 
 //Event Listener when an item is moved
 grid && grid.on('move', function() {
@@ -76,24 +96,17 @@ grid && grid.on('move', function() {
   setUpdate(!update);
 });
 
-const [itemsToHide, setItemsToHide] = useState([]);
-console.log(`to hide = ${itemsToHide}`);
-
-//Event Listener when an item is hidden/shown
-useEffect(()=>{
-  if(itemsToHide.length > 0){
-    grid.hide(itemsToHide, { onFinish: () => grid.refreshItems().layout() });
-  }
-  grid && saveLayout(grid);
-  
-}, [grid && itemsToHide])
-
-
+grid && grid.on('sort', function (currentOrder, previousOrder) {
+  console.log(currentOrder);
+  console.log(previousOrder);
+});
 
 // Save layout to local storage
 function saveLayout(grid) {
   const layout = JSON.stringify(grid.getItems().map(item => item.getElement().getAttribute('data-id')));
-  window.localStorage.setItem('layout', layout);
+  const hiddenItems = JSON.stringify(itemsToHide.map(item => item.getElement().getAttribute('data-id')));
+  const data = { layout, hiddenItems };
+  window.localStorage.setItem('muuriData', JSON.stringify(data));
 }
 
   // const hiddenItems = JSON.stringify(itemsToHide.map(item => item.getElement().getAttribute('data-id')));
